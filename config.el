@@ -1,2 +1,2 @@
 (if (featurep 'evil)
-    (load! "+evil-bindings"))
+    (load! "+my-evil-bindings"))
