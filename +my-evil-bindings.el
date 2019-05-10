@@ -3,11 +3,12 @@
 ;;; Commentary:
 ;;;             Things TODO main keybindings
 ;;;                         TAB
+;;;                            Tab not tabbing in insert mode
+;;;                            checkout company more
 ;;;                         Replace functions
 ;;;                         Git wrappers
 ;;;                         Toggles: highlight
-;;;                         ; -> :
-;;;                         command line mode motions
+;;;                         Relative numbers
 
 (setq evil-collection-key-blacklist
       ;;; Code:
@@ -32,7 +33,6 @@
         :v  "g="    #'+evil:narrow-buffer
         :nv "z="    #'flyspell-correct-word-generic
         :nv "g@"    #'+evil:apply-macro
-        :nv "gl"    #'evil-commentary
         :nv "gx"    #'evil-exchange
         :nv "C-a"   #'evil-numbers/inc-at-pt
         :nv "C-S-a" #'evil-numbers/dec-at-pt
@@ -41,6 +41,10 @@
         :v  "."     #'+evil:apply-macro
         :v  "<"     #'+evil/visual-dedent  ; vnoremap < <gv
         :v  ">"     #'+evil/visual-indent  ; vnoremap > >gv
+        :nv ";"     #'evil-ex
+        :nv "H"     #'evil-beginning-of-line
+        :nv "L"     #'evil-end-of-line
+        :nv "gd"    #'find-function-at-point
 
         ;; Smarter newlines
         :i [remap newline] #'newline-and-indent  ; auto-indent on newline
@@ -154,16 +158,19 @@
         "j"    #'evil-window-down
         "k"    #'evil-window-up
         "l"    #'evil-window-right
+         ;
         "b"    #'switch-to-buffer
 
         "s"    #'doom/open-scratch-buffer
         "!"    #'doom/sudo-this-file
-        ";"    #'eval-expression
-        ":"    #'execute-extended-command
+        ":"    #'eval-expression
+        ";"    #'execute-extended-command
         "-"    #'+popup/toggle
         "S"    #'flyspell-mode
         "C"    #'flycheck-mode
 
+        (:prefix ("c" . "Comments")
+            "l"    #'evil-commentary)
         (:prefix ("g" . "git")
             (:when (featurep! :ui vc-gutter)
                 :desc "Git revert hunk"           "r"   #'git-gutter:revert-hunk

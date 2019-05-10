@@ -123,7 +123,7 @@
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       ;;python            ; beautiful is better than ugly
+       python            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;rest              ; Emacs as a REST client
@@ -165,4 +165,4 @@
        ;; config. Use it as a reference for your own modules.
        (default +smartparens))
 
-   (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 14))
+(setq doom-font (font-spec :family "DejaVu Sans Mono" :size 14))
