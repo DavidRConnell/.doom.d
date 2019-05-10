@@ -45,6 +45,8 @@
         :nv "H"     #'evil-beginning-of-line
         :nv "L"     #'evil-end-of-line
         :nv "gd"    #'find-function-at-point
+        :nv "K"     #'evil-scroll-line-up
+        :nv "J"     #'evil-scroll-line-down
 
         ;; Smarter newlines
         :i [remap newline] #'newline-and-indent  ; auto-indent on newline
@@ -158,6 +160,8 @@
         "j"    #'evil-window-down
         "k"    #'evil-window-up
         "l"    #'evil-window-right
+        "n"    #'evil-window-next
+        "p"    #'evil-window-prev
          ;
         "b"    #'switch-to-buffer
 
@@ -170,12 +174,30 @@
         "C"    #'flycheck-mode
 
         (:prefix ("c" . "Comments")
-            "l"    #'evil-commentary)
+          "l"    #'evil-commentary-line)
         (:prefix ("g" . "git")
+          :desc "Revert" "R" #'vc-revert
             (:when (featurep! :ui vc-gutter)
                 :desc "Git revert hunk"           "r"   #'git-gutter:revert-hunk
-                :desc "Git stage hunk"            "s"   #'git-gutter:stage-hunk
+                :desc "Git stage hunk"            "h"   #'git-gutter:stage-hunk
                 :desc "Git time machine"          "t"   #'git-timemachine-toggle
                 :desc "Jump to next hunk"         "]"   #'git-gutter:next-hunk
-                :desc "Jump to previous hunk"     "["   #'git-gutter:previous-hunk)))
+                :desc "Jump to previous hunk"     "["   #'git-gutter:previous-hunk)
+            (:when (featurep! :tools magit)
+              :desc "status" "s" #'magit-status
+              :desc "add" "a" #'magit-stage-file
+              :desc "add all" "A" #'magit-stage-modified
+              :desc "unstage" "u" #'magit-unstage-file
+              :desc "log" "l" #'magit-log
+              :desc "commit" "c" #'magit-commit
+              :desc "diff" "d" #'magit-diff-buffer-file
+              :desc "diff worktree" "D" #'magit-diff-working-tree
+              :desc "checkout" "b" #'magit-branch-or-checkout
+              (:prefix ("S" . "stash")
+                :desc "pop" "P" #'magit-stash-pop
+                :desc "push" "p" #'magit-stash-worktree
+                :desc "list" "l" #'magit-stash-list
+                :desc "show" "s" #'magit-stash-show
+                :desc "drop" "d" #'magit-stash-drop
+                :desc "branch" "b" #'magit-stash-branch))))
 ;;; +my_evil_bindings.el ends here
