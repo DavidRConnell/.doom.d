@@ -42,11 +42,12 @@
         :v  "<"     #'+evil/visual-dedent  ; vnoremap < <gv
         :v  ">"     #'+evil/visual-indent  ; vnoremap > >gv
         :nv ";"     #'evil-ex
-        :nv "H"     #'evil-beginning-of-line
+        :nv "H"     #'evil-first-non-blank
         :nv "L"     #'evil-end-of-line
         :nv "gd"    #'find-function-at-point
         :nv "K"     #'evil-scroll-line-up
         :nv "J"     #'evil-scroll-line-down
+        :nv "s"     #'evil-substitute
 
         ;; Smarter newlines
         :i [remap newline] #'newline-and-indent  ; auto-indent on newline
@@ -164,12 +165,16 @@
         "p"    #'evil-window-prev
          ;
         "b"    #'switch-to-buffer
+        "+"    #'evil-numbers/inc-at-pt
+        "-"    #'evil-numbers/dec-at-pt
+        "e"    #'eval-defun
 
         "s"    #'doom/open-scratch-buffer
         "!"    #'doom/sudo-this-file
         ":"    #'eval-expression
         ";"    #'execute-extended-command
         "-"    #'+popup/toggle
+        "/"    #'evil-ex-nohighlight
         "S"    #'flyspell-mode
         "C"    #'flycheck-mode
 
@@ -200,4 +205,5 @@
                 :desc "show" "s" #'magit-stash-show
                 :desc "drop" "d" #'magit-stash-drop
                 :desc "branch" "b" #'magit-stash-branch))))
+
 ;;; +my_evil_bindings.el ends here
