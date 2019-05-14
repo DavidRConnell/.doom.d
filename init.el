@@ -172,4 +172,6 @@
        (default +smartparens))
 
 (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 16))
-(setq matlab-server-executable "~/MATLAB/bin/matlab")
+
+(setq-hook! 'display-line-numbers-mode-hook
+  display-line-numbers 'relative)
