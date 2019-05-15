@@ -49,7 +49,7 @@
        ;;+icons          ; colorful icons for dired-mode
         )
        electric          ; smarter, keyword-based electric-indent
-       eshell            ; a consistent, cross-platform shell (WIP)
+       ;;eshell            ; a consistent, cross-platform shell (WIP)
        imenu             ; an imenu sidebar and searchable code index
        ;;term              ; terminals in Emacs
        vc                ; version-control and Emacs, sitting in a tree
@@ -60,7 +60,7 @@
        ;;direnv
        ;;docker
        editorconfig      ; let someone else argue about tabs vs spaces
-       ein               ; tame Jupyter notebooks with emacs
+       ;;ein               ; tame Jupyter notebooks with emacs
        eval              ; run code, run (also, repls)
        flycheck          ; tasing you for every semicolon you forget
        flyspell          ; tasing you for misspelling mispelling
@@ -69,13 +69,7 @@
         +docsets)        ; ...or in Dash docsets locally
        ;;lsp
        ;;macos             ; MacOS-specific commands
-<<<<<<< HEAD
        magit               ; a git porcelain for Emacs
-||||||| merged common ancestors
-       ; magit             ; a git porcelain for Emacs
-=======
-       magit             ; a git porcelain for Emacs
->>>>>>> 7d54e5f4d8b87b485e71cf7713aa587dfc39008e
        ;;make              ; run make tasks from Emacs
        ;;password-store    ; password manager for nerds
        pdf               ; pdf enhancements
