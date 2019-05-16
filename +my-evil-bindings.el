@@ -48,6 +48,7 @@
         :nv "K"     #'evil-scroll-line-up
         :nv "J"     #'evil-scroll-line-down
         :nv "s"     #'evil-substitute
+        :nv "ZZ"    #'save-buffers-kill-terminal
 
         ;; Smarter newlines
         :i [remap newline] #'newline-and-indent  ; auto-indent on newline
@@ -153,6 +154,17 @@
           :map swiper-map
           [backtab] #'+ivy/wgrep-occur)))
 
+
+
+(map! (:when (featurep! :editor fold)
+        :nv "C-SPC" #'+fold/toggle)
+      (:when (featurep! :editor format)
+        :n "gQ" #'+format:region))
+
+(map! (:when (featurep! :ui workspaces)
+                :n "gt"    #'+workspace/switch-right
+                :n "gT"    #'+workspace/switch-left))
+
 (map! :leader
         "w"    #'save-buffer
         "q"    #'kill-this-buffer
@@ -163,8 +175,9 @@
         "l"    #'evil-window-right
         "n"    #'evil-window-next
         "p"    #'evil-window-prev
-         ;
-        "b"    #'switch-to-buffer
+
+        "b"    #'persp-switch-to-buffer
+        "B"    #'switch-to-buffer
         "+"    #'evil-numbers/inc-at-pt
         "-"    #'evil-numbers/dec-at-pt
         "e"    #'eval-defun
@@ -173,10 +186,35 @@
         "!"    #'doom/sudo-this-file
         ":"    #'eval-expression
         ";"    #'execute-extended-command
-        "-"    #'+popup/toggle
+        "."    #'doom/open-private-config
+        "%"    #'eval-buffer
+        "m"    #'+popup/toggle
         "/"    #'evil-ex-nohighlight
         "S"    #'flyspell-mode
         "C"    #'flycheck-mode
+        ;;"r"    (":s///g")
+
+        (:when (featurep! :ui workspaces)
+                "t"   #'+workspace/new
+                "T"   #'+workspace/display
+                "Q"    #'+workspace/delete
+                "1"   (λ! (+workspace/switch-to 0))
+                "2"   (λ! (+workspace/switch-to 1))
+                "3"   (λ! (+workspace/switch-to 2))
+                "4"   (λ! (+workspace/switch-to 3))
+                "5"   (λ! (+workspace/switch-to 4))
+                "6"   (λ! (+workspace/switch-to 5))
+                "7"   (λ! (+workspace/switch-to 6))
+                "8"   (λ! (+workspace/switch-to 7))
+                "9"   (λ! (+workspace/switch-to 8))
+                "0"   #'+workspace/switch-to-last)
+
+        (:prefix ("P" . "Projects")
+          :desc "open emacs.d" "e" #'+default/browse-emacsd
+          "n" #'+default/find-in-notes
+          "k" #'projectile-kill-buffers
+          "g" #'projectile-grep
+          "o" #'projectile-switch-project)
 
         (:prefix ("c" . "Comments")
           "l"    #'evil-commentary-line)
@@ -194,7 +232,7 @@
               :desc "add all" "A" #'magit-stage-modified
               :desc "unstage" "u" #'magit-unstage-file
               :desc "log" "l" #'magit-log
-              :desc "commit" "c" #'magit-commit
+              :desc "commit" "c" #'magit-commit-create
               :desc "diff" "d" #'magit-diff-buffer-file
               :desc "diff worktree" "D" #'magit-diff-working-tree
               :desc "checkout" "b" #'magit-branch-or-checkout
@@ -206,4 +244,21 @@
                 :desc "drop" "d" #'magit-stash-drop
                 :desc "branch" "b" #'magit-stash-branch))))
 
-;;; +my_evil_bindings.el ends here
+  ;; Minibuffer
+  (define-key! evil-ex-completion-map
+    "C-a" #'move-beginning-of-line
+    "C-b" #'backward-word
+    "C-s" (if (featurep! :completion ivy)
+              #'counsel-minibuffer-history
+            #'helm-minibuffer-history))
+
+  (define-key! :keymaps +default-minibuffer-maps
+    [escape] #'abort-recursive-edit
+    "C-v"    #'yank
+    "C-z"    (λ! (ignore-errors (call-interactively #'undo)))
+    "C-a"    #'move-beginning-of-line
+    "C-b"    #'backward-word
+    "C-r"    #'evil-paste-from-register
+    ;; Scrolling lines
+    "C-n"    #'next-line
+    "C-p"    #'previous-line)

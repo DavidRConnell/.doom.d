@@ -29,6 +29,7 @@
         +all             ; catch all popups that start with an asterix
         +defaults)       ; default popup rules
        ;;unicode           ; extended unicode support for various languages
+       pretty-code       ; replace bits of code with pretty symbols
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        window-select     ; visually switch windows
@@ -46,7 +47,7 @@
 
        :emacs
        (dired            ; making dired pretty [functional]
-       ;;+icons          ; colorful icons for dired-mode
+        +icons          ; colorful icons for dired-mode
         )
        electric          ; smarter, keyword-based electric-indent
        ;;eshell            ; a consistent, cross-platform shell (WIP)
@@ -166,6 +167,7 @@
        (default +smartparens))
 
 (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 16))
+(setq doom-localleader-key ",")
 
 (setq-hook! 'display-line-numbers-mode-hook
   display-line-numbers 'relative)
