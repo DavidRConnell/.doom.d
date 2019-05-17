@@ -56,20 +56,6 @@
       :m  "gs"    #'+evil/easymotion  ; lazy-load `evil-easymotion'
       (:after evil-easymotion
         :map evilem-map
-        "a" (evilem-create #'evil-forward-arg)
-        "A" (evilem-create #'evil-backward-arg)
-        "s" (evilem-create #'evil-snipe-repeat
-                           :name 'evil-easymotion-snipe-forward
-                           :pre-hook (save-excursion (call-interactively #'evil-snipe-s))
-                           :bind ((evil-snipe-scope 'buffer)
-                                  (evil-snipe-enable-highlight)
-                                  (evil-snipe-enable-incremental-highlight)))
-        "S" (evilem-create #'evil-snipe-repeat
-                           :name 'evil-easymotion-snipe-backward
-                           :pre-hook (save-excursion (call-interactively #'evil-snipe-S))
-                           :bind ((evil-snipe-scope 'buffer)
-                                  (evil-snipe-enable-highlight)
-                                  (evil-snipe-enable-incremental-highlight)))
         "SPC" #'avy-goto-char-timer
         "/" (evilem-create #'evil-ex-search-next
                            :pre-hook (save-excursion (call-interactively #'evil-ex-search-forward))
@@ -79,13 +65,6 @@
                            :bind ((evil-search-wrap))))
 
       (:after evil-snipe
-        :map evil-snipe-parent-transient-map
-        "C-;" (λ! (require 'evil-easymotion)
-                  (call-interactively
-                   (evilem-create #'evil-snipe-repeat
-                                  :bind ((evil-snipe-scope 'whole-buffer)
-                                         (evil-snipe-enable-highlight)
-                                         (evil-snipe-enable-incremental-highlight))))))
         :nvo "f"     #'evil-snipe-s
         :nvo "F"     #'evil-snipe-S
         :nvo "t"     #'evil-snipe-x
