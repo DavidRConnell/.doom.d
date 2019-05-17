@@ -7,4 +7,6 @@
 
 (add-hook! 'matlab-mode-hook
   '(display-line-numbers-mode
-    highlight-numbers-mode))
+    highlight-numbers-mode
+    highlight-indent-guides-mode
+    git-gutter-mode))
