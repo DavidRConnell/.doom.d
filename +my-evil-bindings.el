@@ -180,16 +180,16 @@
                 "t"   #'+workspace/new
                 "T"   #'+workspace/display
                 "Q"    #'+workspace/delete
-                "1"   (λ! (+workspace/switch-to 0))
-                "2"   (λ! (+workspace/switch-to 1))
-                "3"   (λ! (+workspace/switch-to 2))
-                "4"   (λ! (+workspace/switch-to 3))
-                "5"   (λ! (+workspace/switch-to 4))
-                "6"   (λ! (+workspace/switch-to 5))
-                "7"   (λ! (+workspace/switch-to 6))
-                "8"   (λ! (+workspace/switch-to 7))
-                "9"   (λ! (+workspace/switch-to 8))
-                "0"   #'+workspace/switch-to-last)
+                :desc "switch to workspace" "1"   (λ! (+workspace/switch-to 0))
+                :desc "switch to workspace" "2"   (λ! (+workspace/switch-to 1))
+                :desc "switch to workspace" "3"   (λ! (+workspace/switch-to 2))
+                :desc "switch to workspace" "4"   (λ! (+workspace/switch-to 3))
+                :desc "switch to workspace" "5"   (λ! (+workspace/switch-to 4))
+                :desc "switch to workspace" "6"   (λ! (+workspace/switch-to 5))
+                :desc "switch to workspace" "7"   (λ! (+workspace/switch-to 6))
+                :desc "switch to workspace" "8"   (λ! (+workspace/switch-to 7))
+                :desc "switch to workspace" "9"   (λ! (+workspace/switch-to 8))
+                :desc "switch to last" "0"   #'+workspace/switch-to-last)
 
         (:prefix ("P" . "Projects")
           :desc "open emacs.d" "e" #'+default/browse-emacsd
