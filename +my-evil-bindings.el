@@ -47,7 +47,6 @@
         :nv "gd"    #'find-function-at-point
         :nv "K"     #'evil-scroll-line-up
         :nv "J"     #'evil-scroll-line-down
-        :nv "s"     #'evil-substitute
         :nv "ZZ"    #'save-buffers-kill-terminal
 
         ;; Smarter newlines
@@ -87,6 +86,10 @@
                                   :bind ((evil-snipe-scope 'whole-buffer)
                                          (evil-snipe-enable-highlight)
                                          (evil-snipe-enable-incremental-highlight))))))
+        :nvo "f"     #'evil-snipe-s
+        :nvo "F"     #'evil-snipe-S
+        :nvo "t"     #'evil-snipe-x
+        :nvo "T"     #'evil-snipe-X)
 )
 
 (map! (:when (featurep! :completion company)

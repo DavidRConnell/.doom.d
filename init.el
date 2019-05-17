@@ -171,3 +171,11 @@
 
 (setq-hook! 'display-line-numbers-mode-hook
   display-line-numbers 'relative)
+
+(def-package-hook! evil-snipe
+  :pre-config
+  (setq evil-snipe-auto-disable-substitute nil)
+  :post-config
+  (setq evil-snipe-scope 'buffer)
+  (setq evil-snipe-repeat-scope 'whole-buffer)
+  nil)
