@@ -163,6 +163,7 @@
         "+"    #'evil-numbers/inc-at-pt
         "-"    #'evil-numbers/dec-at-pt
         "e"    #'eval-defun
+        ","    #'+term/open-popup-in-project
 
         "s"    #'doom/open-scratch-buffer
         "!"    #'doom/sudo-this-file
@@ -244,3 +245,4 @@
     ;; Scrolling lines
     "C-n"    #'next-line
     "C-p"    #'previous-line)
+(load! "+terminal_keys")
