@@ -72,8 +72,10 @@
 )
 
 (map! (:when (featurep! :completion company)
-        :i "C-@"      #'+company/complete
         :i "C-SPC"    #'+company/complete
+        :i "C-n"      #'+company/dabbrev
+        :i "C-f"      #'company-files
+        :i "C-k"      #'+company/dict-or-keywords
         (:prefix "C-x"
           :i "C-l"    #'+company/whole-lines
           :i "C-k"    #'+company/dict-or-keywords
@@ -97,8 +99,7 @@
             "C-s"     #'company-filter-candidates
             "C-S-s"   (cond ((featurep! :completion helm) #'helm-company)
                             ((featurep! :completion ivy)  #'counsel-company))
-            "C-SPC"   #'company-complete-common
-            "TAB"     #'company-complete-common-or-cycle
+            "C-SPC"   #'company-complete-common-or-cycle
             [tab]     #'company-complete-common-or-cycle
             [backtab] #'company-select-previous)
           (:map company-search-map  ; applies to `company-filter-map' too
@@ -110,8 +111,7 @@
             "ESC"     #'company-search-abort)
           ;; TAB auto-completion in term buffers
           (:map comint-mode-map
-            "TAB" #'company-complete
-            [tab] #'company-complete)))
+            "C-SPC" #'company-complete)))
 
       (:when (featurep! :completion ivy)
         (:map (help-mode-map helpful-mode-map)
@@ -230,7 +230,7 @@
   (define-key! evil-ex-completion-map
     "C-a" #'move-beginning-of-line
     "C-b" #'backward-word
-    "C-s" (if (featurep! :completion ivy)
+    "C-SPC" (if (featurep! :completion ivy)
               #'counsel-minibuffer-history
             #'helm-minibuffer-history))
 
