@@ -162,7 +162,6 @@
         "B"    #'switch-to-buffer
         "+"    #'evil-numbers/inc-at-pt
         "-"    #'evil-numbers/dec-at-pt
-        "e"    #'eval-defun
         ","    #'+term/open-popup-in-project
 
         "s"    #'doom/open-scratch-buffer
@@ -170,7 +169,6 @@
         ":"    #'eval-expression
         ";"    #'execute-extended-command
         "."    #'doom/open-private-config
-        "%"    #'eval-buffer
         "m"    #'+popup/toggle
         "/"    #'evil-ex-nohighlight
         "S"    #'flyspell-mode
@@ -246,3 +244,4 @@
     "C-n"    #'next-line
     "C-p"    #'previous-line)
 (load! "+terminal_keys")
+(load! "+elisp_keys")
