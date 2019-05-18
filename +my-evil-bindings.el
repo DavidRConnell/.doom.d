@@ -2,13 +2,7 @@
 ;;;
 ;;; Commentary:
 ;;;             Things TODO main keybindings
-;;;                         TAB
-;;;                            Tab not tabbing in insert mode
-;;;                            checkout company more
 ;;;                         Replace functions
-;;;                         Git wrappers
-;;;                         Toggles: highlight
-;;;                         Relative numbers
 
 (setq evil-collection-key-blacklist
       ;;; Code:
@@ -199,20 +193,22 @@
 
         (:prefix ("c" . "Comments")
           "l"    #'evil-commentary-line)
+
+        "G" #'magit-dispatch
         (:prefix ("g" . "git")
           :desc "Revert" "R" #'vc-revert
             (:when (featurep! :ui vc-gutter)
                 :desc "Git revert hunk"           "r"   #'git-gutter:revert-hunk
                 :desc "Git stage hunk"            "h"   #'git-gutter:stage-hunk
                 :desc "Git time machine"          "t"   #'git-timemachine-toggle
-                :desc "Jump to next hunk"         "]"   #'git-gutter:next-hunk
-                :desc "Jump to previous hunk"     "["   #'git-gutter:previous-hunk)
+                :desc "Jump to next hunk"         "n"   #'git-gutter:next-hunk
+                :desc "Jump to previous hunk"     "N"   #'git-gutter:previous-hunk)
             (:when (featurep! :tools magit)
               :desc "status" "s" #'magit-status
               :desc "add" "a" #'magit-stage-file
               :desc "add all" "A" #'magit-stage-modified
               :desc "unstage" "u" #'magit-unstage-file
-              :desc "log" "l" #'magit-log
+              :desc "log" "l" #'magit-log-current
               :desc "commit" "c" #'magit-commit-create
               :desc "diff" "d" #'magit-diff-buffer-file
               :desc "diff worktree" "D" #'magit-diff-working-tree
