@@ -176,6 +176,8 @@
   :pre-config
   (setq evil-snipe-auto-disable-substitute nil)
   :post-config
+  (setq evil-snipe-enable-highlight nil)
+  (setq evil-snipe-enable-incremental-highlight nil)
   (setq evil-snipe-scope 'buffer)
   (setq evil-snipe-repeat-scope 'whole-buffer)
   nil)
