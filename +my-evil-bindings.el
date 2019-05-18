@@ -243,5 +243,3 @@
     ;; Scrolling lines
     "C-n"    #'next-line
     "C-p"    #'previous-line)
-(load! "+terminal_keys")
-(load! "+elisp_keys")

@@ -1,3 +1,6 @@
+(require 'matlab-mode)
+(setq matlab-server-executable "~/MATLAB/bin/matlab")
+(matlab-mode-common-setup)
 (setq matlab-shell-command "~/MATLAB/bin/matlab")
 (setq matlab-shell-command-switches (list "-nodesktop" "-nosplash"))
 

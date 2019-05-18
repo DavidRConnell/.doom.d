@@ -1,6 +1,6 @@
-(map! :mode elisp-mode
+(map! :mode emacs-lisp-mode
       (:localleader
-        "e"     #'eval-defun
+        "f"     #'eval-defun
         "%"     #'eval-buffer
         ; v for visual mode.
         "v"     #'eval-region
