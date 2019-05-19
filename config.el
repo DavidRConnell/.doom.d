@@ -18,6 +18,9 @@
 (add-hook 'term-mode-hook
           #'company-mode)
 
+(add-hook 'matlab-shell-mode-hook
+          #'company-mode)
+
 (after! evil-magit
   (map! :mode magit-mode
         "?" #'evil-search-backward))
