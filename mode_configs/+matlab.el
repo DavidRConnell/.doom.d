@@ -1,7 +1,7 @@
 (require 'matlab-mode)
-(setq matlab-server-executable "~/MATLAB/bin/matlab")
+(setq matlab-server-executable "/usr/local/MATLAB/R2019a/bin/matlab")
 (matlab-mode-common-setup)
-(setq matlab-shell-command "~/MATLAB/bin/matlab")
+(setq matlab-shell-command "/usr/local/MATLAB/R2019a/bin/matlab")
 (setq matlab-shell-command-switches (list "-nodesktop" "-nosplash"))
 
 (defcustom default-fill-column 80
