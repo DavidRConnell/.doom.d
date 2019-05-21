@@ -4,8 +4,10 @@
         "d" #'matlab-jump-to-definition-of-word-at-cursor
         "r" #'matlab-shell-save-and-go
         "v" #'matlab-shell-run-region
-        "l" #'matlab-shell-apropos
         "C" #'matlab-shell-close-figures
-        "e" #'matlab-shell-last-error)
+        "e" #'matlab-shell-last-error
+        "L" #'matlab-shell-apropos
+        "l" #'flycheck-list-errors
+        "s" #'imenu-list-smart-toggle)
 
       :i "C-SPC" #'company-matlab)
