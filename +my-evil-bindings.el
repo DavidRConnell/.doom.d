@@ -2,7 +2,8 @@
 ;;;
 ;;; Commentary:
 ;;;             Things TODO main keybindings
-;;;                         Replace functions
+;;;                         Add number of lines with gniversal param replace functions
+;;;                         Stop auto delete (smart-parens)
 
 (setq evil-collection-key-blacklist
       ;;; Code:
@@ -167,7 +168,16 @@
         "/"    #'evil-ex-nohighlight
         "S"    #'flyspell-mode
         "C"    #'flycheck-mode
-        ;;"r"    (":s///g")
+
+        (:prefix ("r" . "Replace line")
+          :desc "custom" "c" (lambda! (evil-ex "s/\\<"))
+          :desc "word" "w" (lambda! (evil-ex (concat "s/\\<" (thing-at-point 'word) "\\>/")))
+          :desc "WORD" "W" (lambda! (evil-ex (concat "s/\\<" (thing-at-point 'symbol) "\\>/"))))
+
+        (:prefix ("R" . "Replace buffer")
+          :desc "custom" "c" (lambda! (evil-ex (concat "%s/\\<")))
+          :desc "word" "w" (lambda! (evil-ex (concat "%s/\\<" (thing-at-point 'word) "\\>/")))
+          :desc "WORD" "W" (lambda! (evil-ex (concat "%s/\\<" (thing-at-point 'symbol) "\\>/"))))
 
         (:when (featurep! :ui workspaces)
                 "t"   #'+workspace/new
