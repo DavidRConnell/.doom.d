@@ -7,6 +7,8 @@
         "C" #'matlab-shell-close-figures
         "e" #'matlab-shell-last-error
         "L" #'matlab-shell-apropos
+        "P" #'matlab-start
+        "p" #'matlab-shell
         "l" #'flycheck-list-errors
         "s" #'imenu-list-smart-toggle)
 
