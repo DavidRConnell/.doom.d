@@ -2,7 +2,6 @@
 ;;;
 ;;; Commentary:
 ;;;             Things TODO main keybindings
-;;;                         Add number of lines with gniversal param replace functions
 ;;;                         Stop auto delete (smart-parens)
 
 (setq evil-collection-key-blacklist
@@ -142,6 +141,22 @@
                 :n "gt"    #'+workspace/switch-right
                 :n "gT"    #'+workspace/switch-left))
 
+(defun get-evil-ex-prefix ()
+  "Format universal argument for use on evil-ex command state."
+    (cond
+     ((and (evil-visual-state-p)
+           evil-ex-visual-char-range
+           (memq (evil-visual-type) '(inclusive exclusive)))
+      "`<,`>")
+     ((evil-visual-state-p)
+      "'<,'>")
+     (current-prefix-arg
+      (let ((arg (prefix-numeric-value current-prefix-arg)))
+        (cond ((< arg 0) (setq arg (1+ arg)))
+              ((> arg 0) (setq arg (1- arg))))
+        (if (= arg 0) '(".")
+          (format ".,.%+d" arg))))))
+
 (map! :leader
         "w"    #'save-buffer
         "q"    #'kill-this-buffer
@@ -170,9 +185,10 @@
         "C"    #'flycheck-mode
 
         (:prefix ("r" . "Replace line")
-          :desc "custom" "c" (lambda! (evil-ex "s/\\<"))
-          :desc "word" "w" (lambda! (evil-ex (concat "s/\\<" (thing-at-point 'word) "\\>/")))
-          :desc "WORD" "W" (lambda! (evil-ex (concat "s/\\<" (thing-at-point 'symbol) "\\>/"))))
+          :desc "test" "t" (print (get-evil-ex-prefix))
+          :desc "custom" "c" (lambda! (evil-ex (get-evil-ex-prefix) "s/\\<"))
+          :desc "word" "w" (lambda! (evil-ex (concat (get-evil-ex-prefix) "s/\\<" (thing-at-point 'word) "\\>/")))
+          :desc "WORD" "W" (lambda! (evil-ex (concat (get-evil-ex-prefix) "s/\\<" (thing-at-point 'symbol) "\\>/"))))
 
         (:prefix ("R" . "Replace buffer")
           :desc "custom" "c" (lambda! (evil-ex (concat "%s/\\<")))
