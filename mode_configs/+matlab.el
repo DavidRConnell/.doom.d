@@ -12,8 +12,13 @@
 (setq matlab-shell-command "/usr/local/MATLAB/bin/matlab")
 (setq matlab-shell-command-switches (list "-nodesktop" "-nosplash"))
 
+(defun insert-function-snippet ()
+  (if (equal 0 (buffer-size))
+      (insert (concat "function " (substring (buffer-name) 0 -2) "\nend"))))
+
 (add-hook! 'matlab-mode-hook
   '(display-line-numbers-mode
     highlight-numbers-mode
     highlight-indent-guides-mode
-    git-gutter-mode))
+    git-gutter-mode
+    insert-function-snippet))
