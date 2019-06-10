@@ -1,9 +1,7 @@
 (map! :mode python-mode
       :localleader
       "p" #'run-python
-      "r" #'quickrun
+      "r" (lambda! (async-shell-command (concat "python3 "(buffer-file-name))))
       "v" #'python-shell-send-region
       "f" #'python-shell-send-defun
-      "l" #'flycheck-list-errors
-      "?" #'python-describe-at-point
-      "s" #'imenu-list-smart-toggle)
+      "?" #'python-describe-at-point)

@@ -181,17 +181,14 @@
         "."    #'doom/open-private-config
         "m"    #'+popup/toggle
         "/"    #'evil-ex-nohighlight
-        "S"    #'flyspell-mode
-        "C"    #'flycheck-mode
 
         (:prefix ("r" . "Replace line")
-          :desc "test" "t" (print (get-evil-ex-prefix))
-          :desc "custom" "c" (lambda! (evil-ex (get-evil-ex-prefix) "s/\\<"))
+          :desc "custom" "c" (lambda! (evil-ex (concat (get-evil-ex-prefix) "s/\\<")))
           :desc "word" "w" (lambda! (evil-ex (concat (get-evil-ex-prefix) "s/\\<" (thing-at-point 'word) "\\>/")))
           :desc "WORD" "W" (lambda! (evil-ex (concat (get-evil-ex-prefix) "s/\\<" (thing-at-point 'symbol) "\\>/"))))
 
         (:prefix ("R" . "Replace buffer")
-          :desc "custom" "c" (lambda! (evil-ex (concat "%s/\\<")))
+          :desc "custom" "c" (lambda! (evil-ex "%s/\\<"))
           :desc "word" "w" (lambda! (evil-ex (concat "%s/\\<" (thing-at-point 'word) "\\>/")))
           :desc "WORD" "W" (lambda! (evil-ex (concat "%s/\\<" (thing-at-point 'symbol) "\\>/"))))
 
@@ -245,7 +242,13 @@
                 :desc "list" "l" #'magit-stash-list
                 :desc "show" "s" #'magit-stash-show
                 :desc "drop" "d" #'magit-stash-drop
-                :desc "branch" "b" #'magit-stash-branch))))
+                :desc "branch" "b" #'magit-stash-branch)))
+
+        (:prefix ("C" . "Code checking")
+          :desc "toggle spell"   "s" #'flyspell-mode
+          :desc "toggle lint"    "c" #'flycheck-mode
+          :desc "list errors"    "l" #'flycheck-list-errors
+          :desc "show functions" "f" #'imenu-list-smart-toggle))
 
   ;; Minibuffer
   (define-key! evil-ex-completion-map

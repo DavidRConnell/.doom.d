@@ -6,10 +6,8 @@
         "v" #'matlab-shell-run-region
         "C" #'matlab-shell-close-figures
         "e" #'matlab-shell-last-error
-        "L" #'matlab-shell-apropos
+        "l" #'matlab-shell-apropos
         "P" #'matlab-start
-        "p" #'matlab-shell
-        "l" #'flycheck-list-errors
-        "s" #'imenu-list-smart-toggle)
+        "p" #'matlab-shell)
 
       :i "C-SPC" #'company-matlab)
