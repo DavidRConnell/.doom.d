@@ -42,6 +42,13 @@
         :nv "K"     #'evil-scroll-line-up
         :nv "J"     #'evil-scroll-line-down
         :nv "ZZ"    #'save-buffers-kill-terminal
+        :nv "M-h"   #'evil-window-left
+
+        :nv "M-j"   #'evil-window-down
+        :nv "M-k"   #'evil-window-up
+        :nv "M-l"   #'evil-window-right
+        :nv "M-n"   #'evil-window-next
+        :nv "M-p"   #'evil-window-prev
 
         ;; Smarter newlines
         :i [remap newline] #'newline-and-indent  ; auto-indent on newline
@@ -63,7 +70,21 @@
         :nvo "F"     #'evil-snipe-S
         :nvo "t"     #'evil-snipe-x
         :nvo "T"     #'evil-snipe-X)
-)
+
+      (:when (featurep! :ui workspaces)
+                :nv "M-t"   #'+workspace/new
+                :nv "M-T"   #'+workspace/display
+                :nv "M-q"    #'+workspace/delete
+                :nv "M-1"   (λ! (+workspace/switch-to 0))
+                :nv "M-2"   (λ! (+workspace/switch-to 1))
+                :nv "M-3"   (λ! (+workspace/switch-to 2))
+                :nv "M-4"   (λ! (+workspace/switch-to 3))
+                :nv "M-5"   (λ! (+workspace/switch-to 4))
+                :nv "M-6"   (λ! (+workspace/switch-to 5))
+                :nv "M-7"   (λ! (+workspace/switch-to 6))
+                :nv "M-8"   (λ! (+workspace/switch-to 7))
+                :nv "M-9"   (λ! (+workspace/switch-to 8))
+                :nv "M-0"   #'+workspace/switch-to-last))
 
 (map! (:when (featurep! :completion company)
         :i "C-SPC"    #'+company/complete
@@ -137,10 +158,6 @@
       (:when (featurep! :editor format)
         :n "gQ" #'+format:region))
 
-(map! (:when (featurep! :ui workspaces)
-                :n "gt"    #'+workspace/switch-right
-                :n "gT"    #'+workspace/switch-left))
-
 (defun get-evil-ex-prefix ()
   "Format universal argument for use on evil-ex command state."
     (cond
@@ -161,12 +178,6 @@
         "w"    #'save-buffer
         "q"    #'kill-this-buffer
         "o"    #'find-file
-        "h"    #'evil-window-left
-        "j"    #'evil-window-down
-        "k"    #'evil-window-up
-        "l"    #'evil-window-right
-        "n"    #'evil-window-next
-        "p"    #'evil-window-prev
 
         "b"    #'persp-switch-to-buffer
         "B"    #'switch-to-buffer
@@ -192,22 +203,7 @@
           :desc "word" "w" (lambda! (evil-ex (concat "%s/\\<" (thing-at-point 'word) "\\>/")))
           :desc "WORD" "W" (lambda! (evil-ex (concat "%s/\\<" (thing-at-point 'symbol) "\\>/"))))
 
-        (:when (featurep! :ui workspaces)
-                "t"   #'+workspace/new
-                "T"   #'+workspace/display
-                "Q"    #'+workspace/delete
-                :desc "switch to workspace" "1"   (λ! (+workspace/switch-to 0))
-                :desc "switch to workspace" "2"   (λ! (+workspace/switch-to 1))
-                :desc "switch to workspace" "3"   (λ! (+workspace/switch-to 2))
-                :desc "switch to workspace" "4"   (λ! (+workspace/switch-to 3))
-                :desc "switch to workspace" "5"   (λ! (+workspace/switch-to 4))
-                :desc "switch to workspace" "6"   (λ! (+workspace/switch-to 5))
-                :desc "switch to workspace" "7"   (λ! (+workspace/switch-to 6))
-                :desc "switch to workspace" "8"   (λ! (+workspace/switch-to 7))
-                :desc "switch to workspace" "9"   (λ! (+workspace/switch-to 8))
-                :desc "switch to last" "0"   #'+workspace/switch-to-last)
-
-        (:prefix ("P" . "Projects")
+        (:prefix ("p" . "Projects")
           :desc "open emacs.d" "e" #'+default/browse-emacsd
           "n" #'+default/find-in-notes
           "k" #'projectile-kill-buffers
