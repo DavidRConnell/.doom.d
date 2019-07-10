@@ -166,7 +166,7 @@
        ;; config. Use it as a reference for your own modules.
        (default +smartparens))
 
-(setq doom-font (font-spec :family "DejaVu Sans Mono" :size 16))
+(setq doom-font (font-spec :family "DejaVu Sans Mono" :size 18))
 (setq doom-localleader-key ",")
 
 (setq-hook! 'display-line-numbers-mode-hook
