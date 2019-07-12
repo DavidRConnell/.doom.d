@@ -16,9 +16,7 @@
         :m  "[a"    #'evil-backward-arg
         :m  "]o"    #'outline-next-visible-heading
         :m  "[o"    #'outline-previous-visible-heading
-        :n  "]b"    #'next-buffer
         :n  "}"     #'next-buffer
-        :n  "[b"    #'previous-buffer
         :n  "{"     #'previous-buffer
         :n  "zx"    #'kill-this-buffer
         :n  "ZX"    #'bury-buffer
