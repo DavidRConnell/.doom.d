@@ -1,8 +1,8 @@
 (map! :mode term-mode
       :n "j" #'term-send-down
       :n "k" #'term-send-up
-      :i "C-p" #'term-send-up
-      :i "C-n" #'term-send-down
+      :ni "C-p" #'term-send-up
+      :ni "C-n" #'term-send-down
       :n "g" #'term-send-home
       :n "C-d" #'term-send-eof)
 
@@ -11,6 +11,13 @@
                 :n "k" #'matlab-shell-previous-matching-input-from-input
                 :n "j" #'matlab-shell-next-matching-input-from-input
                 :ni "C-k" #'previous-line
-                :i "C-p" #'matlab-shell-previous-matching-input-from-input
-                :i "C-n" #'matlab-shell-next-matching-input-from-input
+                :ni "C-p" #'matlab-shell-previous-matching-input-from-input
+                :ni "C-n" #'matlab-shell-next-matching-input-from-input
                 :ni "C-d" #'matlab-shell-exit))
+
+(add-hook! 'sly-mrepl-hook
+  (map! :mode sly-mrepl-mode
+        :n "k" #'sly-mrepl-previous-input-or-button
+        :n "j" #'sly-mrepl-next-input-or-button
+        :ni "C-p" #'sly-mrepl-previous-input-or-button
+        :ni "C-n" #'sly-mrepl-next-input-or-button))
