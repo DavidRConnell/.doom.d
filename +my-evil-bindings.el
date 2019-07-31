@@ -172,6 +172,10 @@
         (if (= arg 0) '(".")
           (format ".,.%+d" arg))))))
 
+(defun get-sp-pair (prefix)
+  "Get pair in format for use with sp-rewrap sexp."
+    (--first (equal prefix (car it)) (sp--get-pair-list-context 'wrap)))
+
 (map! :leader
         "w"    #'save-buffer
         "q"    #'kill-this-buffer
@@ -190,6 +194,11 @@
         "."    #'doom/open-private-config
         "m"    #'+popup/toggle
         "/"    #'evil-ex-nohighlight
+
+        "["    (lambda! (sp-rewrap-sexp (get-sp-pair "[")))
+        "{"    (lambda! (sp-rewrap-sexp (get-sp-pair "{")))
+        "("    (lambda! (sp-rewrap-sexp (get-sp-pair "(")))
+        "\""   (lambda! (sp-rewrap-sexp (get-sp-pair "\"")))
 
         (:prefix ("r" . "Replace line")
           :desc "custom" "c" (lambda! (evil-ex (concat (get-evil-ex-prefix) "s/\\<")))
