@@ -251,7 +251,18 @@
           :desc "toggle spell"   "s" #'flyspell-mode
           :desc "toggle lint"    "c" #'flycheck-mode
           :desc "list errors"    "l" #'flycheck-list-errors
-          :desc "show functions" "f" #'imenu-list-smart-toggle))
+          :desc "show functions" "f" #'imenu-list-smart-toggle)
+
+        (:prefix ("C-o" . "Org-mode")
+          :desc "Agenda"         "a"  #'org-agenda
+          :desc "Todo list"      "t"  #'org-todo-list
+          :desc "Tags search"    "m"  #'org-tags-view
+          :desc "Org capture"    "x"  #'org-capture
+          :desc "Go to org file" "g"  #'org-capture-goto-target
+          :desc "Org store link" "l"  #'org-store-link
+          :desc "View search"    "v"  #'org-search-view
+          :desc "Notes"          "N"  #'remember-notes
+          :desc "Notes quick"    "n"  #'remember-other-frame))
 
   ;; Minibuffer
   (define-key! evil-ex-completion-map
