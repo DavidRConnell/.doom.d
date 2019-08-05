@@ -40,13 +40,6 @@
         :nv "K"     #'evil-scroll-line-up
         :nv "J"     #'evil-scroll-line-down
         :nv "ZZ"    #'save-buffers-kill-terminal
-        :nv "M-h"   #'evil-window-left
-
-        :nv "M-j"   #'evil-window-down
-        :nv "M-k"   #'evil-window-up
-        :nv "M-l"   #'evil-window-right
-        :nv "M-n"   #'evil-window-next
-        :nv "M-p"   #'evil-window-prev
 
         ;; Smarter newlines
         :i [remap newline] #'newline-and-indent  ; auto-indent on newline
