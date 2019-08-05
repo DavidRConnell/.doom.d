@@ -246,7 +246,7 @@
           :desc "list errors"    "l" #'flycheck-list-errors
           :desc "show functions" "f" #'imenu-list-smart-toggle)
 
-        (:prefix ("C-o" . "Org-mode")
+        (:prefix ("t" . "Org-mode")
           :desc "Agenda"         "a"  #'org-agenda
           :desc "Todo list"      "t"  #'org-todo-list
           :desc "Tags search"    "m"  #'org-tags-view
