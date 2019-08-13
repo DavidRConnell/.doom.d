@@ -205,10 +205,11 @@
 
         (:prefix ("p" . "Projects")
           :desc "open emacs.d" "e" #'+default/browse-emacsd
-          "n" #'+default/find-in-notes
-          "k" #'projectile-kill-buffers
+          :desc "open notes" "n" (lambda! (doom-project-browse "~/notes/"))
+          :desc "open config" "c" (lambda! (doom-project-browse "~/.config/"))
           "g" #'projectile-grep
-          "o" #'projectile-switch-project)
+          "o" #'projectile-switch-project
+          "r" #'counsel-buffer-or-recentf)
 
         (:prefix ("c" . "Comments")
           "l"    #'evil-commentary-line)
