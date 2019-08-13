@@ -1,5 +1,7 @@
 ;;; +org.el --- description -*- lexical-binding: t; -*-
 
 (map! :mode org-mode
-      :nv "C-j" #'evil-forward-section-begin
-      :nv "C-k" #'evil-backward-section-begin)
+      :nv "C-j" #'org-forward-heading-same-level
+      :nv "C-k" #'org-backward-heading-same-level
+      (:localleader
+        "n" #'org-add-note))
