@@ -23,4 +23,11 @@
 
 (after! evil-magit
   (map! :mode magit-mode
-        "?" #'evil-search-backward))
+        "?" #'evil-search-backward
+        "K" #'evil-scroll-line-up))
+
+(after! org
+  (progn
+    (delete '("\\.pdf\\'" . default) org-file-apps)
+    (add-to-list 'org-file-apps '("pdf" . "zathura %s"))
+    (load (concat doom-private-dir "mode_configs/+org.el"))))
