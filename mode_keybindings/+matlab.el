@@ -7,7 +7,7 @@
         "R" #'matlab-run-command
         "r" #'matlab-run-last-command
         "v" #'matlab-shell-run-region-or-line
-        "c" (lambda! (matlab-run-shell-function #'matlab-shell-close-figures))
+        "c" #'matlab-close-figures
         "e" #'matlab-shell-last-error
         "l" #'matlab-shell-apropos
         "p" #'matlab-shell))
@@ -32,12 +32,10 @@
     (matlab-shell-add-to-input-history cmd)
     (switch-to-buffer curr-buffer)))
 
-(defun matlab-run-shell-function (fun &optional args)
+(defun matlab-close-figures ()
   "Pass the matlab shell function FUN with optional arguments ARGS to a matlab shell."
   (interactive)
   (let ((curr-buffer (buffer-name)))
     (switch-to-buffer (concat "*" matlab-shell-buffer-name "*"))
-    (if args
-        (funcall fun args)
-      (funcall fun))
+    (matlab-shell-close-figures)
     (switch-to-buffer curr-buffer)))

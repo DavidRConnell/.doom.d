@@ -10,10 +10,10 @@
           (map! :mode matlab-shell-mode
                 :n "k" #'matlab-shell-previous-matching-input-from-input
                 :n "j" #'matlab-shell-next-matching-input-from-input
-                :ni "C-k" #'previous-line
-                :ni "C-p" #'matlab-shell-previous-matching-input-from-input
-                :ni "C-n" #'matlab-shell-next-matching-input-from-input
-                :ni "C-d" #'matlab-shell-exit))
+                :n "C-p" #'matlab-shell-previous-matching-input-from-input
+                :n "C-n" #'matlab-shell-next-matching-input-from-input
+                :ni "C-d" #'matlab-shell-exit
+                :i "C-SPC" #'matlab-shell-tab))
 
 (add-hook! 'sly-mrepl-hook
   (map! :mode sly-mrepl-mode

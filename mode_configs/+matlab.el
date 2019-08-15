@@ -11,4 +11,5 @@
     highlight-indent-guides-mode
     git-gutter-mode
     matlab-toggle-show-mlint-warnings
+    matlab-toggle-functions-have-end
     insert-function-snippet))
