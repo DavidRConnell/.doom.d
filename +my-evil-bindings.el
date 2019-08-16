@@ -203,6 +203,7 @@
           :desc "open emacs.d" "e" #'+default/browse-emacsd
           :desc "open notes" "n" (lambda! (doom-project-browse "~/notes/"))
           :desc "open config" "c" (lambda! (doom-project-browse "~/.config/"))
+          "R" #'projectile-replace
           "g" #'projectile-grep
           "o" #'projectile-switch-project
           "r" #'counsel-buffer-or-recentf)
