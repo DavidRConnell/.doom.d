@@ -19,8 +19,9 @@
       '((sequence "TODO(t)" "NEXT(n)" "MAYBE(m)" "LATER(l)"
                   "STAGNANT(s)" "WAITING(w@)" "DOING(d!/)"
                   "|" "DONE(D!/)")
-         (sequence "FIX(f)" "FIXING(i!/)" "|" "FIXED(F!/)")
-         (sequence "[ ]([)" "[-](-!/)" "|" "[x](x!/)")))
+        (sequence "NOTES(N)" "|")
+        (sequence "FIX(f)" "FIXING(i!/)" "|" "FIXED(F!/)")
+        (sequence "[ ]([)" "[-](-!/)" "|" "[x](x!/)")))
 
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "#98be65" :weight bold))
@@ -32,8 +33,9 @@
         ("WAITING" . (:foreground "#46d9ff" :weight bold))
         ("LATER" . (:foreground "#46d9ff" :weight bold))
         ("STAGNANT" . (:foreground "#46d9ff" :weight bold))
+        ("NOTES" . (:foreground "#d2691e" :weight bold))
         ("[ ]" . (:foreground "#98be65" :weight bold))
-        ("[-]" . (:foreground "#ecbe7b"))))
+        ("[-]" . (:foreground "#ecbe7b" :weight bold))))
 
 (setq org-tag-alist '((:startgroup . nil)
                       ("@rush" . ?r)
