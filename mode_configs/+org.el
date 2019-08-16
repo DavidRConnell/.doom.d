@@ -118,6 +118,9 @@
       '(("t" "Todo" entry
          (file +org-capture-inbox-file)
          "* TODO %?")
+        ("l" "Link" entry
+         (file +org-capture-inbox-file)
+         "* TODO %?\n%a")
         ("n" "Notes" entry
          (file+headline +org-capture-notes-file "Inbox")
          "* %u\n%?")
