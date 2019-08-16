@@ -40,6 +40,8 @@
         :nv "K"     #'evil-scroll-line-up
         :nv "J"     #'evil-scroll-line-down
         :nv "ZZ"    #'save-buffers-kill-terminal
+        :nv "/" #'swiper
+        :nv "?" #'swiper-backward
 
         ;; Smarter newlines
         :i [remap newline] #'newline-and-indent  ; auto-indent on newline
@@ -55,12 +57,6 @@
         "?" (evilem-create #'evil-ex-search-previous
                            :pre-hook (save-excursion (call-interactively #'evil-ex-search-backward))
                            :bind ((evil-search-wrap))))
-
-      (:after evil-snipe
-        :nvo "f"     #'evil-snipe-s
-        :nvo "F"     #'evil-snipe-S
-        :nvo "t"     #'evil-snipe-x
-        :nvo "T"     #'evil-snipe-X)
 
       (:when (featurep! :ui workspaces)
                 :nv "M-t"   #'+workspace/new
