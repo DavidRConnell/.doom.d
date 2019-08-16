@@ -188,6 +188,7 @@
         "{"    (lambda! (sp-rewrap-sexp (get-sp-pair "{")))
         "("    (lambda! (sp-rewrap-sexp (get-sp-pair "(")))
         "\""   (lambda! (sp-rewrap-sexp (get-sp-pair "\"")))
+        :desc "show functions" "l" #'imenu-list-smart-toggle
 
         (:prefix ("r" . "Replace line")
           :desc "custom" "c" (lambda! (evil-ex (concat (get-evil-ex-prefix) "s/\\<")))
@@ -241,8 +242,7 @@
         (:prefix ("C" . "Code checking")
           :desc "toggle spell"   "s" #'flyspell-mode
           :desc "toggle lint"    "c" #'flycheck-mode
-          :desc "list errors"    "l" #'flycheck-list-errors
-          :desc "show functions" "f" #'imenu-list-smart-toggle)
+          :desc "list errors"    "l" #'flycheck-list-errors)
 
         (:prefix ("t" . "Org-mode")
           :desc "Agenda"         "a"  #'org-agenda
