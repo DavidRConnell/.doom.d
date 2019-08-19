@@ -140,3 +140,17 @@
 
 (setq org-outline-path-complete-in-steps nil)
 (setq org-refile-allow-creating-parent-nodes 'confirm)
+
+(setq org-agenda-compact-blocks t)
+(setq org-agenda-custom-commands
+      '((" " "Agenda"
+        ((agenda "" nil)
+         (todo "DOING|[-]|FIXING"
+               ((org-agenda-overriding-header "Doing")))
+         (todo "NEXT|FIX|WAITING"
+               ((org-agenda-overriding-header "Next")))
+         (tags "Bob|Andrew"
+               ((org-agenda-overriding-header "Device Meeting")))
+         (tags "Stats|DataMgt"
+               ((org-agenda-overriding-header "Stats/data Meeting"))))
+        nil)))
