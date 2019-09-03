@@ -9,8 +9,8 @@
 (if (featurep 'evil)
     (load! "+my-evil-bindings"))
 
-(load-files-in (string-join (list doom-private-dir "mode_configs")))
-(load-files-in (string-join (list doom-private-dir "mode_keybindings")))
+(load-files-in (concat doom-private-dir "mode_configs"))
+(load-files-in (concat doom-private-dir "mode_keybindings"))
 
 (add-hook 'git-timemachine-mode-hook
           #'git-timemachine-show-revision-fuzzy)
