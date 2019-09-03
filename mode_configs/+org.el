@@ -72,19 +72,25 @@
   (org-back-to-heading t)
   (let ((state (org-get-todo-state)))
     (if state
-        (cond ((= n-not-done 0)
-               (cond ((or (string-match state "TODO")
-                          (string-match state "NEXT"))
-                      (org-todo "DONE"))
-                     ((or (string-match state "[ ]")
-                          (string-match state "[-]"))
-                      (org-todo "[x]"))))
-              ((= n-done 0)
-               (cond ((or (string-match state "DONE"))
-                      (org-todo "TODO"))
-                     ((or (string-match state "[-]")
-                          (string-match state "[x]"))
-                      (org-todo "[ ]"))))))))
+        (if (= n-not-done 0)
+            (org-todo (org-get-todo-sequence-tail state))
+          (org-todo (org-get-todo-sequence-head state))))))
+
+(defun org-get-todo-sequence-tail (kwd)
+  "Return the tail of the TODO sequence to which KWD belongs.
+If KWD is not set, check if there is a text property remembering the
+right sequence."
+  (let (p)
+    (cond
+     ((not kwd)
+      (or (get-text-property (point-at-bol) 'org-todo-head)
+	  (progn
+	    (setq p (next-single-property-change (point-at-bol) 'org-todo-head
+						 nil (point-at-eol)))
+	    (get-text-property p 'org-todo-head))))
+     ((not (member kwd org-todo-keywords-1))
+      (car org-todo-keywords-1))
+     (t (first (last (assoc kwd org-todo-kwd-alist)))))))
 
 ;; (defmacro make-org-capture-file-vars (files)
 ;;   (dolist (f files)
@@ -138,14 +144,10 @@
          ((agenda nil
                   ((org-agenda-span 1)
                    (org-agenda-start-day "+0d")))
-          (todo "DOING\|FIXING"
-                ((org-agenda-overriding-header "Doing")))
           (todo "NEXT"
                 ((org-agenda-overriding-header "Next")))
           (todo "WAITING"
-                ((org-agenda-overriding-header "Waiting on")))
-          (todo "FIX"
-                ((org-agenda-overriding-header "To Fix"))))
+                ((org-agenda-overriding-header "Waiting on"))))
          nil)
         (" " "Meetings"
          ((tags "device"
