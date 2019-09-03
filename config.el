@@ -31,3 +31,6 @@
     (delete '("\\.pdf\\'" . default) org-file-apps)
     (add-to-list 'org-file-apps '("pdf" . "zathura %s"))
     (load (concat doom-private-dir "mode_configs/+org.el"))))
+
+(add-hook! 'org-agenda-mode-hook
+  (load (concat doom-private-dir "mode_keybindings/+org.el")))
