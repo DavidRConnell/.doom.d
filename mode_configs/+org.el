@@ -71,9 +71,9 @@
 (defun org-auto-complete-todo (n-done n-not-done)
   (org-back-to-heading t)
   (let ((state (org-get-todo-state)))
-    (if state
+    (if (member state (list "TODO" "DONE" "STAGNANT"))
         (cond
-         ((org-stagnant-project-p)
+         ((and (org-stagnant-project-p) (string= state "TODO"))
           (org-todo "STAGNANT"))
          ((= n-not-done 0)
           (org-todo (org-get-todo-sequence-tail state)))
