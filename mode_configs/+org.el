@@ -72,9 +72,12 @@
   (org-back-to-heading t)
   (let ((state (org-get-todo-state)))
     (if state
-        (if (= n-not-done 0)
-            (org-todo (org-get-todo-sequence-tail state))
-          (org-todo (org-get-todo-sequence-head state))))))
+        (cond
+         ((org-stagnant-project-p)
+          (org-todo "STAGNANT"))
+         ((= n-not-done 0)
+          (org-todo (org-get-todo-sequence-tail state)))
+         (t (org-todo (org-get-todo-sequence-head state)))))))
 
 (defun org-get-todo-sequence-tail (kwd)
   "Return the tail of the TODO sequence to which KWD belongs.
@@ -91,6 +94,17 @@ right sequence."
      ((not (member kwd org-todo-keywords-1))
       (car org-todo-keywords-1))
      (t (first (last (assoc kwd org-todo-kwd-alist)))))))
+
+(defun org-stagnant-project-p ()
+  (block "fun"
+    (save-restriction
+      (save-excursion
+        (org-narrow-to-subtree)
+        (while (not (eobp))
+          (org-next-visible-heading 1)
+          (if (string= (org-get-todo-state) "NEXT")
+              (return-from "fun" nil)))
+        t))))
 
 ;; (defmacro make-org-capture-file-vars (files)
 ;;   (dolist (f files)
