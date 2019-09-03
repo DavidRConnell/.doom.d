@@ -249,10 +249,14 @@
           :desc "Agenda"         "a"  #'org-agenda
           :desc "Todo list"      "t"  #'org-todo-list
           :desc "Tags search"    "m"  #'org-tags-view
-          :desc "Org capture"    "c"  #'org-capture
+          :desc "Org capture"    "x"  #'org-capture
           :desc "Go to org file" "g"  (lambda! (doom-project-browse "~/org/"))
           :desc "Org store link" "l"  #'org-store-link
-          :desc "View search"    "v"  #'org-search-view))
+          :desc "View search"    "v"  #'org-search-view
+          (:prefix ("c" . "Clock")
+            :desc "Clock in" "c" #'org-clock-in-last
+            :desc "Clock out" "C" #'org-clock-out
+            :desc "Goto last" "g" #'org-clock-goto)))
 
   ;; Minibuffer
   (define-key! evil-ex-completion-map
