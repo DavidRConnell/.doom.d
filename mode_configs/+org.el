@@ -99,6 +99,7 @@ right sequence."
   (block "fun"
     (save-restriction
       (save-excursion
+        (outline-show-branches)
         (org-narrow-to-subtree)
         (while (not (eobp))
           (org-next-visible-heading 1)
