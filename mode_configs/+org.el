@@ -142,28 +142,48 @@
          "* [ ] %?\n%^{AUTHOR}p")
         ("h" "Habits" entry
          (file+headline +org-capture-habits-file "Inbox")
-         "* TODO %?\nSCHEDULED: <%<%Y-%m-%d %a> %^{repeat|+1d}>\n:PROPERTIES:\n:STYLE: habit\n:END:")
-        ("r" "Run Week" entry
-         (file +org-capture-running-file)
-         "* Week %<%W>\n%^{Mon}%t\n%^{Tue}%t\n%^{Wed}%t"
-         :prepend t :immediate-finish t)))
+         "* TODO %?\nSCHEDULED: <%<%Y-%m-%d %a> %^{repeat|+1d}>\n:PROPERTIES:\n:STYLE: habit\n:END:")))
+        ;; ("r" "Run Week" entry
+        ;;  (file +org-capture-running-file)
+        ;;  "* Week %<%W>\n%^{Mon}%t\n%^{Tue}%t\n%^{Wed}%t"
+        ;;  :prepend t :immediate-finish t)))
 
 (setq org-refile-targets '((nil :maxlevel . 9)
                            (org-agenda-files :maxlevel . 9)))
 
+(setq org-refile-use-outline-path t)
 (setq org-outline-path-complete-in-steps nil)
 (setq org-refile-allow-creating-parent-nodes 'confirm)
 
-(setq org-agenda-compact-blocks t)
 (setq org-agenda-custom-commands
-      '((" " "Agenda"
-        ((agenda "" nil)
-         (todo "DOING|[-]|FIXING"
-               ((org-agenda-overriding-header "Doing")))
-         (todo "NEXT|FIX|WAITING"
-               ((org-agenda-overriding-header "Next")))
-         (tags "Bob|Andrew"
-               ((org-agenda-overriding-header "Device Meeting")))
-         (tags "Stats|DataMgt"
-               ((org-agenda-overriding-header "Stats/data Meeting"))))
-        nil)))
+      '(("n" "Next Actions"
+         ((agenda nil
+                  ((org-agenda-span 1)
+                   (org-agenda-start-day "+0d")))
+          (todo "DOING\|FIXING"
+                ((org-agenda-overriding-header "Doing")))
+          (todo "NEXT"
+                ((org-agenda-overriding-header "Next")))
+          (todo "WAITING"
+                ((org-agenda-overriding-header "Waiting on")))
+          (todo "FIX"
+                ((org-agenda-overriding-header "To Fix"))))
+         nil)
+        (" " "Meetings"
+         ((tags "device"
+                ((org-agenda-overriding-header "Device Group")))
+          (tags "big meeting"
+                ((org-agenda-overriding-header "Stats/Data Management")))
+          (tags "Andrew"
+                ((org-agenda-overriding-header "Lim")))
+          (tags "Jeff"
+                ((org-agenda-overriding-header "Hausdorff"))))
+         nil)
+        ("p" "Poke"
+         ((todo "STAGNANT"
+                ((org-agenda-overriding-header "Stagnant")))
+          (todo "WAITING"
+                ((org-agenda-overriding-header "Waiting On")))
+          (todo "CANCELLED"
+                ((org-agenda-overriding-header "Cancelled"))))
+         nil)))
