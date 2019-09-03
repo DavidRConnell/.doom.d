@@ -184,11 +184,12 @@
         "m"    #'+popup/toggle
         "/"    #'evil-ex-nohighlight
 
-        "["    (lambda! (sp-rewrap-sexp (get-sp-pair "[")))
-        "{"    (lambda! (sp-rewrap-sexp (get-sp-pair "{")))
-        "("    (lambda! (sp-rewrap-sexp (get-sp-pair "(")))
-        "\""   (lambda! (sp-rewrap-sexp (get-sp-pair "\"")))
         :desc "show functions" "l" #'imenu-list-smart-toggle
+
+        :desc "Surrond With" "["    (lambda! (sp-rewrap-sexp (get-sp-pair "[")))
+        :desc "Surrond With" "{"    (lambda! (sp-rewrap-sexp (get-sp-pair "{")))
+        :desc "Surrond With" "("    (lambda! (sp-rewrap-sexp (get-sp-pair "(")))
+        :desc "Surrond With" "\""   (lambda! (sp-rewrap-sexp (get-sp-pair "\"")))
 
         (:prefix ("r" . "Replace line")
           :desc "custom" "c" (lambda! (evil-ex (concat (get-evil-ex-prefix) "s/\\<")))
