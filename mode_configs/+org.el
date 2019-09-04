@@ -22,6 +22,10 @@
         (sequence "NOTES(N)" "|")
         (sequence "[ ]([)" "[-](-!/)" "|" "[x](x!/)")))
 
+;; (defface ontrack)
+;; (defface workingon)
+;; (defface heldup)
+;; (defface finished)
 (setq org-todo-keyword-faces
       '(("TODO" . (:foreground "#98be65" :weight bold))
         ("NEXT" . (:foreground "#da8548" :weight bold))
@@ -73,10 +77,10 @@
   (let ((state (org-get-todo-state)))
     (if (member state (list "TODO" "DONE" "STAGNANT"))
         (cond
-         ((and (org-stagnant-project-p) (string= state "TODO"))
-          (org-todo "STAGNANT"))
          ((= n-not-done 0)
           (org-todo (org-get-todo-sequence-tail state)))
+         ((org-stagnant-project-p)
+          (org-todo "STAGNANT"))
          (t (org-todo (org-get-todo-sequence-head state)))))))
 
 (defun org-get-todo-sequence-tail (kwd)
