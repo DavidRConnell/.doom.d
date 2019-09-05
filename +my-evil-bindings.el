@@ -175,7 +175,7 @@
         "B"    #'switch-to-buffer
         "+"    #'evil-numbers/inc-at-pt
         "-"    #'evil-numbers/dec-at-pt
-        ","    #'+term/open-popup-in-project
+        ","    #'eshell
 
         "s"    #'doom/open-scratch-buffer
         "!"    #'doom/sudo-this-file
@@ -185,7 +185,7 @@
         "m"    #'+popup/toggle
         "/"    #'evil-ex-nohighlight
 
-        :desc "show functions" "l" #'imenu-list-smart-toggle
+        :desc "show functions" "l" #'imenu
 
         :desc "Surrond With" "["    (lambda! (sp-rewrap-sexp (get-sp-pair "[")))
         :desc "Surrond With" "{"    (lambda! (sp-rewrap-sexp (get-sp-pair "{")))
