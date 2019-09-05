@@ -37,6 +37,7 @@
         :nv "H"     #'evil-first-non-blank
         :nv "L"     #'evil-end-of-line
         :nv "gd"    #'find-function-at-point
+        ;; :nv "gd"    #'imenu-anywhere
         :nv "K"     #'evil-scroll-line-up
         :nv "J"     #'evil-scroll-line-down
         :nv "ZZ"    #'save-buffers-kill-terminal
