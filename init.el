@@ -153,6 +153,9 @@
          +wordnut         ; wordnet (wn) search
          +langtool)       ; a proofreader (grammar/style check) for Emacs
 
+       :email
+       notmuch
+
        :collab
        ;;floobits          ; peer programming for a price
        ;;impatient-mode    ; show off code over HTTP

@@ -241,6 +241,10 @@
                 :desc "drop" "d" #'magit-stash-drop
                 :desc "branch" "b" #'magit-stash-branch)))
 
+        (:prefix ("e" . "Email")
+          :desc "Go to mail" "g" #'=notmuch
+          :desc "Compose mail" "c" #'compose-mail-other-window)
+
         (:prefix ("C" . "Code checking")
           :desc "toggle spell"   "s" #'flyspell-mode
           :desc "toggle lint"    "c" #'flycheck-mode
