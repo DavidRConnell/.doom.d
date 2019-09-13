@@ -1,0 +1,2 @@
+addpath ~/bin > /dev/null
+addpath ~/.emacs.d/bin > /dev/null
