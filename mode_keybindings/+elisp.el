@@ -2,6 +2,8 @@
       (:localleader
         "f"     #'eval-defun
         "%"     #'eval-buffer
-        ; v for visual mode.
         "v"     #'eval-region
-        "r"     #'quickrun))
+        "r"     #'quickrun)
+      (:prefix "C-c"
+        "C-c" #'eval-defun
+        "C-l" #'eval-buffer))
