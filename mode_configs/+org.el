@@ -1,4 +1,5 @@
 (setq org-directory "~/org/")
+(setq org-agenda-files (list  "~/org/agenda/"))
 
 (setq org-enforce-todo-dependencies t)
 (add-hook 'org-todo-hook

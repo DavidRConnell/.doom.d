@@ -255,7 +255,8 @@
           :desc "Todo list"      "t"  #'org-todo-list
           :desc "Tags search"    "m"  #'org-tags-view
           :desc "Org capture"    "x"  #'org-capture
-          :desc "Go to org file" "g"  (lambda! (doom-project-browse "~/org/"))
+          :desc "Go to org file" "g"  (lambda!
+                                       (projectile-find-file-in-directory "~/org/"))
           :desc "Org store link" "l"  #'org-store-link
           :desc "View search"    "v"  #'org-search-view
           (:prefix ("c" . "Clock")
