@@ -3,7 +3,7 @@
       :n "k" #'term-send-up
       :ni "C-p" #'term-send-up
       :ni "C-n" #'term-send-down
-      :n "g" #'term-send-home
+      :n "G" #'term-send-home
       :n "C-d" #'term-send-eof)
 
 (add-hook! 'eshell-mode-hook
