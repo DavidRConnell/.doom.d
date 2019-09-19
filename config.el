@@ -21,6 +21,9 @@
 (add-hook 'matlab-shell-mode-hook
           #'company-mode)
 
+(add-hook 'julia-mode-hook
+          'julia-repl-mode)
+
 (after! evil-magit
   (map! :mode magit-mode
         "?" #'evil-search-backward
@@ -34,3 +37,6 @@
 
 (add-hook! 'org-agenda-mode-hook
   (load (concat doom-private-dir "mode_keybindings/+org.el")))
+
+;; Reload theme to poorly fix cursor color.
+(load-theme 'doom-one)

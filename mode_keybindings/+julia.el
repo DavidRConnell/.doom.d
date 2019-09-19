@@ -2,5 +2,6 @@
 
 (map! :mode julia-mode
       (:localleader
-        "r" #'quickrun
-        "p" #'run-julia))
+        "r" #'julia-repl-send-buffer
+        "p" #'julia-repl
+        "v" #'julia-repl-send-region-or-line))
