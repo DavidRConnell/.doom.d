@@ -7,8 +7,17 @@
         (load! (string-join (list dir (car file-names)) "/")))
     (setq file-names (cdr file-names))))
 
+(defvar org-notes "~/notes/")
+(defvar refs-pdfs "~/Documents/references/")
+(defvar refs-bib (concat refs-pdfs "index.bib"))
+(defvar refs-notes (concat org-notes "refs.org"))
+
 (if (featurep 'evil)
     (load! "+my-evil-bindings"))
+
+(use-package! org-ref
+  :config
+  (setq org-ref-completion-library 'org-ref-ivy-cite))
 
 (load-files-in (concat doom-private-dir "mode_configs"))
 (load-files-in (concat doom-private-dir "mode_keybindings"))
@@ -35,8 +44,6 @@
 
 (after! org
   (progn
-    (delete '("\\.pdf\\'" . default) org-file-apps)
-    (add-to-list 'org-file-apps '("pdf" . "zathura %s"))
     (load (concat doom-private-dir "mode_configs/+org.el"))))
 
 (add-hook! 'org-agenda-mode-hook

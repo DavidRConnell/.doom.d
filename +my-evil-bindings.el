@@ -265,6 +265,12 @@
             :desc "Clock out" "C" #'org-clock-out
             :desc "Goto last" "g" #'org-clock-goto))
 
+        (:prefix ("n" . "Noter")
+          :desc "Run Noter" "n"    #'org-noter
+          :desc "Open Index" "i"  (lambda! (find-file refs-bib))
+          :desc "Open Reference" "r" (lambda! (counsel-find-file refs-pdfs))
+          :desc "Insert Cite" "c" #'org-ref-insert-cite-with-completion))
+
   ;; Minibuffer
   (define-key! evil-ex-completion-map
     "C-a" #'move-beginning-of-line

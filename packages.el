@@ -6,3 +6,7 @@
 
 (package! matlab-emacs :recipe
   (:fetcher github :repo "ayonga/matlab-emacs"))
+
+(package! org-ref)
+(package! org-noter)
+(package! ivy-bibtex)
