@@ -4,4 +4,5 @@
       (:localleader
         "r" #'julia-repl-send-buffer
         "p" #'julia-repl
-        "v" #'julia-repl-send-region-or-line))
+        "v" #'julia-repl-send-region-or-line
+        "o" (lambda! (counsel-find-file "~/.julia/packages"))))

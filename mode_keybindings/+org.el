@@ -3,7 +3,7 @@
 (map! :map org-mode-map
       :nv "C-j" #'org-forward-heading-same-level
       :nv "C-k" #'org-backward-heading-same-level
-      :nv "H" #'evil-org-beginning-of-line
+      :nv "H" #'org-beginning-of-line
       (:localleader
         "n" #'org-add-note
         "p" #'org-priority
@@ -17,6 +17,7 @@
       :m "/" #'org-agenda-filter-by-tag
       :m "L" #'evil-end-of-line
       :m "H" #'evil-beginning-of-line
+      :m "RET" #'+org/dwim-at-point
       (:prefix "C-c"
         "C-c" #'org-agenda-set-tags
         "." #'org-agenda-date-prompt)

@@ -31,12 +31,11 @@
         :v  "gp"    #'+evil/paste-preserve-register
         :v  "@"     #'+evil:apply-macro
         :v  "."     #'+evil:apply-macro
-        :v  "<"     #'+evil/visual-dedent  ; vnoremap < <gv
-        :v  ">"     #'+evil/visual-indent  ; vnoremap > >gv
+        :v  "<"     #'+evil/visual-dedent
+        :v  ">"     #'+evil/visual-indent
         :nv ";"     #'evil-ex
         :nv "H"     #'evil-first-non-blank
         :nv "L"     #'evil-end-of-line
-        :nv "gd"    #'find-function-at-point
         ;; :nv "gd"    #'imenu-anywhere
         :nv "K"     #'evil-scroll-line-up
         :nv "J"     #'evil-scroll-line-down
@@ -184,6 +183,7 @@
         "."    #'doom/open-private-config
         "m"    #'+popup/toggle
         "/"    #'evil-ex-nohighlight
+        "\\"   #'toggle-truncate-lines
 
         :desc "show functions" "l" #'imenu
 
@@ -209,6 +209,7 @@
           "R" #'projectile-replace
           "g" #'projectile-grep
           "o" #'projectile-switch-project
+          "f" #'projectile-find-file
           "r" #'counsel-buffer-or-recentf)
 
         (:prefix ("c" . "Comments")
@@ -256,13 +257,13 @@
           :desc "Tags search"    "m"  #'org-tags-view
           :desc "Org capture"    "x"  #'org-capture
           :desc "Go to org file" "g"  (lambda!
-                                       (projectile-find-file-in-directory "~/org/"))
+                                       (counsel-find-file "~/org/"))
           :desc "Org store link" "l"  #'org-store-link
           :desc "View search"    "v"  #'org-search-view
           (:prefix ("c" . "Clock")
             :desc "Clock in" "c" #'org-clock-in-last
             :desc "Clock out" "C" #'org-clock-out
-            :desc "Goto last" "g" #'org-clock-goto)))
+            :desc "Goto last" "g" #'org-clock-goto))
 
   ;; Minibuffer
   (define-key! evil-ex-completion-map

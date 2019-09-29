@@ -14,7 +14,10 @@
 (load-files-in (concat doom-private-dir "mode_keybindings"))
 
 (add-hook 'git-timemachine-mode-hook
-          #'git-timemachine-show-revision-fuzzy)
+          #'git-timemachine-show-revision-fuzzy
+          (map! :mode git-timemachine-mode
+                :ni "C-p" #'git-timemachine-show-previous-revision
+                :ni "C-n" #'git-timemachine-show-next-revision))
 
 (add-hook 'term-mode-hook
           #'company-mode)
