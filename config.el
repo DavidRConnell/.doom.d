@@ -1,3 +1,4 @@
+(setq default-fill-column 80)
 (defun load-files-in (dir)
   "Load all files under directory DIR."
   (setq file-names (directory-files dir))
