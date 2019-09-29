@@ -243,7 +243,7 @@
                 :desc "branch" "b" #'magit-stash-branch)))
 
         (:prefix ("e" . "Email")
-          :desc "Go to mail" "g" #'=notmuch
+          :desc "Go to mail" "g" #'=mu4e
           :desc "Compose mail" "c" #'compose-mail-other-window)
 
         (:prefix ("C" . "Code checking")
