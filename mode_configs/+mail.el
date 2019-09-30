@@ -15,3 +15,7 @@
 (setq message-auto-save-directory "~/.mail/gmail/drafts")
 (setq message-kill-buffer-on-exit t)
 (setq message-directory "~/.mail/gmail")
+
+(add-hook! 'message-mode-hook
+  (turn-off-auto-fill)
+  (visual-line-mode))
