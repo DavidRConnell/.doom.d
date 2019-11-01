@@ -7,6 +7,7 @@
 (package! counsel-org-clock)
 (package! define-word)
 (package! powerthesaurus)
+(package! scad-mode)
 (package! matlab-mode)
 (package! julia-repl)
 (package! flycheck-julia)
