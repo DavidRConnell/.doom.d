@@ -16,6 +16,10 @@
 (setq message-kill-buffer-on-exit t)
 (setq message-directory "~/.mail/gmail")
 
+(setq shr-color-visible-luminance-min 80)
+(setq message-signature
+      "Thank you\nDavid R. Connell")
+
 (add-hook! 'message-mode-hook
   (turn-off-auto-fill)
   (visual-line-mode))
