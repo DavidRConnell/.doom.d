@@ -6,7 +6,7 @@
 
 (setq evil-collection-key-blacklist
       ;;; Code:
-      (list "C-j" "C-k" "gd" "gf" "K" "[" "]" "gz"
+      (list "C-j" "C-k" "gd" "gf" "J" "K" "[" "]" "gz" "Spc"
             doom-leader-key doom-localleader-key
             doom-leader-alt-key doom-localleader-alt-key))
 
