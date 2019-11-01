@@ -172,6 +172,10 @@
 
 (setq doom-font (font-spec :family "DejaVu Sans Mono" :size 18))
 (setq doom-localleader-key ",")
+(defvar org-notes "~/notes/")
+(defvar refs-pdfs "~/Documents/references/")
+(defvar refs-bib (concat refs-pdfs "index.bib"))
+(defvar refs-notes (concat org-notes "refs.org"))
 
 (setq-hook! 'display-line-numbers-mode-hook
   display-line-numbers 'relative)
@@ -185,3 +189,13 @@
   (setq evil-snipe-scope 'buffer)
   (setq evil-snipe-repeat-scope 'whole-buffer)
   nil)
+(defun load-files-in (dir)
+  "Load all files under directory DIR."
+  (setq file-names (directory-files dir))
+  (while file-names
+    (if (string-suffix-p ".el" (car file-names))
+        (load! (string-join (list dir (car file-names)) "/")))
+    (setq file-names (cdr file-names))))
+
+(load-files-in (concat doom-private-dir "mode_configs"))
+

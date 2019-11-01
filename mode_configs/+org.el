@@ -1,6 +1,7 @@
 (setq org-directory "~/org/")
 (setq org-agenda-files (list "~/org/"))
 
+(setq org-ref-completion-library 'org-ref-ivy-cite)
 (setq reftex-default-bibliography (list refs-bib))
 (setq org-ref-bibliography-notes refs-notes
       org-ref-default-bibliography (list refs-bib)
