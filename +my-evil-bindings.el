@@ -274,6 +274,11 @@
           :desc "Open Notes" "o" (lambda! (find-file refs-notes))
           :desc "Insert Cite" "c" #'org-ref-insert-cite-with-completion)
 
+        (:prefix ("d" . "Dictionary")
+          :desc "Define at point" "d" #'define-word-at-point
+          :desc "Define any word" "D" #'define-word
+          :desc "Thesaurus" "t" #'powerthesaurus-lookup-word-dwim))
+
   ;; Minibuffer
   (define-key! evil-ex-completion-map
     "C-a" #'move-beginning-of-line

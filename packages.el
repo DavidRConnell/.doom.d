@@ -11,3 +11,5 @@
 (package! org-noter)
 (package! ivy-bibtex)
 (package! counsel-org-clock)
+(package! define-word)
+(package! powerthesaurus)
