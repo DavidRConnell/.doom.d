@@ -170,8 +170,10 @@
        ;; config. Use it as a reference for your own modules.
        (default +smartparens))
 
-(setq doom-font (font-spec :family "DejaVu Sans Mono" :size 18))
+(setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 16))
 (setq doom-localleader-key ",")
+(setq doom-theme 'doom-one)
+
 (defvar org-notes "~/notes/")
 (defvar refs-pdfs "~/Documents/references/")
 (defvar refs-bib (concat refs-pdfs "index.bib"))
