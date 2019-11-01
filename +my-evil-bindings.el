@@ -263,15 +263,16 @@
           :desc "Org store link" "l"  #'org-store-link
           :desc "View search"    "v"  #'org-search-view
           (:prefix ("c" . "Clock")
-            :desc "Clock in" "c" #'org-clock-in-last
+            :desc "Clock in" "c" #'counsel-org-clock-context
             :desc "Clock out" "C" #'org-clock-out
-            :desc "Goto last" "g" #'org-clock-goto))
+            :desc "Goto last" "g" #'counsel-org-clock-goto))
 
         (:prefix ("n" . "Noter")
           :desc "Run Noter" "n"    #'org-noter
           :desc "Open Index" "i"  (lambda! (find-file refs-bib))
           :desc "Open Reference" "r" (lambda! (counsel-find-file refs-pdfs))
-          :desc "Insert Cite" "c" #'org-ref-insert-cite-with-completion))
+          :desc "Open Notes" "o" (lambda! (find-file refs-notes))
+          :desc "Insert Cite" "c" #'org-ref-insert-cite-with-completion)
 
   ;; Minibuffer
   (define-key! evil-ex-completion-map

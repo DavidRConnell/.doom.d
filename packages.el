@@ -10,3 +10,4 @@
 (package! org-ref)
 (package! org-noter)
 (package! ivy-bibtex)
+(package! counsel-org-clock)
