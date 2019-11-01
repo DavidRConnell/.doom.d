@@ -1,4 +1,3 @@
-(setq default-fill-column 80)
 (defun load-files-in (dir)
   "Load all files under directory DIR."
   (setq file-names (directory-files dir))
@@ -11,6 +10,9 @@
 (defvar refs-pdfs "~/Documents/references/")
 (defvar refs-bib (concat refs-pdfs "index.bib"))
 (defvar refs-notes (concat org-notes "refs.org"))
+;; (setq default-fill-column 80)
+;; (defun string-to-int (str)
+;;   (string-to-number str))
 
 (if (featurep 'evil)
     (load! "+my-evil-bindings"))
