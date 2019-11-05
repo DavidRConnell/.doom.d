@@ -38,12 +38,15 @@
         :nv "k"     #'evil-previous-visual-line
         :nv "H"     #'evil-first-non-blank
         :nv "L"     #'evil-end-of-line
-        ;; :nv "gd"    #'imenu-anywhere
         :nv "K"     #'evil-scroll-line-up
         :nv "J"     #'evil-scroll-line-down
         :nv "ZZ"    #'save-buffers-kill-terminal
         :nv "/" #'swiper
         :nv "?" #'swiper-backward
+
+        (:prefix "C-h"
+          :desc "Find info manual" "RET" #'info-display-manual
+          :desc "Top layer key map" "K" #'which-key-show-top-level)
 
         ;; Smarter newlines
         :i [remap newline] #'newline-and-indent  ; auto-indent on newline
