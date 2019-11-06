@@ -26,6 +26,7 @@
         :nv "z="    #'flyspell-correct-word-generic
         :nv "g@"    #'+evil:apply-macro
         :nv "gx"    #'evil-exchange
+        :nv "gd"    #'dumb-jump-go
         :nv "C-a"   #'evil-numbers/inc-at-pt
         :nv "C-S-a" #'evil-numbers/dec-at-pt
         :v  "gp"    #'+evil/paste-preserve-register
