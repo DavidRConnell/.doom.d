@@ -176,7 +176,7 @@
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 
 (defvar org-notes "~/notes/")
-(defvar refs-pdfs "~/Documents/references/")
+(defvar refs-pdfs "~/References/")
 (defvar refs-bib (concat refs-pdfs "index.bib"))
 (defvar refs-notes (concat org-notes "refs.org"))
 
