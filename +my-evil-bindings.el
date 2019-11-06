@@ -43,6 +43,7 @@
         :nv "ZZ"    #'save-buffers-kill-terminal
         :nv "/" #'swiper
         :nv "?" #'swiper-backward
+        :nv "gn" #'swiper-thing-at-point
 
         (:prefix "C-h"
           :desc "Find info manual" "RET" #'info-display-manual
@@ -57,10 +58,10 @@
         :map evilem-map
         "SPC" #'avy-goto-char-timer
         "/" (evilem-create #'evil-ex-search-next
-                           :pre-hook (save-excursion (call-interactively #'evil-ex-search-forward))
+                           :pre-hook (save-excursion (call-interactively #'swiper))
                            :bind ((evil-search-wrap)))
         "?" (evilem-create #'evil-ex-search-previous
-                           :pre-hook (save-excursion (call-interactively #'evil-ex-search-backward))
+                           :pre-hook (save-excursion (call-interactively #'swiper-backward))
                            :bind ((evil-search-wrap))))
 
       (:when (featurep! :ui workspaces)
