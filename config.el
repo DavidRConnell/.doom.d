@@ -24,5 +24,8 @@
         "?" #'evil-search-backward
         "K" #'evil-scroll-line-up))
 
+(after! evil
+  (evil-collection-minibuffer-setup))
+
 (load-files-in (concat doom-private-dir "mode_keybindings"))
 (load-theme doom-theme)
