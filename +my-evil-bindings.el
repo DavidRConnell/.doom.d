@@ -34,7 +34,6 @@
         :v  "."     #'+evil:apply-macro
         :v  "<"     #'+evil/visual-dedent
         :v  ">"     #'+evil/visual-indent
-        :nv ";"     #'evil-ex
         :nv "j"     #'evil-next-visual-line
         :nv "k"     #'evil-previous-visual-line
         :nv "H"     #'evil-first-non-blank
