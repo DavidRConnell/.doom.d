@@ -287,7 +287,6 @@
             #'helm-minibuffer-history))
 
   (define-key! :keymaps +default-minibuffer-maps
-    [escape] #'abort-recursive-edit
     "C-v"    #'yank
     "C-z"    (λ! (ignore-errors (call-interactively #'undo)))
     "C-a"    #'move-beginning-of-line

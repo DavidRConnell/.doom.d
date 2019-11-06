@@ -25,7 +25,15 @@
         "K" #'evil-scroll-line-up))
 
 (after! evil
-  (evil-collection-minibuffer-setup))
+  (evil-collection-minibuffer-setup)
+  (dolist (map +default-minibuffer-maps)
+    (evil-collection-define-key 'normal map (kbd "j") #'next-line)
+    (evil-collection-define-key 'normal map (kbd "k") #'previous-line)
+    (evil-collection-define-key 'normal map (kbd "C-n") #'next-line)
+    (evil-collection-define-key 'normal map (kbd "C-p") #'previous-line)
+    (evil-collection-define-key 'insert map (kbd "C-n") #'next-line)
+    (evil-collection-define-key 'insert map (kbd "C-p") #'previous-line)
+    (evil-collection-define-key 'insert map (kbd "C-v") #'yank)))
 
 (load-files-in (concat doom-private-dir "mode_keybindings"))
 (load-theme doom-theme)
