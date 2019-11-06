@@ -139,12 +139,7 @@
         (:after swiper
           :map swiper-map
           [backtab] #'+ivy/wgrep-occur
-          [C-return] (+ivy-do-action! #'+ivy-git-grep-other-window-action))
-        (:after swiper
-          :map swiper-map
-          [backtab] #'+ivy/wgrep-occur)))
-
-
+          [C-return] (+ivy-do-action! #'+ivy-git-grep-other-window-action))))
 
 (map! (:when (featurep! :editor fold)
         :nv "C-SPC" #'+fold/toggle)
