@@ -24,6 +24,9 @@
         "?" #'evil-search-backward
         "K" #'evil-scroll-line-up))
 
+(add-hook 'minibuffer-setup-hook
+          #'company-mode)
+
 (after! evil
   (evil-collection-minibuffer-setup)
   (dolist (map +default-minibuffer-maps)
