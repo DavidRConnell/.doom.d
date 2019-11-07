@@ -16,7 +16,7 @@
             #'company-mode))
 
 (after! julia-mode
-  (add-hook 'julia-mode-hook
+  (add-hook! 'julia-mode-hook
             'julia-repl-mode))
 
 (after! evil-magit
