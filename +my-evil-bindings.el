@@ -63,6 +63,8 @@
         "?" (evilem-create #'evil-ex-search-previous
                            :pre-hook (save-excursion (call-interactively #'swiper-backward))
                            :bind ((evil-search-wrap))))
+        :m "r" #'avy-goto-char-in-line
+        :m "R" #'avy-goto-char-2
 
       (:when (featurep! :ui workspaces)
                 :nv "M-t"   #'+workspace/new
