@@ -24,6 +24,10 @@
         "?" #'evil-search-backward
         "K" #'evil-scroll-line-up))
 
+(after! avy
+  (setq avy-keys-alist
+        '((avy-goto-char . (?a ?o ?e ?u ?h ?t ?n ?s ?-))))
+  (setq avy-keys (number-sequence ?a ?z)))
 
 (load-files-in (concat doom-private-dir "mode_keybindings"))
 (load-theme doom-theme)
