@@ -180,7 +180,7 @@
       "!"    #'doom/sudo-this-file
       ":"    #'eval-expression
       ";"    #'execute-extended-command
-      "."    #'doom/open-private-config
+      "."    (lambda! (projectile-switch-project-by-name "~/.doom.d"))
       "m"    #'+popup/toggle
       "/"    #'evil-ex-nohighlight
       "\\"   #'toggle-truncate-lines
@@ -220,8 +220,8 @@
                            (concat "%s/\\<" (thing-at-point 'symbol) "\\>/"))))
 
       (:prefix ("p" . "Projects")
-        :desc "open emacs.d" "e" #'+default/browse-emacsd
-        :desc "open notes" "n" (lambda! (doom-project-browse "~/notes/"))
+        :desc "open emacs.d" "e" (lambda! (projectile-switch-project-by-name
+                                           "~/.emacs.d"))
         :desc "open config" "c" (lambda! (doom-project-browse "~/.config/"))
         "R" #'projectile-replace
         "g" #'projectile-grep
@@ -274,7 +274,7 @@
         :desc "Tags search"    "m"  #'org-tags-view
         :desc "Org capture"    "x"  #'org-capture
         :desc "Go to org file" "g"  (lambda!
-                                     (counsel-find-file "~/org/"))
+                                     (projectile-switch-project-by-name "~/org/"))
         :desc "Org store link" "l"  #'org-store-link
         :desc "View search"    "v"  #'org-search-view
         (:prefix ("c" . "Clock")
