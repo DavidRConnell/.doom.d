@@ -138,11 +138,11 @@
           "C-l"      #'ivy-done
           "C-c C-e"  #'+ivy/wgrep-occur      ; search/replace on results
           [backtab]  #'+ivy/wgrep-occur      ; search/replace on results
-          [C-return] (+ivy-do-action! #'+ivy-git-grep-other-window-action))
+          [C-return] #'+ivy/git-grep-other-window-action)
         (:after swiper
           :map swiper-map
           [backtab] #'+ivy/wgrep-occur
-          [C-return] (+ivy-do-action! #'+ivy-git-grep-other-window-action))))
+          [C-return] #'+ivy/git-grep-other-window-action)))
 
 (map! (:when (featurep! :editor fold)
         :nv "C-SPC" #'+fold/toggle)
