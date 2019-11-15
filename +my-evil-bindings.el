@@ -25,6 +25,8 @@
         :v  "g="    #'+evil:narrow-buffer
         :nv "z="    #'flyspell-correct-word-generic
         :nv "g@"    #'+evil:apply-macro
+        :nv "C-q"    #'+evil:apply-macro
+        :nv "Q"     #'evil-execute-macro
         :nv "gx"    #'evil-exchange
         :nv "gd"    #'dumb-jump-go
         :nv "C-a"   #'evil-numbers/inc-at-pt
@@ -40,10 +42,16 @@
         :nv "L"     #'evil-end-of-line
         :nv "K"     #'evil-scroll-line-up
         :nv "J"     #'evil-scroll-line-down
+        :n "C-j"    #'evil-scroll-page-down
+        :n "C-k"    #'evil-scroll-page-up
+        :v "C-j"    #'avy-goto-line-below
+        :v "C-k"    #'avy-goto-line-above
+        :nv "C-m"   #'evil-goto-mark
         :nv "ZZ"    #'save-buffers-kill-terminal
         :nv "/" #'swiper
         :nv "?" #'swiper-backward
         :nv "gn" #'swiper-thing-at-point
+        :nvi "M-/" #'ace-link
 
         (:prefix "C-h"
           :desc "Find info manual" "RET" #'info-display-manual
@@ -57,6 +65,7 @@
         :m "R" #'avy-goto-char-2
 
         :m  "gs"    #'+evil/easymotion  ; lazy-load `evil-easymotion'
+        :m  "C-e"    #'+evil/easymotion  ; lazy-load `evil-easymotion'
         (:after evil-easymotion
           :map evilem-map
           "SPC" #'avy-goto-char-timer
