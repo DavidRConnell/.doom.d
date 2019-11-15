@@ -29,7 +29,9 @@
 (after! avy
   (setq avy-keys-alist
         '((avy-goto-char . (?a ?o ?e ?u ?h ?t ?n ?s ?-))))
-  (setq avy-keys (number-sequence ?a ?z)))
+  (setq avy-keys (number-sequence ?a ?z))
+  (setq avy-enter-times-out nil)
+  (setq avy-timeout-seconds 0.3))
 
 (load-files-in (concat doom-private-dir "mode_keybindings"))
 (load-theme doom-theme)

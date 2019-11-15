@@ -65,14 +65,17 @@
         :i [remap newline] #'newline-and-indent  ; auto-indent on newline
         :i "C-j"           #'+default/newline    ; default behavior
 
-        :m "r" #'avy-goto-char-in-line
-        :m "R" #'avy-goto-char-2
+        ; Use C-s (snipe) instead of C-t becaulse C-t is my stumpwm key
+        :nvm "C-s" (lambda! ; make exclusive (more like till than from)
+                   (call-interactively #'avy-goto-char-in-line)
+                   (point))
 
-        :m  "gs"    #'+evil/easymotion  ; lazy-load `evil-easymotion'
+        :nvm "C-f" #'avy-goto-char-in-line
+
+        :nv "C-/" #'avy-goto-char-timer
         :m  "C-e"    #'+evil/easymotion  ; lazy-load `evil-easymotion'
         (:after evil-easymotion
           :map evilem-map
-          "SPC" #'avy-goto-char-timer
           "/" (evilem-create #'evil-ex-search-next
                              :pre-hook (save-excursion (call-interactively #'swiper))
                              :bind ((evil-search-wrap)))
