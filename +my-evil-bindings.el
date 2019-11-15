@@ -29,6 +29,10 @@
         :nv "Q"     #'evil-execute-macro
         :nv "gx"    #'evil-exchange
         :nv "gd"    #'dumb-jump-go
+        :nv "gc"    #'dc-commentary-line
+        :nv "gr"    #'dc-apply-ex-substitute-word
+        :nv "gR"    #'dc-apply-ex-substitute-WORD
+        :nv "gk"    #'dc-apply-ex-substitute-custom
         :nv "C-a"   #'evil-numbers/inc-at-pt
         :nv "C-S-a" #'evil-numbers/dec-at-pt
         :v  "gp"    #'+evil/paste-preserve-register
