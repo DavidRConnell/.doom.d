@@ -2,6 +2,7 @@
 ;; (defun string-to-int (str)
 ;;   (string-to-number str))
 
+(load! "+binding_functions")
 (if (featurep 'evil)
     (load! "+my-evil-bindings"))
 

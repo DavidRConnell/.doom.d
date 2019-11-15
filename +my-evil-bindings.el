@@ -149,26 +149,6 @@
       (:when (featurep! :editor format)
         :n "gQ" #'+format:region))
 
-(defun get-evil-ex-prefix ()
-  "Format universal argument for use on evil-ex command state."
-  (cond
-   ((and (evil-visual-state-p)
-         evil-ex-visual-char-range
-         (memq (evil-visual-type) '(inclusive exclusive)))
-    "`<,`>")
-   ((evil-visual-state-p)
-    "'<,'>")
-   (current-prefix-arg
-    (let ((arg (prefix-numeric-value current-prefix-arg)))
-      (cond ((< arg 0) (setq arg (1+ arg)))
-            ((> arg 0) (setq arg (1- arg))))
-      (if (= arg 0) '(".")
-        (format ".,.%+d" arg))))))
-
-(defun get-sp-pair (prefix)
-  "Get pair in format for use with sp-rewrap sexp."
-  (--first (equal prefix (car it)) (sp--get-pair-list-context 'wrap)))
-
 (map! :leader
       "w"    #'save-buffer
       "q"    #'kill-this-buffer
@@ -191,20 +171,37 @@
 
       :desc "show functions" "l" #'imenu
 
-      :desc "Surrond With" "["    (lambda! (sp-rewrap-sexp (get-sp-pair "[")))
-      :desc "Surrond With" "{"    (lambda! (sp-rewrap-sexp (get-sp-pair "{")))
-      :desc "Surrond With" "("    (lambda! (sp-rewrap-sexp (get-sp-pair "(")))
-      :desc "Surrond With" "\""   (lambda! (sp-rewrap-sexp (get-sp-pair "\"")))
+      :desc "Surrond With" "["    (lambda! (sp-rewrap-sexp (dc--get-sp-pair "[")))
+      :desc "Surrond With" "{"    (lambda! (sp-rewrap-sexp (dc--get-sp-pair "{")))
+      :desc "Surrond With" "("    (lambda! (sp-rewrap-sexp (dc--get-sp-pair "(")))
+      :desc "Surrond With" "\""   (lambda! (sp-rewrap-sexp (dc--get-sp-pair "\"")))
 
       (:prefix ("r" . "Replace line")
-        :desc "custom" "c" (lambda! (evil-ex (concat (get-evil-ex-prefix) "s/\\<")))
-        :desc "word" "w" (lambda! (evil-ex (concat (get-evil-ex-prefix) "s/\\<" (thing-at-point 'word) "\\>/")))
-        :desc "WORD" "W" (lambda! (evil-ex (concat (get-evil-ex-prefix) "s/\\<" (thing-at-point 'symbol) "\\>/"))))
+        :desc "custom" "c" (lambda!
+                            (evil-ex
+                             (concat (dc--get-evil-ex-prefix) "s/\\<")))
+
+        :desc "word" "w" (lambda!
+                          (evil-ex
+                           (concat
+                            (dc--get-evil-ex-prefix)
+                            "s/\\<" (thing-at-point 'word) "\\>/")))
+
+        :desc "WORD" "W" (lambda!
+                          (evil-ex
+                           (concat
+                            (dc--get-evil-ex-prefix)
+                            "s/\\<" (thing-at-point 'symbol) "\\>/"))))
 
       (:prefix ("R" . "Replace buffer")
         :desc "custom" "c" (lambda! (evil-ex "%s/\\<"))
-        :desc "word" "w" (lambda! (evil-ex (concat "%s/\\<" (thing-at-point 'word) "\\>/")))
-        :desc "WORD" "W" (lambda! (evil-ex (concat "%s/\\<" (thing-at-point 'symbol) "\\>/"))))
+        :desc "word" "w" (lambda!
+                          (evil-ex
+                           (concat "%s/\\<" (thing-at-point 'word) "\\>/")))
+
+        :desc "WORD" "W" (lambda!
+                          (evil-ex
+                           (concat "%s/\\<" (thing-at-point 'symbol) "\\>/"))))
 
       (:prefix ("p" . "Projects")
         :desc "open emacs.d" "e" #'+default/browse-emacsd
