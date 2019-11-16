@@ -29,7 +29,7 @@
         :nv "Q"     #'evil-execute-macro
         :nv "gx"    #'evil-exchange
         :nv "gd"    #'dumb-jump-go
-        :nv "gc"    #'dc-commentary-line
+        :nv "gc"    #'evilnc-comment-operator
         :nv "gr"    #'dc-apply-ex-substitute-word
         :nv "gR"    #'dc-apply-ex-substitute-WORD
         :nv "gk"    #'dc-apply-ex-substitute-custom
@@ -230,7 +230,7 @@
         "r" #'counsel-buffer-or-recentf)
 
       (:prefix ("c" . "Comments")
-        "l"    #'evil-commentary-line)
+        "l"    #'evilnc-comment-or-uncomment-lines)
 
       "G" #'magit-dispatch
       (:prefix ("g" . "git")

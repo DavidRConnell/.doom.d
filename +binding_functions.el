@@ -1,13 +1,5 @@
 ;;; ~/.doom.d/+binding_functions.el -*- lexical-binding: t; -*-
 
-(evil-define-operator dc-commentary-line (beg end)
-  :move-point nil
-  :type line
-  :repeat t
-  :jump t
-  (interactive "<r>")
-  (evil-commentary-line beg end))
-
 (evil-define-operator dc-apply-ex-substitute-word (beg end)
   "Apply search and replace to each line."
   :move-point nil
