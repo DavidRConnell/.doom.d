@@ -181,16 +181,6 @@
 (setq-hook! 'display-line-numbers-mode-hook
   display-line-numbers 'relative)
 
-(use-package-hook! evil-snipe
-  :pre-config
-  (setq evil-snipe-auto-disable-substitute nil)
-  :post-config
-  (setq evil-snipe-enable-highlight nil)
-  (setq evil-snipe-enable-incremental-highlight nil)
-  (setq evil-snipe-scope 'buffer)
-  (setq evil-snipe-repeat-scope 'whole-buffer)
-  nil)
-
 (defun load-files-in (dir)
   "Load all files under directory DIR."
   (setq file-names (directory-files dir))
