@@ -60,4 +60,4 @@
   (interactive)
   (+workspace-new name)
   (+workspace-switch name)
-  (find-file file))
+  (counsel-find-file file))
