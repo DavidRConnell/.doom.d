@@ -274,7 +274,7 @@
         :desc "Tags search"    "m"  #'org-tags-view
         :desc "Org capture"    "x"  #'org-capture
         :desc "Go to org file" "g"  (lambda!
-                                     (projectile-switch-project-by-name "~/org/"))
+                                     (dc-open-in-workspace "Org" "~/org/"))
         :desc "Org store link" "l"  #'org-store-link
         :desc "View search"    "v"  #'org-search-view
         (:prefix ("c" . "Clock")
@@ -284,9 +284,9 @@
 
       (:prefix ("n" . "Noter")
         :desc "Run Noter" "n"    #'org-noter
-        :desc "Open Index" "i"  (lambda! (find-file refs-bib))
-        :desc "Open Reference" "r" (lambda! (counsel-find-file refs-pdfs))
-        :desc "Open Notes" "o" (lambda! (find-file refs-notes))
+        :desc "Open Index" "i"  (lambda! (dc-open-in-workspace "Notes" refs-bib))
+        :desc "Open Reference" "r" (lambda! (dc-open-in-workspace "Notes" refs-pdfs))
+        :desc "Open Notes" "o" (lambda! (dc-open-in-workspace "Notes" refs-notes))
         :desc "Insert Cite" "c" #'org-ref-insert-cite-with-completion)
 
       (:prefix ("d" . "Dictionary")

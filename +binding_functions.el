@@ -54,3 +54,10 @@
 (defun dc--get-sp-pair (prefix)
   "Get pair in format for use with sp-rewrap sexp."
   (--first (equal prefix (car it)) (sp--get-pair-list-context 'wrap)))
+
+(defun dc-open-in-workspace (name file)
+  "Open FILE in the workspace NAME creating it if it doesn't already exist."
+  (interactive)
+  (+workspace-new name)
+  (+workspace-switch name)
+  (find-file file))
