@@ -56,8 +56,13 @@
   (--first (equal prefix (car it)) (sp--get-pair-list-context 'wrap)))
 
 (defun dc-open-in-workspace (name file)
-  "Open FILE in the workspace NAME creating it if it doesn't already exist."
+  "Open FILE in the workspace NAME creating it if it doesn't already exist.
+If FILE is a directory search with `counsel-find-file'"
   (interactive)
-  (+workspace-new name)
+  (if (not (+workspace-exists-p name))
+      (+workspace-new name))
   (+workspace-switch name)
-  (counsel-find-file file))
+
+  (if (file-directory-p file)
+      (counsel-find-file file)
+    (find-file file)))
