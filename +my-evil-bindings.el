@@ -264,9 +264,10 @@
         :desc "Compose mail" "c" #'compose-mail-other-window)
 
       (:prefix ("C" . "Code checking")
-        :desc "toggle spell"   "s" #'flyspell-mode
-        :desc "toggle lint"    "c" #'flycheck-mode
-        :desc "list errors"    "l" #'flycheck-list-errors)
+        :desc "toggle spell"     "s" #'flyspell-mode
+        :desc "toggle lint"      "c" #'flycheck-mode
+        :desc "toggle langcheck" "g" #'langtool-check
+        :desc "list errors"      "l" #'flycheck-list-errors)
 
       (:prefix ("t" . "Org-mode")
         :desc "Agenda"         "a"  #'org-agenda
@@ -292,7 +293,8 @@
       (:prefix ("d" . "Dictionary")
         :desc "Define at point" "d" #'define-word-at-point
         :desc "Define any word" "D" #'define-word
-        :desc "Thesaurus" "t" #'powerthesaurus-lookup-word-dwim))
+        :desc "Thesaurus" "t" #'powerthesaurus-lookup-word-dwim
+        :desc "Search with wordnut" #'wordnut-lookup-current-word))
 
 ;; Minibuffer
 (define-key! evil-ex-completion-map
