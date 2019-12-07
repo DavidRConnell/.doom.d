@@ -1,41 +1,33 @@
-(setq org-directory "~/org/")
-(setq org-agenda-files (list "~/org/"))
-
-(setq org-ref-completion-library 'org-ref-ivy-cite)
-(setq reftex-default-bibliography (list refs-bib))
-(setq org-ref-bibliography-notes refs-notes
-      org-ref-default-bibliography (list refs-bib)
-      org-ref-pdf-directory refs-pdfs)
-
-(setq org-noter-default-notes-file-names (list refs-notes)
-      org-noter-notes-search-path (list refs-pdfs)
-      org-noter-auto-save-last-location t
-      org-noter-insert-note-no-questions t)
-
-(setq bibtex-completion-bibliography refs-bib
-      bibtex-completion-library-path refs-pdfs
-      bibtex-completion-notes-path refs-notes)
-
-(setq org-startup-folded t)
-(setq org-startup-truncated nil)
-
-(setq org-enforce-todo-dependencies t)
-(add-hook 'org-todo-hook
-          'org-reset-subtasks)
-
-(defun org-reset-subtasks ()
-  (save-restriction
-    (save-excursion
-      (org-up-element)
-      (org-narrow-to-subtree)
-      (while (not (eobp))
-        (org-next-visible-heading 1)
-        (org-todo (org-get-todo-sequence-head
-                   (org-get-todo-state)))))))
-
-(setq org-log-into-drawer t)
-
 (after! org
+  (setq org-directory "~/org/")
+  (setq org-agenda-files (list "~/org/"))
+
+  (setq org-startup-folded t)
+  (setq org-startup-truncated nil)
+  (setq org-pretty-entities t)
+
+  (add-hook! 'org-mode-hook
+             #'+org-pretty-mode
+             #'turn-off-auto-fill
+             #'visual-line-mode
+             #'flyspell-mode)
+
+  (setq org-enforce-todo-dependencies t)
+  (add-hook 'org-todo-hook
+            'org-reset-subtasks)
+
+  (defun org-reset-subtasks ()
+    (save-restriction
+      (save-excursion
+        (org-up-element)
+        (org-narrow-to-subtree)
+        (while (not (eobp))
+          (org-next-visible-heading 1)
+          (org-todo (org-get-todo-sequence-head
+                     (org-get-todo-state)))))))
+
+  (setq org-log-into-drawer t)
+
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "MAYBE(m)" "LATER(l)"
                     "STAGNANT(s)" "WAITING(w@)" "CANCELLED(c)"
@@ -86,10 +78,6 @@
                         ("personal" . ?m)
                         ("grad" . ?g)))
 
-  (add-hook! 'org-mode-hook
-             #'turn-off-auto-fill
-             #'visual-line-mode
-             #'flyspell-mode))
 
 ;; (add-hook 'org-after-todo-statistics-hook
 ;;           'org-auto-complete-todo)
@@ -209,3 +197,22 @@ right sequence."
           (todo "CANCELLED"
                 ((org-agenda-overriding-header "Cancelled"))))
          nil)))
+(after! ox
+  (setq org-export-with-toc nil)
+  (setq org-export-with-section-numbers nil))
+
+(after! org-ref
+  (setq org-ref-completion-library 'org-ref-ivy-cite)
+  (setq reftex-default-bibliography (list refs-bib))
+  (setq org-ref-bibliography-notes refs-notes
+        org-ref-default-bibliography (list refs-bib)
+        org-ref-pdf-directory refs-pdfs)
+  (setq bibtex-completion-bibliography refs-bib
+        bibtex-completion-library-path refs-pdfs
+        bibtex-completion-notes-path refs-notes))
+
+(after! org-noter
+  (setq org-noter-default-notes-file-names (list refs-notes)
+        org-noter-notes-search-path (list refs-pdfs)
+        org-noter-auto-save-last-location t
+        org-noter-insert-note-no-questions t))
