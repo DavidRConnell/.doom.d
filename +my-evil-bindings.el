@@ -252,6 +252,7 @@
       "+"    #'evil-numbers/inc-at-pt
       "-"    #'evil-numbers/dec-at-pt
       ","    #'eshell
+      "e"    #'+eval/line-or-region
 
       "s"    #'doom/open-scratch-buffer
       "!"    #'doom/sudo-this-file
@@ -262,6 +263,8 @@
       "/"    #'evil-ex-nohighlight
       "\\"   #'toggle-truncate-lines
 
+      :desc "Find file in project"  "SPC"  #'projectile-find-file
+      :desc "Search for symbol in project" "*" #'+default/search-project-for-symbol-at-point
       :desc "show functions" "l" #'imenu
 
       :desc "Surrond With" "["    (lambda! (sp-rewrap-sexp (dc--get-sp-pair "[")))
