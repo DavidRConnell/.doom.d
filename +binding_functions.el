@@ -1,5 +1,14 @@
 ;;; ~/.doom.d/+binding_functions.el -*- lexical-binding: t; -*-
 
+(evil-define-operator dc-comment-line-operator (beg end)
+  "Wrapper around `evilnc comment operator' to always comments whole lines"
+  :move-point nil
+  :type line
+  :repeat t
+  :jump t
+  (interactive "<r>")
+  (evilnc-comment-operator beg end))
+
 (evil-define-operator dc-apply-ex-substitute-word (beg end)
   "Apply search and replace to each line."
   :move-point nil
