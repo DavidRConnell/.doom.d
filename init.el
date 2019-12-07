@@ -169,29 +169,6 @@
        ;; config. Use it as a reference for your own modules.
        (default +smartparens))
 
-(setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 16))
-(setq doom-localleader-key ",")
-(setq doom-theme 'doom-one)
-(setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
-
-(defvar org-notes "~/notes/")
-(defvar refs-pdfs "~/References/")
-(defvar refs-bib (concat refs-pdfs "index.bib"))
-(defvar refs-notes (concat org-notes "refs.org"))
-
-(setq-hook! 'display-line-numbers-mode-hook
-  display-line-numbers 'relative)
-
-(defun load-files-in (dir)
-  "Load all files under directory DIR."
-  (setq file-names (directory-files dir))
-  (while file-names
-    (if (string-suffix-p ".el" (car file-names))
-        (load! (string-join (list dir (car file-names)) "/")))
-    (setq file-names (cdr file-names))))
-
-(load-files-in (concat doom-private-dir "mode_configs"))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
