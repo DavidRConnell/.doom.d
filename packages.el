@@ -9,7 +9,6 @@
 (package! powerthesaurus)
 (package! scad-mode)
 (package! matlab-mode)
-(package! julia-repl)
 (package! flycheck-julia)
 
 (package! evil-snipe :disable t)
