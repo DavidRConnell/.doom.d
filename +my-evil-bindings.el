@@ -236,7 +236,11 @@
 (map! (:when (featurep! :editor fold)
         :nv "C-SPC" #'+fold/toggle)
       (:when (featurep! :editor format)
-        :n "gQ" #'+format:region))
+        :n "gQ" #'+format:region)
+      (:when (featurep! :editor snippets)
+        :i "C-e" #'aya-expand
+        :nv "C-e" #'aya-create
+        :i "C-s" #'yas-expand))
 
 (map! :leader
       "w"    #'save-buffer

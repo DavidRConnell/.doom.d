@@ -29,5 +29,9 @@
   (setq avy-enter-times-out nil)
   (setq avy-timeout-seconds 0.3))
 
+(after! yasnippet
+  (map! :map yas-keymap
+    "C-SPC" #'yas-next-field-or-maybe-expand))
+
 (load-files-in (concat doom-private-dir "mode_keybindings"))
 (load-theme doom-theme)

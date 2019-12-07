@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: if
+# key: if
+# condition: t
+# --
+if $0
+end
