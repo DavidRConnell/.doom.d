@@ -28,7 +28,7 @@
 (after! git-timemachine
   (add-hook 'git-timemachine-mode-hook
             #'git-timemachine-show-revision-fuzzy)
-  (map! :map git-timemachine-mode-map
+  (map! :mode git-timemachine-mode
         "C-p" #'git-timemachine-show-previous-revision
         "C-n" #'git-timemachine-show-next-revision))
 
