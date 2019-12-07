@@ -32,14 +32,6 @@
         "C-p" #'git-timemachine-show-previous-revision
         "C-n" #'git-timemachine-show-next-revision))
 
-(after! term
-  (add-hook 'term-mode-hook
-            #'company-mode))
-
-(after! julia-mode
-  (add-hook! 'julia-mode-hook
-             'julia-repl-mode))
-
 (after! evil-magit
   (map! :mode magit-mode
         "?" #'evil-search-backward
