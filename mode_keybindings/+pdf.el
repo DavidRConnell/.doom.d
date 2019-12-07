@@ -1,11 +1,20 @@
 ;;; +pdf.el --- description -*- lexical-binding: t; -*-
 
-(map! :map pdf-view-mode-map
-      :ni "n" #'org-noter
-      :ni "i" #'org-noter-insert-note
-      :ni "r" #'org-ref-pdf-to-bibtex
-      :ni "j" #'pdf-view-next-line-or-next-page
-      :ni "k" #'pdf-view-previous-line-or-previous-page)
+(after! pdf-tools
+  (map! :mode pdf-view-mode
+        :ni "i" #'org-noter-insert-note
+        :ni "r" #'org-ref-pdf-to-bibtex
+        :ni "j" #'pdf-view-next-line-or-next-page
+        :ni "k" #'pdf-view-previous-line-or-previous-page
+        :ni "C-j" #'pdf-view-next-page
+        :ni "C-k" #'pdf-view-previous-page
+        :ni "/" #'pdf-occur
+        (:localleader
+          "l" #'dc-pdf-outline-imenu-slim))
+
+  (map! :map pdf-occur-buffer-mode-map
+        :ni "C-n" #'evil-next-visual-line
+        :ni "C-p" #'evil-previous-visual-line))
 
 (after! pdf-tools
   (defun dc-pdf-outline-imenu-slim ()
