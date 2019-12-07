@@ -43,7 +43,11 @@
 (after! evil-magit
   (map! :mode magit-mode
         "?" #'evil-search-backward
-        "K" #'evil-scroll-line-up))
+        "K" #'evil-scroll-line-up
+        "L" #'evil-last-non-blank
+        "H" #'evil-first-non-blank
+        "l" #'evil-forward-char
+        "h" #'evil-backward-char))
 
 (after! avy
   (setq avy-keys-alist
