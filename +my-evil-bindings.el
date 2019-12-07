@@ -332,9 +332,9 @@
             :desc "drop" "d" #'magit-stash-drop
             :desc "branch" "b" #'magit-stash-branch)))
 
-      (:prefix ("e" . "Email")
+      (:prefix ("M" . "Mail")
         :desc "Go to mail" "g" #'=mu4e
-        :desc "Compose mail" "c" #'compose-mail-other-window)
+        :desc "Compose mail" "c" #'mu4e-compose-new)
 
       (:prefix ("C" . "Code checking")
         :desc "toggle spell"     "s" #'flyspell-mode
