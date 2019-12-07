@@ -48,6 +48,9 @@
   (setq avy-enter-times-out nil)
   (setq avy-timeout-seconds 0.3))
 
+(after! deft
+  (setq deft-directory org-notes))
+
 (after! yasnippet
   (map! :map yas-keymap
     "C-SPC" #'yas-next-field-or-maybe-expand))
