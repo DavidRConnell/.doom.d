@@ -182,7 +182,7 @@ right sequence."
           (todo "WAITING"
                 ((org-agenda-overriding-header "Waiting on"))))
          nil)
-        (" " "Meetings"
+        ("m" "Meetings"
          ((tags "device"
                 ((org-agenda-overriding-header "Device Group")))
           (tags "big meeting"
