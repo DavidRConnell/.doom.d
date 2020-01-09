@@ -31,13 +31,14 @@
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "MAYBE(m)" "LATER(l)"
                     "STAGNANT(s)" "WAITING(w@)" "CANCELLED(c)"
-                    "|" "DONE(d!/)")
+                    "EMAIL(e)" "|" "DONE(d!/)")
           (sequence "NOTES(N)" "|")
           (sequence "[ ]([)" "[-](-!/)" "|" "[x](x!/)")))
 
   (setq org-todo-keyword-faces
         '(("TODO" . (:foreground "#98be65" :weight bold))
           ("NEXT" . (:foreground "#da8548" :weight bold))
+          ("EMAIL" . (:foreground "#da8548" :weight bold))
           ("MAYBE" . (:foreground "#ecbe7b" :weight bold))
           ("WAITING" . (:foreground "#46d9ff" :weight bold))
           ("CANCELLED" . (:foreground "#46d9ff" :weight bold))
@@ -176,6 +177,8 @@ right sequence."
                    (org-agenda-start-day "+0d")))
           (todo "NEXT"
                 ((org-agenda-overriding-header "Next")))
+          (todo "EMAIL"
+                ((org-agenda-overriding-header "Email")))
           (todo "WAITING"
                 ((org-agenda-overriding-header "Waiting on"))))
          nil)
