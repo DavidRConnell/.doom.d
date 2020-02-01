@@ -96,6 +96,18 @@
     :lambda "lambda"
     :Lambda "lambda!"))
 
+(after! flycheck
+  (flycheck-define-checker proselint
+    "A linter for prose."
+    :command ("proselint" source-inplace)
+    :error-patterns
+    ((warning line-start (file-name) ":" line ":" column ": "
+              (id (one-or-more (not (any " "))))
+              (message (one-or-more not-newline)
+                       (zero-or-more "\n" (any " ") (one-or-more not-newline)))
+              line-end))
+    :modes (text-mode LaTeX-mode org-mode markdown-mode)))
+
 (after! evil-surround
   (add-to-list 'evil-surround-pairs-alist
                '(?< . ("< " . " >")))
