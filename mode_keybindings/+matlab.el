@@ -11,7 +11,13 @@
           "l" #'matlab-shell-apropos
           "p" #'matlab-shell
           (:prefix ("t" . "test")
-            "g" #'dc-matlab-toggle-test-file))
+            "g" #'dc-matlab-toggle-test-file
+            "t" (lambda! (dc-matlab-shell-run-tests "file"))
+            "T" (lambda! (dc-matlab-shell-run-tests "project"))
+            "p" (lambda! (dc-matlab-shell-run-performance-tests "file"))
+            "P" (lambda! (dc-matlab-shell-run-performance-tests "project"))
+            "r" (lambda! (dc-matlab-shell-run-tests "rerun"))
+            "s" #'dc-matlab-shell-test-summary))
         (:prefix "C-c"
           "C-c" #'matlab-shell-run-cell
           "C-l" #'matlab-shell-run-region-or-line))
@@ -100,3 +106,46 @@
                     "\tmethods (Test, TestTags = {'Performance'})\n"
                     "\tend\n"
                     "end")))
+
+  (defun dc-matlab-shell-run-tests (scope)
+    (interactive)
+    (let ((test-suite "testSuite = matlab.unittest.TestSuite.from%s('%s', 'tag', 'Unit'); ")
+          (command (concat "testResults = run(%s); "
+                           "utils.summarizeTests(testResults)")))
+
+      (cond ((string= scope "file")
+             (dc-matlab-run-command
+              (concat
+               (format test-suite
+                       "File"
+                       (concat (dc--matlab-get-test-dir)
+                               (dc--matlab-get-file-name 'test)))
+               (format command "testSuite"))))
+
+            ((string= scope "project")
+             (dc-matlab-run-command
+              (concat
+               (format test-suite "Folder" (dc--matlab-get-test-dir))
+               (format command "testSuite"))))
+
+            ((string= scope "rerun")
+             (dc-matlab-run-command
+              (format command "testSuite([testResults.Failed])"))))))
+
+  (defun dc-matlab-shell-run-performance-tests (scope)
+    (interactive)
+    (let ((command (concat  "testResults = runperf('%s', 'tag', 'Performance'); "
+                            "utils.summarizeTests(testResults)")))
+      (cond ((string= scope "file")
+             (dc-matlab-run-command
+              (format command (concat
+                               (dc--matlab-get-test-dir)
+                               (dc--matlab-get-file-name 'test)))))
+
+            ((string= scope "project")
+             (dc-matlab-run-command
+              (format command (dc--matlab-get-test-dir)))))))
+
+  (defun dc-matlab-shell-test-summary ()
+    (interactive)
+    (dc-matlab-run-command "utils.summarizeTests(testResults)")))
