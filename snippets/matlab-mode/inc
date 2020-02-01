@@ -3,5 +3,4 @@
 # key: inc
 # condition: t   
 # --
-${1:var} = 1 + $1;
-$0
+${1:var} = $1 $0;
