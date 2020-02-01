@@ -3,12 +3,9 @@
         (:localleader
           "?" (lambda! (matlab-shell-describe-command
                         (matlab-read-word-at-point)))
-          "d" (lambda! (matlab-find-file-on-path
-                        (matlab-read-word-at-point)))
           "R" #'matlab-run-command
           "r" #'matlab-run-last-command
           "c" #'matlab-close-figures
-          "e" #'mlint-show-warning
           "l" #'matlab-shell-apropos
           "p" #'matlab-shell)
         (:prefix "C-c"
