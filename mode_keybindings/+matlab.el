@@ -27,21 +27,16 @@
   (defun matlab-run-last-command ()
     "Run the last command sent to the matlab shell buffer."
     (interactive)
+      (matlab-run-command
+       (concat (comint-previous-input-string 0) "\n")))
+
+  (defun matlab-run-command (command)
+    "Send a command to the running matlab shell buffer."
+    (interactive "MCommand: ")
     (let ((curr-buffer (buffer-name)))
       (switch-to-buffer (concat "*" matlab-shell-buffer-name "*"))
-      (matlab-shell-send-string
-       (concat
-        (comint-previous-input-string 0) "\n"))
-      (switch-to-buffer curr-buffer)))
-
-  (defun matlab-run-command ()
-    "Send a command to the running matlab shell buffer."
-    (interactive)
-    (let ((curr-buffer (buffer-name))
-          (cmd (read-from-minibuffer "Command: ")))
-      (switch-to-buffer (concat "*" matlab-shell-buffer-name "*"))
-      (matlab-shell-send-string (concat cmd "\n"))
-      (matlab-shell-add-to-input-history cmd)
+      (matlab-shell-send-string (concat command "\n"))
+      (matlab-shell-add-to-input-history command)
       (switch-to-buffer curr-buffer)))
 
   (defun matlab-close-figures ()
