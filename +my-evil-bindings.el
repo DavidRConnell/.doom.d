@@ -127,6 +127,7 @@
  :v  "<"     #'+evil/visual-dedent
  :v  ">"     #'+evil/visual-indent
  :nv "j"     #'evil-next-visual-line
+ :nv "gj"    #'join-line
  :nv "k"     #'evil-previous-visual-line
  :nv "H"     #'evil-first-non-blank
  :nv "L"     #'evil-end-of-line
@@ -138,11 +139,12 @@
  :v "C-k"    #'avy-goto-line-above
  :nv "C-m"   #'evil-goto-mark
  :nv "ZZ"    #'save-buffers-kill-terminal
- :nv "/" #'swiper
- :nv "?" #'swiper-backward
- :nv "gn" #'swiper-thing-at-point
- :nvi "M-/" #'ace-link
- :nvi "C-u" #'universal-argument
+ :nv "/"     #'swiper
+ :nv "?"     #'swiper-backward
+ :nv "gn"    #'swiper-thing-at-point
+ :nvi "M-/"  #'ace-link
+ :nvi "C-u"  #'universal-argument
+ :nv "U"     #'undo-tree-visualize
 
  ;; Use C-s (snipe) instead of C-t becaulse C-t is my stumpwm key
  :nvm "C-s" (lambda! ; make exclusive (more like till than from)
