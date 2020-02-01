@@ -12,3 +12,4 @@
 (package! flycheck-julia)
 
 (package! evil-snipe :disable t)
+(package! writegood-mode :disable t)
