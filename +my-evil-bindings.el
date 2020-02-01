@@ -255,6 +255,7 @@
       "e"    #'+eval/line-or-region
 
       "s"    #'doom/open-scratch-buffer
+      :desc "Find file on server" "S" #'dc-find-file-on-server
       "!"    #'doom/sudo-this-file
       ":"    #'eval-expression
       ";"    #'execute-extended-command

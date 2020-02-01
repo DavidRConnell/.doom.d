@@ -87,3 +87,12 @@ If FILE is a directory search with `counsel-find-file'"
                                (directory-files org-directory)
                                #'(lambda (f) (string= (file-name-extension f) "org")))))
     (find-file (concat org-directory file))))
+
+(defun dc-find-file-on-server ()
+  (interactive)
+  (if (not (+workspace-exists-p "Server"))
+      (+workspace-new "Server"))
+  (+workspace-switch "Server")
+
+  (counsel-find-file "/ssh:"))
+
