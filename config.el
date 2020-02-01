@@ -114,5 +114,8 @@
   (add-to-list 'evil-surround-pairs-alist
                '(?> . ("<" . ">"))))
 
+(after! evil-matchit
+  (global-evil-matchit-mode 1))
+
 (load-files-in (concat doom-private-dir "mode_keybindings"))
 (load-theme doom-theme t nil)
