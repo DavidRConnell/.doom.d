@@ -9,7 +9,9 @@
           "r" #'dc-matlab-run-last-command
           "c" #'dc-matlab-close-figures
           "l" #'matlab-shell-apropos
-          "p" #'matlab-shell)
+          "p" #'matlab-shell
+          (:prefix ("t" . "test")
+            "g" #'dc-matlab-toggle-test-file))
         (:prefix "C-c"
           "C-c" #'matlab-shell-run-cell
           "C-l" #'matlab-shell-run-region-or-line))
@@ -47,13 +49,44 @@
       (matlab-shell-close-figures)
       (switch-to-buffer curr-buffer)))
 
-  (defun matlab-goto-test-file ()
+  (defun dc-matlab-toggle-test-file ()
     (interactive)
-    (if (string-match "*[tT]est*" (buffer-name))
-        (matlab-find-file)
-      (matlab-find-test-file))
+    (let ((name (buffer-name)))
+      (if (string-match "\\([a-zA-Z0-9]*\\)\\(Test\\)\\(\\.[a-zA-Z0-9]*\\)" name)
+          (dc--matlab-find-original-file (projectile-project-root)
+                                         (concat (match-string 1 name)
+                                                 (match-string 3 name)))
+        (dc--matlab-find-test-file name))))
 
-    (defun insert-function-snippet ()
-  "Add snippet for matlab function when opening a new .m file."
-  (if (equal 0 (buffer-size))
-      (insert (concat "function " (substring (buffer-name) 0 -2) "\nend"))))))
+  (defun dc--matlab-find-original-file (dir filename)
+      (if (file-exists-p (concat dir filename))
+          (find-file (concat dir filename))
+        (cl-loop for f in (directory-files dir) do
+                 (if (not (string-match-p "\\." f))
+                     (dc--matlab-find-original-file
+                      (concat dir f "/") filename)))))
+
+  (defun dc--matlab-find-test-file (filename)
+    (let* ((test-dir (concat (projectile-project-root) "tests/"))
+           (test-file-name (concat test-dir
+                                   (file-name-sans-extension filename)
+                                   "Test.m")))
+      (if (not (file-exists-p test-dir))
+          (mkdir test-dir))
+
+      (if (not (file-exists-p test-file-name))
+          (with-temp-buffer
+            (dc--matlab-insert-test-snippet filename)
+            (write-file test-file-name)
+            (goto-char 0)))
+      (find-file test-file-name)))
+
+  (defun dc--matlab-insert-test-snippet (filename)
+    "Add snippet for matlab function when opening a new .m file."
+    (insert (concat "classdef " (substring filename 0 -2) "Test"
+                    " < matlab.unittest.TestCase\n\n"
+                    "\tmethods(TestMethodSetup)\n"
+                    "\tend\n\n"
+                    "\tmethods(Test)\n"
+                    "\tend\n"
+                    "end"))))
