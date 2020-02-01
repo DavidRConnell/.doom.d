@@ -75,3 +75,15 @@ If FILE is a directory search with `counsel-find-file'"
   (if (file-directory-p file)
       (counsel-find-file file)
     (find-file file)))
+
+(defun dc-open-org-file ()
+  "Open org file in org-directory."
+  (interactive)
+  (if (not (+workspace-exists-p "Org"))
+      (+workspace-new "Org"))
+  (+workspace-switch "Org")
+
+  (let ((file (completing-read "Open file: "
+                               (directory-files org-directory)
+                               #'(lambda (f) (string= (file-name-extension f) "org")))))
+    (find-file (concat org-directory file))))

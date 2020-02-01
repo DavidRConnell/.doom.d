@@ -354,8 +354,7 @@
         :desc "Todo list"      "t"  #'org-todo-list
         :desc "Tags search"    "m"  #'org-tags-view
         :desc "Org capture"    "x"  #'org-capture
-        :desc "Go to org file" "g"  (lambda!
-                                     (dc-open-in-workspace "Org" "~/org/"))
+        :desc "Go to org file" "g"  #'dc-open-org-file
         :desc "Org store link" "l"  #'org-store-link
         :desc "View search"    "v"  #'org-search-view
         (:prefix ("c" . "Clock")
