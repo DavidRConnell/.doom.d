@@ -87,6 +87,10 @@
   (map! :map yas-keymap
     "C-SPC" #'yas-next-field-or-maybe-expand))
 
+(after! langtool
+  (setq langtool-java-classpath
+        "/usr/share/languagetool:/usr/share/java/languagetool/*"))
+
 (after! emacs
   (set-pretty-symbols! '(emacs-lisp-mode)
     :lambda "lambda"
