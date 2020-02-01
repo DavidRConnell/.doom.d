@@ -15,6 +15,19 @@
   (setq flycheck-matlab-mlint-executable
         "/usr/local/MATLAB/bin/glnxa64/mlint")
 
+  (set-pretty-symbols! '(matlab-mode)
+    :def "function"
+    ;; Types
+    :true "true" :false "false"
+    ;; Flow
+    :not "~"
+    :and "&&" :or "||"
+    :for "for"
+    :return "return"
+    :not-equal "~="
+    :gt-equal ">="
+    :lt-equal "<=")
+
   (add-hook 'matlab-shell-mode-hook
             #'company-mode)
 

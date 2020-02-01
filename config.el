@@ -2,6 +2,38 @@
 (if (featurep 'evil)
     (load! "+my-evil-bindings"))
 
+(setq +pretty-code-symbols
+      '(:name "»"
+              :src_block "»"
+              :src_block_end "«"
+              :lambda "λ"
+              :Lambda "Λ"
+              :def "ƒ"
+              :composition "∘"
+              :map "↦"
+              :null "∅"
+              :true "𝕋"
+              :false "𝔽"
+              :int "ℤ"
+              :float "ℝ"
+              :str "𝕊"
+              :bool "𝔹"
+              :not "￢"
+              :in "∈"
+              :not-in "∉"
+              :and "∧"
+              :or "∨"
+              :for "∀"
+              :some "∃"
+              :return "⟼"
+              :yield "⟻"
+              :tuple "⨂"
+              :pipe ""
+              :dot "•"
+              :not-equal "≠"
+              :gt-equal "≥"
+              :lt-equal "≤"))
+
 (setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 16))
 (setq doom-localleader-key ",")
 (setq doom-theme 'doom-one)
@@ -54,6 +86,11 @@
 (after! yasnippet
   (map! :map yas-keymap
     "C-SPC" #'yas-next-field-or-maybe-expand))
+
+(after! emacs
+  (set-pretty-symbols! '(emacs-lisp-mode)
+    :lambda "lambda"
+    :Lambda "lambda!"))
 
 (load-files-in (concat doom-private-dir "mode_keybindings"))
 (load-theme doom-theme)
