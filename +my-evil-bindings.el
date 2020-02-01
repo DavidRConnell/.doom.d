@@ -107,8 +107,8 @@
  :v  "g="    #'+evil:narrow-buffer
  :nv "z="    #'flyspell-correct-word-generic
  :nv "g@"    #'+evil:apply-macro
- :nv "C-q"    #'+evil:apply-macro
- :nv "Q"     #'evil-execute-macro
+ :nv "Q"     #'+evil:apply-macro
+ :nv "C-q"   #'evil-execute-macro
  :nv "gx"    #'evil-exchange
  :nv "gK"    #'+lookup/documentation
  :nv "gc"    #'dc-comment-line-operator
