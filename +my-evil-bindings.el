@@ -313,7 +313,7 @@
                                            "~/.emacs.d"))
         :desc "open config" "c" (lambda! (doom-project-browse "~/.config/"))
         "R" #'projectile-replace
-        "g" #'projectile-grep
+        "g" #'+ivy/project-search
         "o" #'projectile-switch-project
         "f" #'projectile-find-file
         "r" #'counsel-buffer-or-recentf)
@@ -356,7 +356,7 @@
         :desc "toggle spell"     "s" #'flyspell-mode
         :desc "toggle lint"      "c" #'flycheck-mode
         :desc "toggle langcheck" "g" #'langtool-check
-        :desc "list errors"      "l" #'flycheck-list-errors)
+        :desc "list errors"      "l" #'counsel-flycheck)
 
       (:prefix ("t" . "Org-mode")
         :desc "Agenda"         "a"  #'org-agenda
