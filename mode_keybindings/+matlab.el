@@ -93,8 +93,10 @@
     "Add snippet for matlab function when opening a new .m file."
     (insert (concat "classdef " (substring filename 0 -2) "Test"
                     " < matlab.unittest.TestCase\n\n"
-                    "\tmethods(TestMethodSetup)\n"
+                    "\tmethods (TestMethodSetup)\n"
                     "\tend\n\n"
-                    "\tmethods(Test)\n"
+                    "\tmethods (Test, TestTags = {'Unit'})\n"
+                    "\tend\n\n"
+                    "\tmethods (Test, TestTags = {'Performance'})\n"
                     "\tend\n"
-                    "end"))))
+                    "end")))
