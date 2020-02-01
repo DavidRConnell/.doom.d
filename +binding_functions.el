@@ -96,3 +96,9 @@ If FILE is a directory search with `counsel-find-file'"
 
   (counsel-find-file "/ssh:"))
 
+(defun dc-find-external-manual (man-dir)
+  (interactive)
+  (let ((man (completing-read "Find manual: "
+                             (directory-files man-dir))))
+    (info-setup (concat man-dir "/" man "/" man ".info")
+                (pop-to-buffer "*info*"))))

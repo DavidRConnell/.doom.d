@@ -91,7 +91,8 @@
 
  (:prefix "C-h"
    :desc "Find info manual" "RET" #'info-display-manual
-   :desc "Top layer key map" "K" #'which-key-show-top-level)
+   :desc "Top layer key map" "K" #'which-key-show-top-level
+   :desc "External info manuals" "C-i" (lambda! (dc-find-external-manual "~/info")))
 
  :m  "]a"    #'evil-forward-arg
  :m  "[a"    #'evil-backward-arg
