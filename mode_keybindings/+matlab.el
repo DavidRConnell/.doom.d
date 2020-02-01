@@ -13,7 +13,16 @@
           "p" #'matlab-shell)
         (:prefix "C-c"
           "C-c" #'matlab-shell-run-cell
-          "C-l" #'matlab-shell-run-region-or-line)))
+          "C-l" #'matlab-shell-run-region-or-line))
+
+  (add-hook! 'matlab-shell-mode-hook
+    (map! :mode matlab-shell-mode
+          :n "k" #'matlab-shell-previous-matching-input-from-input
+          :n "j" #'matlab-shell-next-matching-input-from-input
+          :n "C-p" #'matlab-shell-previous-matching-input-from-input
+          :n "C-n" #'matlab-shell-next-matching-input-from-input
+          :ni "C-d" #'matlab-shell-exit
+          :i "C-SPC" #'matlab-shell-tab)))
 
 (after! matlab
   (defun matlab-run-last-command ()
