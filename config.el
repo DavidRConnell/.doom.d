@@ -76,8 +76,9 @@
   (setq avy-keys-alist
         '((avy-goto-char . (?a ?o ?e ?u ?h ?t ?n ?s ?-))))
   (setq avy-keys (number-sequence ?a ?z))
-  (setq avy-enter-times-out nil)
-  (setq avy-timeout-seconds 0.3))
+  (setq avy-enter-times-out t)
+  (setq avy-timeout-seconds 1)
+  (setq aw-keys '(?a ?o ?e ?u ?h ?t ?n ?s ?-)))
 
 (after! deft
   (setq deft-directory org-notes))
