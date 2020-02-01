@@ -44,3 +44,6 @@
               #'yas-minor-mode
               #'hl-todo-mode
               #'rainbow-delimiters-mode))
+
+(after! (:and evil-matchit matlab)
+  (evilmi-load-plugin-rules '(matlab-mode) '(matlab)))
