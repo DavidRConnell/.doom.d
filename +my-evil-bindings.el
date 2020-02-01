@@ -152,16 +152,16 @@
              (point))
 
  :nvm "C-f" #'avy-goto-char-in-line
+ :nvm "C-/" #'avy-goto-char-timer
+ :m "C-e" #'+evil/easymotion  ; lazy-load `evil-easymotion'
 
- :nv "C-/" #'avy-goto-char-timer
- (:after evil-easymotion
-   :map evilem-map
-   "/" (evilem-create #'evil-ex-search-next
-                      :pre-hook (save-excursion (call-interactively #'swiper))
-                      :bind ((evil-search-wrap)))
-   "?" (evilem-create #'evil-ex-search-previous
-                      :pre-hook (save-excursion (call-interactively #'swiper-backward))
-                      :bind ((evil-search-wrap))))
+ :o "j" #'evilem-motion-next-line
+ :o "k" #'evilem-motion-previous-line
+
+ (:after org
+   :map org-mode-map
+   :prefix "<easymotion>"
+   "h" #'+org/goto-visible)
 
  (:when (featurep! :ui workspaces)
    :nv "M-t"   #'+workspace/new
@@ -245,8 +245,8 @@
       (:when (featurep! :editor format)
         :n "gQ" #'+format:region)
       (:when (featurep! :editor snippets)
-        :i "C-e" #'aya-expand
-        :nv "C-e" #'aya-create
+        :i "C-a" #'aya-expand
+        :nv "C-a" #'aya-create
         :i "C-s" #'yas-expand))
 
 (map! :leader
