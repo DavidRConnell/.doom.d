@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: try
+# uuid:
+# key: try
+# condition: t
+# --
+try $0
+end
