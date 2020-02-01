@@ -2,12 +2,12 @@
   (map! :mode matlab-mode
         (:localleader
           "?" (lambda! (matlab-shell-describe-command
-          "R" #'matlab-run-command
-          "r" #'matlab-run-last-command
-          "c" #'matlab-close-figures
                   (matlab-read-word-at-point)))
           "." (lambda! (matlab-shell-locate-fcn
                   (matlab-read-word-at-point)))
+          "R" #'dc-matlab-run-command
+          "r" #'dc-matlab-run-last-command
+          "c" #'dc-matlab-close-figures
           "l" #'matlab-shell-apropos
           "p" #'matlab-shell)
         (:prefix "C-c"
@@ -24,13 +24,13 @@
           :i "C-SPC" #'matlab-shell-tab)))
 
 (after! matlab
-  (defun matlab-run-last-command ()
+  (defun dc-matlab-run-last-command ()
     "Run the last command sent to the matlab shell buffer."
     (interactive)
-      (matlab-run-command
+      (dc-matlab-run-command
        (concat (comint-previous-input-string 0) "\n")))
 
-  (defun matlab-run-command (command)
+  (defun dc-matlab-run-command (command)
     "Send a command to the running matlab shell buffer."
     (interactive "MCommand: ")
     (let ((curr-buffer (buffer-name)))
@@ -39,10 +39,21 @@
       (matlab-shell-add-to-input-history command)
       (switch-to-buffer curr-buffer)))
 
-  (defun matlab-close-figures ()
+  (defun dc-matlab-close-figures ()
     "Pass the matlab shell function FUN with optional arguments ARGS to a matlab shell."
     (interactive)
     (let ((curr-buffer (buffer-name)))
       (switch-to-buffer (concat "*" matlab-shell-buffer-name "*"))
       (matlab-shell-close-figures)
-      (switch-to-buffer curr-buffer))))
+      (switch-to-buffer curr-buffer)))
+
+  (defun matlab-goto-test-file ()
+    (interactive)
+    (if (string-match "*[tT]est*" (buffer-name))
+        (matlab-find-file)
+      (matlab-find-test-file))
+
+    (defun insert-function-snippet ()
+  "Add snippet for matlab function when opening a new .m file."
+  (if (equal 0 (buffer-size))
+      (insert (concat "function " (substring (buffer-name) 0 -2) "\nend"))))))
