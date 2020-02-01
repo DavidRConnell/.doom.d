@@ -51,32 +51,40 @@
 
   (defun dc-matlab-toggle-test-file ()
     (interactive)
-    (let ((name (buffer-name)))
-      (if (string-match "\\([a-zA-Z0-9]*\\)\\(Test\\)\\(\\.[a-zA-Z0-9]*\\)" name)
-          (dc--matlab-find-original-file (projectile-project-root)
-                                         (concat (match-string 1 name)
-                                                 (match-string 3 name)))
-        (dc--matlab-find-test-file name))))
+    (if (string-match-p "Test" (buffer-name))
+        (dc--matlab-find-original-file (projectile-project-root)
+                                       (dc--matlab-get-file-name))
+        (dc--matlab-find-test-file)))
+
+  (defun dc--matlab-get-test-dir ()
+    (concat (projectile-project-root) "tests/"))
+
+  (defun dc--matlab-get-file-name (&optional test)
+    (let ((buffer (buffer-name)))
+      (string-match "\\([a-zA-Z0-9]*?\\)\\(Test\\)?*\\(\\.[a-zA-Z0-9]*\\)" buffer)
+      (if test
+          (concat (match-string 1 buffer) "Test" (match-string 3 buffer))
+        (concat (match-string 1 buffer) (match-string 3 buffer)))))
 
   (defun dc--matlab-find-original-file (dir filename)
-      (if (file-exists-p (concat dir filename))
-          (find-file (concat dir filename))
-        (cl-loop for f in (directory-files dir) do
-                 (if (not (string-match-p "\\." f))
-                     (dc--matlab-find-original-file
-                      (concat dir f "/") filename)))))
+    (if (file-exists-p (concat dir filename))
+        (find-file (concat dir filename))
+      (cl-loop for f in (directory-files dir) do
+               (message f)
+               (if (not (string-match-p "\\." f))
+                   (dc--matlab-find-original-file
+                    (concat dir f "/") filename)))))
 
-  (defun dc--matlab-find-test-file (filename)
-    (let* ((test-dir (concat (projectile-project-root) "tests/"))
+  (defun dc--matlab-find-test-file ()
+    (let* ((test-dir (dc--matlab-get-test-dir))
            (test-file-name (concat test-dir
-                                   (file-name-sans-extension filename)
-                                   "Test.m")))
+                                   (dc--matlab-get-file-name 'test))))
       (if (not (file-exists-p test-dir))
           (mkdir test-dir))
 
       (if (not (file-exists-p test-file-name))
           (with-temp-buffer
-            (dc--matlab-insert-test-snippet filename)
+            (dc--matlab-insert-test-snippet (dc--matlab-get-file-name))
             (write-file test-file-name)
             (goto-char 0)))
       (find-file test-file-name)))
