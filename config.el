@@ -96,5 +96,11 @@
     :lambda "lambda"
     :Lambda "lambda!"))
 
+(after! evil-surround
+  (add-to-list 'evil-surround-pairs-alist
+               '(?< . ("< " . " >")))
+  (add-to-list 'evil-surround-pairs-alist
+               '(?> . ("<" . ">"))))
+
 (load-files-in (concat doom-private-dir "mode_keybindings"))
 (load-theme doom-theme t nil)
