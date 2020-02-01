@@ -2,10 +2,12 @@
   (map! :mode matlab-mode
         (:localleader
           "?" (lambda! (matlab-shell-describe-command
-                        (matlab-read-word-at-point)))
           "R" #'matlab-run-command
           "r" #'matlab-run-last-command
           "c" #'matlab-close-figures
+                  (matlab-read-word-at-point)))
+          "." (lambda! (matlab-shell-locate-fcn
+                  (matlab-read-word-at-point)))
           "l" #'matlab-shell-apropos
           "p" #'matlab-shell)
         (:prefix "C-c"
