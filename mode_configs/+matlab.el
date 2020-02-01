@@ -5,7 +5,9 @@
 
 (defun fix-matlab-imenu-generic-expression ()
     (setq imenu-generic-expression
-          '((nil "^\\s-*\\(function\\)\\s-*\\(.*\\)" 2))))
+          '(("Function" "^\\s-*\\(function\\)\\s-*\\([^\\.\n]*\\)\n" 2)
+            ("Function" "^\\s-*\\(function\\)\\s-*\\([^\\.]*\\.\\.\\.\\s-*\n.*\\)" 2)
+            ("Class" "^\\s-*\\(classdef\\)\\s-*\\(.*\\)" 2))))
 
 (after! matlab
   (setq matlab-shell-command "/usr/local/MATLAB/bin/matlab")
