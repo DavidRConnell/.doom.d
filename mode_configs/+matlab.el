@@ -37,7 +37,10 @@
               #'display-line-numbers-mode
               #'highlight-indent-guides-mode
               #'git-gutter-mode
+              #'auto-fill-mode
               #'matlab-toggle-functions-have-end
               #'insert-function-snippet
               #'fix-matlab-imenu-generic-expression
-              #'yas-minor-mode))
+              #'yas-minor-mode
+              #'hl-todo-mode
+              #'rainbow-delimiters-mode))
