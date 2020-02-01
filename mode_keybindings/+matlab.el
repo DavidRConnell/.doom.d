@@ -59,13 +59,13 @@
     (interactive)
     (if (string-match-p "Test" (buffer-name))
         (dc--matlab-find-original-file (projectile-project-root)
-                                       (dc--matlab-get-file-name))
+                                       (dc--matlab-get-filename))
         (dc--matlab-find-test-file)))
 
   (defun dc--matlab-get-test-dir ()
     (concat (projectile-project-root) "tests/"))
 
-  (defun dc--matlab-get-file-name (&optional test)
+  (defun dc--matlab-get-filename (&optional test)
     (let ((buffer (buffer-name)))
       (string-match "\\([a-zA-Z0-9]*?\\)\\(Test\\)?*\\(\\.[a-zA-Z0-9]*\\)" buffer)
       (if test
@@ -119,7 +119,7 @@
                (format test-suite
                        "File"
                        (concat (dc--matlab-get-test-dir)
-                               (dc--matlab-get-file-name 'test)))
+                               (dc--matlab-get-filename 'test)))
                (format command "testSuite"))))
 
             ((string= scope "project")
@@ -140,7 +140,7 @@
              (dc-matlab-run-command
               (format command (concat
                                (dc--matlab-get-test-dir)
-                               (dc--matlab-get-file-name 'test)))))
+                               (dc--matlab-get-filename 'test)))))
 
             ((string= scope "project")
              (dc-matlab-run-command
