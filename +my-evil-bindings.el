@@ -20,9 +20,13 @@
   (define-key! evil-ex-completion-map
     "C-a" #'move-beginning-of-line
     "C-b" #'backward-word
-    "C-SPC" (if (featurep! :completion ivy)
+    [tab] (if (featurep! :completion ivy)
                 #'counsel-minibuffer-history
-              #'helm-minibuffer-history))
+              #'helm-minibuffer-history)
+    "C-SPC" #'evil-ex-completion)
+
+  (define-key! minibuffer-local-map
+    "C-SPC" #'completion-at-point)
 
   (define-key! :keymaps +default-minibuffer-maps
     [escape] #'abort-recursive-edit
@@ -219,12 +223,12 @@
           :n "Q" #'ivy-resume)
         (:after ivy
           :map ivy-minibuffer-map
-          "C-SPC" #'ivy-call-and-recenter  ; preview file
+          "C-SPC" #'ivy-partial-or-done ; preview file
           "C-l"   #'ivy-alt-done
           "C-v"   #'yank)
         (:after counsel
           :map counsel-ag-map
-          "C-SPC"    #'ivy-call-and-recenter ; preview
+          "C-SPC"    #'ivy-partial-or-done ; preview
           "C-l"      #'ivy-done
           "C-c C-e"  #'+ivy/wgrep-occur      ; search/replace on results
           [backtab]  #'+ivy/wgrep-occur      ; search/replace on results
