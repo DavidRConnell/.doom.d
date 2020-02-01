@@ -83,22 +83,25 @@
 
   (defun dc--matlab-find-test-file ()
     (let* ((test-dir (dc--matlab-get-test-dir))
-           (test-file-name (concat test-dir
-                                   (dc--matlab-get-file-name 'test))))
+           (test-filename (dc--matlab-get-filename 'test))
+           (test-file (concat test-dir test-filename)))
+
       (if (not (file-exists-p test-dir))
           (mkdir test-dir))
 
-      (if (not (file-exists-p test-file-name))
+      (message test-file)
+      (if (not (file-exists-p test-file))
           (with-temp-buffer
-            (dc--matlab-insert-test-snippet (dc--matlab-get-file-name))
-            (write-file test-file-name)
+            (dc--matlab-insert-test-snippet (substring test-filename 0 -2))
+            (write-file test-file)
             (goto-char 0)))
-      (find-file test-file-name)))
 
-  (defun dc--matlab-insert-test-snippet (filename)
+      (find-file test-file)))
+
+  (defun dc--matlab-insert-test-snippet (classname)
     "Add snippet for matlab function when opening a new .m file."
-    (insert (concat "classdef " (substring filename 0 -2) "Test"
-                    " < matlab.unittest.TestCase\n\n"
+    (insert (concat "classdef " classname
+                    " < matlab.unittest.TestCase & matlab.perftest.TestCase\n\n"
                     "\tmethods (TestMethodSetup)\n"
                     "\tend\n\n"
                     "\tmethods (Test, TestTags = {'Unit'})\n"
