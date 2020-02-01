@@ -192,7 +192,8 @@
           :i "C-s"    #'company-yasnippet
           :i "C-o"    #'company-capf
           :i "C-n"    #'+company/dabbrev
-          :i "C-p"    #'+company/dabbrev-code-previous)
+          :i "C-p"    #'+company/dabbrev-code-previous
+          :i "C-u"    #'company-math-symbols-unicode)
         (:after company
           (:map company-active-map
             "C-w"     nil  ; don't interfere with `evil-delete-backward-word'
