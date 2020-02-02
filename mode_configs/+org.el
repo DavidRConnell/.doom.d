@@ -188,6 +188,7 @@ right sequence."
           (todo "WAITING"
                 ((org-agenda-overriding-header "Waiting on"))))
          nil)
+
         ("m" "Meetings"
          ((tags "device"
                 ((org-agenda-overriding-header "Device Group")))
@@ -198,14 +199,20 @@ right sequence."
           (tags "Jeff"
                 ((org-agenda-overriding-header "Hausdorff"))))
          nil)
-        ("p" "Poke"
-         ((todo "STAGNANT"
-                ((org-agenda-overriding-header "Stagnant")))
-          (todo "WAITING"
-                ((org-agenda-overriding-header "Waiting On")))
-          (todo "CANCELLED"
-                ((org-agenda-overriding-header "Cancelled"))))
-         nil)))
+
+        ("p" "Places"
+         ((tags-todo "@office"
+                ((org-agenda-overriding-header "At Rush")))
+          (tags-todo "@home"
+                ((org-agenda-overriding-header "At Home")))
+          (tags-todo "@computer"
+                ((org-agenda-overriding-header "At Computer")))
+          (tags-todo "@phone"
+                ((org-agenda-overriding-header "At Phone")))
+          (tags-todo "@errand"
+                ((org-agenda-overriding-header "On Errands"))))
+         nil))))
+
 (after! ox
   (setq org-export-with-toc nil)
   (setq org-export-with-section-numbers nil))
