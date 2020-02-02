@@ -163,6 +163,17 @@
    :prefix "<easymotion>"
    "h" #'+org/goto-visible)
 
+ (:after gud
+   :nv "M-u" #'gud-up
+   :nv "M-d" #'gud-down
+   :nv "M-b" #'gud-break
+   :nv "M-r" #'gud-remove
+   :nv "M-s" #'gud-step
+   :nv "M-n" #'gud-next
+   :nv "M-c" #'gud-cont
+   :nv "M-S" #'gud-show-stack
+   :nv "M-l" #'gud-list-breakpoints)
+
  (:when (featurep! :ui workspaces)
    :nv "M-t"   #'+workspace/new
    :nv "M-T"   #'+workspace/display
