@@ -29,9 +29,15 @@
   (setq org-log-into-drawer t)
 
   (setq org-todo-keywords
-        '((sequence "TODO(t)" "NEXT(n)" "MAYBE(m)" "LATER(l)"
-                    "STAGNANT(s)" "WAITING(w@)" "CANCELLED(c)"
-                    "EMAIL(e)" "|" "DONE(d!/)")
+        '((sequence "TODO(t)"
+                    "NEXT(n)"
+                    "EMAIL(e)"
+                    "MAYBE(m)"
+                    "LATER(l)"
+                    "STAGNANT(s)"
+                    "WAITING(w@)"
+                    "CANCELLED(c)"
+                    "|" "DONE(d!/)")
           (sequence "NOTES(N)" "|")
           (sequence "[ ]([)" "[-](-!/)" "|" "[x](x!/)")))
 
