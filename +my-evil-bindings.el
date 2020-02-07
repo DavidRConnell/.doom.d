@@ -44,7 +44,7 @@
     "C-j"  #'scroll-up-command
     "C-k"  #'scroll-down-command)
 
-  (define-key! read-expression-map
+  (define-key! :keymaps '(read-expression-map minibuffer-local-map)
     "C-n" #'next-line-or-history-element
     "C-p" #'previous-line-or-history-element))
 
