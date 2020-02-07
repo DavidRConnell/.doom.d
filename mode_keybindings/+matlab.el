@@ -1,23 +1,27 @@
 (after! matlab
   (map! :mode matlab-mode
         (:localleader
-          "?" (lambda! (matlab-shell-describe-command
-                  (matlab-read-word-at-point)))
-          "." (lambda! (matlab-shell-locate-fcn
-                  (matlab-read-word-at-point)))
-          "R" #'dc-matlab-run-command
-          "r" #'dc-matlab-run-last-command
-          "c" #'dc-matlab-close-figures
-          "l" #'matlab-shell-apropos
-          "p" #'matlab-shell
+          :desc "Help" "?"            (lambda! (matlab-shell-describe-command
+                                          (matlab-read-word-at-point)))
+          :desc "Find function" "."   (lambda! (matlab-shell-locate-fcn
+                                          (matlab-read-word-at-point)))
+          :desc "Help prompt" "C-?"   #'matlab-shell-describe-command
+          :desc "Find function prompt" "C-." #'matlab-shell-locate-fcn
+          :desc "Run command" "R"      #'dc-matlab-run-command
+          :desc "Run last command" "r" #'dc-matlab-run-last-command
+          :desc "Close figures" "c"    #'dc-matlab-close-figures
+          :desc "Apropos" "l"          #'matlab-shell-apropos
+          :desc "Matlab Shell" "p"     #'matlab-shell
           (:prefix ("t" . "test")
-            "g" #'dc-matlab-toggle-test-file
-            "t" (lambda! (dc-matlab-shell-run-tests "file"))
-            "T" (lambda! (dc-matlab-shell-run-tests "project"))
-            "p" (lambda! (dc-matlab-shell-run-performance-tests "file"))
-            "P" (lambda! (dc-matlab-shell-run-performance-tests "project"))
-            "r" (lambda! (dc-matlab-shell-run-tests "rerun"))
-            "s" #'dc-matlab-shell-test-summary))
+            :desc "Toggle test file" "g"   #'dc-matlab-toggle-test-file
+            :desc "Run tests" "t"          (lambda! (dc-matlab-shell-run-tests "file"))
+            :desc "Run all tests" "T"      (lambda! (dc-matlab-shell-run-tests "project"))
+            :desc "Run perftests" "p"      (lambda! (dc-matlab-shell-run-performance-tests
+                                               "file"))
+            :desc "Run all pefrtests" "P"  (lambda! (dc-matlab-shell-run-performance-tests
+                                               "project"))
+            :desc "Rerun failed tests" "r" (lambda! (dc-matlab-shell-run-tests "rerun"))
+            :desc "Show test summary" "s"  #'dc-matlab-shell-test-summary))
         (:prefix "C-c"
           "C-c" #'matlab-shell-run-cell
           "C-l" #'matlab-shell-run-region-or-line))
