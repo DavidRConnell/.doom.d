@@ -365,6 +365,7 @@
 
       (:prefix ("C" . "Code checking")
         :desc "toggle spell"     "s" #'flyspell-mode
+        :desc "Check strings"    "S" #'ispell-comments-and-strings
         :desc "toggle lint"      "c" #'flycheck-mode
         :desc "toggle langcheck" "g" #'langtool-check
         :desc "list errors"      "l" #'counsel-flycheck)
