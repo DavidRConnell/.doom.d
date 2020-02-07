@@ -46,6 +46,12 @@
 (setq-hook! 'display-line-numbers-mode-hook
   display-line-numbers 'relative)
 
+(after! evil-matchit
+  (global-evil-matchit-mode 1))
+
+(after! company
+  (global-company-mode 1))
+
 (defun load-files-in (dir)
   "Load all files under directory DIR."
   (setq file-names (directory-files dir))
@@ -114,8 +120,9 @@
   (add-to-list 'evil-surround-pairs-alist
                '(?> . ("<" . ">"))))
 
-(after! evil-matchit
-  (global-evil-matchit-mode 1))
+;; (after! ess
+;;   (add-to-list 'auto-mode-alist
+;;                '("\\.jl" . julia-mode)))
 
 (load-files-in (concat doom-private-dir "mode_keybindings"))
 (load-theme doom-theme t nil)
