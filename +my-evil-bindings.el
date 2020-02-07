@@ -152,7 +152,7 @@
              (point))
 
  :nvm "C-f" #'avy-goto-char-in-line
- :nvm "C-/" #'avy-goto-char-timer
+ :nvm "C-/" #'avy-goto-char-2
  :m "C-e" #'+evil/easymotion  ; lazy-load `evil-easymotion'
 
  :o "j" #'evilem-motion-next-line
