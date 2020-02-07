@@ -139,7 +139,8 @@
 
             ((string= scope "rerun")
              (dc-matlab-run-command
-              (format command "testSuite([testResults.Failed])"))))))
+              (concat "testSuite = testSuite([testResults.Failed]);"
+                      (format command "testSuite")))))))
 
   (defun dc-matlab-shell-run-performance-tests (scope)
     (interactive)
