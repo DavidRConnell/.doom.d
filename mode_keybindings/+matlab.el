@@ -39,8 +39,10 @@
   (defun dc-matlab-run-last-command ()
     "Run the last command sent to the matlab shell buffer."
     (interactive)
-      (dc-matlab-run-command
-       (concat (comint-previous-input-string 0) "\n")))
+    (let ((curr-buffer (buffer-name)))
+      (switch-to-buffer (concat "*" matlab-shell-buffer-name "*"))
+      (dc-matlab-run-command (comint-previous-input-string 0))
+      (switch-to-buffer curr-buffer)))
 
   (defun dc-matlab-run-command (command)
     "Send a command to the running matlab shell buffer."
