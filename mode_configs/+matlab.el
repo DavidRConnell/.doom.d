@@ -31,8 +31,6 @@
     :gt-equal ">="
     :lt-equal "<=")
 
-  (add-hook 'matlab-shell-mode-hook
-            #'company-mode)
 
   (add-hook! 'matlab-mode-hook
               #'display-line-numbers-mode
