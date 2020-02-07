@@ -26,7 +26,7 @@
     :not "~"
     :and "&&" :or "||"
     :for "for"
-    :return "return"
+    ;; :return "return"
     :not-equal "~="
     :gt-equal ">="
     :lt-equal "<=")
