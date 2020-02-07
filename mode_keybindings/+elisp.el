@@ -6,4 +6,5 @@
         "r"     #'quickrun)
       (:prefix "C-c"
         "C-c" #'eval-defun
-        "C-l" #'eval-buffer))
+        "C-l" #'eval-buffer
+        "C-e" #'eval-last-sexp))
