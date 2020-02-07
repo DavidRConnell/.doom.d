@@ -1,3 +1,6 @@
+(defun turn-off-flycheck ()
+  (flycheck-mode -1))
+
 (after! org
   (setq org-directory "~/org/")
   (setq org-agenda-files (list "~/org/"))
@@ -6,10 +9,12 @@
   (setq org-startup-truncated nil)
   (setq org-pretty-entities t)
 
+
   (add-hook! 'org-mode-hook
              #'+org-pretty-mode
              #'turn-off-auto-fill
              #'visual-line-mode
+             #'turn-off-flycheck
              #'flyspell-mode)
 
   (setq org-enforce-todo-dependencies t)
