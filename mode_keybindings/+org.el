@@ -7,8 +7,7 @@
         :nv "H" #'org-beginning-of-line
         :nv "j" #'evil-next-visual-line
         :nv "k" #'evil-previous-visual-line
-        (:prefix "z"
-          "n" #'org-toggle-narrow-to-subtree)
+        :nv "zn" #'org-toggle-narrow-to-subtree
         (:localleader
           "n" #'org-add-note
           "p" #'org-priority
