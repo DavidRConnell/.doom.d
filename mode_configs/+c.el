@@ -4,7 +4,7 @@
            #'function-args-mode)
 
 (after! cc-mode
-  (set-pretty-symbols! '(c-mode)
+  (set-pretty-symbols! '(c-mode objc-mode)
     ;; Types
     :null "void"
     :true "true" :false "false"
