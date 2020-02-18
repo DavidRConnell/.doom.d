@@ -32,6 +32,8 @@
     :lt-equal "<=")
 
 
+  (evilmi-load-plugin-rules '(matlab-mode) '(matlab))
+
   (add-hook! 'matlab-mode-hook
               #'display-line-numbers-mode
               #'highlight-indent-guides-mode
@@ -43,6 +45,3 @@
               #'yas-minor-mode
               #'hl-todo-mode
               #'rainbow-delimiters-mode))
-
-(after! (:and evil-matchit matlab)
-  (evilmi-load-plugin-rules '(matlab-mode) '(matlab)))
