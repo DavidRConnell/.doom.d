@@ -8,7 +8,7 @@
           '(("Function" "^\\s-*\\(function\\)\\s-*\\([^\\.\n]*\\)\n" 2)
             ("Function" "^\\s-*\\(function\\)\\s-*\\([^\\.]*\\.\\.\\.\\s-*\n.*\\)" 2)
             ("Class" "^\\s-*\\(classdef\\)\\s-*\\(.*\\)" 2)
-            ("Section" "%%\\s-*\\(.*\\)$" 1))))
+            ("Section" "^\\s-*%%\\s-*\\(.*\\)$" 1))))
 
 (after! matlab
   (setq matlab-shell-command "/usr/local/MATLAB/bin/matlab")
