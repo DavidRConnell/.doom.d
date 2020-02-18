@@ -125,6 +125,8 @@
   (add-to-list 'evil-surround-pairs-alist
                '(?> . ("<" . ">"))))
 
+(after! projectile
+  (setq projectile-enable-caching nil))
 ;; (after! ess
 ;;   (add-to-list 'auto-mode-alist
 ;;                '("\\.jl" . julia-mode)))
