@@ -112,7 +112,12 @@
               (message (one-or-more not-newline)
                        (zero-or-more "\n" (any " ") (one-or-more not-newline)))
               line-end))
-    :modes (text-mode LaTeX-mode org-mode markdown-mode)))
+    :modes (text-mode LaTeX-mode org-mode markdown-mode latex-mode)))
+
+(after! (:and flycheck flyspell)
+  (add-hook 'text-mode-hook
+            #'flyspell-mode
+            #'flycheck-mode))
 
 (after! evil-surround
   (add-to-list 'evil-surround-pairs-alist
