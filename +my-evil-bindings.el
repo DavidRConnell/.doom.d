@@ -272,6 +272,7 @@
       "-"    #'evil-numbers/dec-at-pt
       ","    #'eshell
       "e"    #'+eval/line-or-region
+      :desc "journal" "j"    (lambda! (dc-open-in-workspace "Journal" "~/journal"))
 
       "s"    #'doom/open-scratch-buffer
       :desc "Find file on server" "S" #'dc-find-file-on-server
