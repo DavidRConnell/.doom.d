@@ -279,7 +279,7 @@
       "!"    #'doom/sudo-this-file
       ":"    #'eval-expression
       ";"    #'execute-extended-command
-      "."    (lambda! (projectile-switch-project-by-name "~/.doom.d"))
+      :desc ".doom.d" "."    (lambda! (dc-open-in-workspace "Doom" "~/.doom.d"))
       "m"    #'+popup/toggle
       "/"    #'evil-ex-nohighlight
       "\\"   #'toggle-truncate-lines
