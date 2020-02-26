@@ -218,9 +218,33 @@ right sequence."
                 ((org-agenda-overriding-header "On Errands"))))
          nil))))
 
-(after! ox
-  (setq org-export-with-toc nil)
-  (setq org-export-with-section-numbers nil))
+(load "~/projects/orgtex/orgtex.el")
+
+(after! (:and ox org)
+  (setq org-latex-pdf-process (list "latexmk -g -pdf -pdflatex=\"%latex\" -outdir=%o %f"))
+  (add-to-list 'org-latex-classes
+               '("tufte-handout" "\\documentclass{tufte-handout}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")))
+  (add-to-list 'org-latex-classes
+               '("article" "\\documentclass[11pt]{scrartcl}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")))
+  (add-to-list 'org-latex-classes
+               '("rushdoc" "\\documentclass{rushdoc}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")))
+  (add-to-list 'org-latex-classes
+               '("rushpres" "\\documentclass{rushpresentation}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")))
+
+  (add-to-list 'org-latex-packages-alist
+               '("" "pgfplots" nil))
+  (add-to-list 'org-latex-packages-alist
+               '("" "booktabs" nil))
+
+  (setq org-export-with-toc nil))
 
 (after! org-ref
   (setq org-ref-completion-library 'org-ref-ivy-cite)
@@ -230,7 +254,8 @@ right sequence."
         org-ref-pdf-directory refs-pdfs)
   (setq bibtex-completion-bibliography refs-bib
         bibtex-completion-library-path refs-pdfs
-        bibtex-completion-notes-path refs-notes))
+        bibtex-completion-notes-path refs-notes
+        bibtex-file-path (concat refs-bib ":" "~/projects/Connectivity/bibs")))
 
 (after! org-noter
   (setq org-noter-default-notes-file-names (list refs-notes)
