@@ -157,6 +157,9 @@
 
  :o "j" #'evilem-motion-next-line
  :o "k" #'evilem-motion-previous-line
+ :o "C-w" #'evilem-motion-forward-word-begin
+ :o "C-e" #'evilem-motion-forward-word-end
+ :o "C-b" #'evilem-motion-backward-word-begin
 
  (:after org
    :map org-mode-map
