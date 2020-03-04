@@ -349,7 +349,8 @@
           :desc "add" "a" #'magit-stage-file
           :desc "add all" "A" #'magit-stage-modified
           :desc "unstage" "u" #'magit-unstage-file
-          :desc "log" "l" #'magit-log-current
+          :desc "file log" "l" #'magit-log-buffer-file
+          :desc "branch log" "L" #'magit-log-current
           :desc "commit" "c" #'magit-commit-create
           :desc "diff" "d" #'magit-diff-buffer-file
           :desc "diff worktree" "D" #'magit-diff-working-tree
