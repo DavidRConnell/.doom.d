@@ -321,9 +321,8 @@
                            (concat "%s/\\<" (thing-at-point 'symbol) "\\>/"))))
 
       (:prefix ("p" . "Projects")
-        :desc "open emacs.d" "e" (lambda! (projectile-switch-project-by-name
-                                           "~/.emacs.d"))
-        :desc "open config" "c" (lambda! (doom-project-browse "~/.config/"))
+        :desc "open emacs.d" "e" (lambda! (dc-open-in-workspace "Emacs" "~/.emacs.d"))
+        :desc "open config" "c" (lambda! (dc-open-in-workspace "Config" "~/.config/"))
         "R" #'projectile-replace
         "g" #'+ivy/project-search
         "o" #'projectile-switch-project
