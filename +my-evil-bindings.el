@@ -392,6 +392,7 @@
         :desc "Open Index" "i"  (lambda! (dc-open-in-workspace "Notes" refs-bib))
         :desc "Open Reference" "r" (lambda! (dc-open-in-workspace "Notes" refs-pdfs))
         :desc "Open Notes" "o" (lambda! (dc-open-in-workspace "Notes" refs-notes))
+        :desc "Go to Note" "g" (lambda! (dc-open-in-workspace "Notes" org-notes))
         :desc "Insert Cite" "c" #'org-ref-insert-cite-with-completion
         :desc "Deft" "d" #'deft)
 
