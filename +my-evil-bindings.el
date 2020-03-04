@@ -3,7 +3,7 @@
 
 (setq evil-collection-key-blacklist
       ;;; Code:
-      (list "C-j" "C-k" "gd" "gf" "J" "K" "[" "]" "gz" "Spc"
+      (list "C-j" "C-k" "gd" "gf" "J" "K" "[" "]" "gz" "Spc" "gr" "gR"
             doom-leader-key doom-localleader-key
             doom-leader-alt-key doom-localleader-alt-key))
 
