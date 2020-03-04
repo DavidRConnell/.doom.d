@@ -88,6 +88,7 @@
                         ("{w_.+}" . ?W)
                         (:endgrouptag . nil)
                         ("personal" . ?m)
+                        ("Chris" . ?C)
                         ("grad" . ?g)))
 
 
