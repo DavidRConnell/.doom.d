@@ -14,6 +14,7 @@
 (package! ripgrep)
 (package! ace-link)
 (package! function-args)
+(package! wordnut)
 
 (package! evil-matchit-matlab :recipe
   (:local-repo "~/.doom.d/evil-matchit-matlab"))
