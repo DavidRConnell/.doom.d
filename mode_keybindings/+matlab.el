@@ -107,15 +107,13 @@
   (defun dc--matlab-insert-test-snippet (classname)
     "Add snippet for matlab function when opening a new .m file."
     (insert (concat "classdef " classname
-                    " < matlab.unittest.TestCase & matlab.perftest.TestCase\n\n"
+                    " < matlab.unittest.TestCase\n\n"
                     "\tproperties\n"
                     "\tend\n\n"
                     "\tmethods (TestMethodSetup)\n"
                     "\tend\n\n"
                     "\tmethods (Test, TestTags = {'Unit'})\n"
                     "\tend\n\n"
-                    "\tmethods (Test, TestTags = {'Performance'})\n"
-                    "\tend\n"
                     "end")))
 
   (defun dc-matlab-shell-run-tests (scope)
