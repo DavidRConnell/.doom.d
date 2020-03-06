@@ -4,7 +4,6 @@
 # key: __rushdoc
 # condition: t
 # --
-#+TITLE: $1
 #+AUTHOR: David R. Connell
 #+LATEX_CLASS: rushdoc
 #+LATEX_COMPILER: xelatex

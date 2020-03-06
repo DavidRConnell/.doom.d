@@ -4,7 +4,6 @@
 # key: __handout
 # condition: t
 # --
-#+TITLE: $1
 #+AUTHOR: David R. Connell
 #+LATEX_CLASS: tufte-handout
 $0
