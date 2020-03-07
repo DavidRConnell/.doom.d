@@ -24,7 +24,9 @@
             :desc "Show test summary" "s"  #'dc-matlab-shell-test-summary))
         (:prefix "C-c"
           "C-c" #'matlab-shell-run-cell
-          "C-l" #'matlab-shell-run-region-or-line))
+          "C-l" #'matlab-shell-save-and-go
+          "C-e" #'dc-matlab-shell-run-line
+          "C-r" #'dc-matlab-shell-run-region))
 
   (add-hook! 'matlab-shell-mode-hook
     (map! :mode matlab-shell-mode
@@ -158,4 +160,31 @@
 
   (defun dc-matlab-shell-test-summary ()
     (interactive)
-    (dc-matlab-run-command "utils.summarizeTests(testResults)")))
+    (dc-matlab-run-command "utils.summarizeTests(testResults)"))
+
+  (defun dc-matlab-shell-run-line (n)
+    (interactive "p")
+    (let ((beg (point-at-bol))
+          (end (point-at-eol n)))
+      (save-excursion
+        (goto-char beg)
+        (push-mark-command 0)
+        (goto-char end)
+        (matlab-shell-run-region-or-line))
+      (pop-mark)
+      (evil-force-normal-state)))
+
+  (evil-define-operator dc-matlab-shell-run-region (beg end)
+    "Wrapper around `evilnc comment operator' to always comments whole lines"
+    :move-point nil
+    :type line
+    :repeat t
+    :jump t
+    (interactive "<r>")
+    (save-excursion
+      (goto-char beg)
+      (push-mark-command 0)
+      (goto-char end)
+      (matlab-shell-run-region-or-line))
+    (pop-mark)
+    (evil-force-normal-state)))
