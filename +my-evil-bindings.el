@@ -11,10 +11,7 @@
   ;; Have C-u behave similarly to `doom/backward-to-bol-or-indent'.
   ;; NOTE SPC u replaces C-u as the universal argument.
   (map! :i "C-u" #'doom/backward-kill-to-bol-and-indent
-        :i "C-w" #'backward-kill-word
-        ;; Vimmish ex motion keys
-        :i "C-b" #'backward-word
-        :i "C-f" #'forward-word)
+        :i "C-w" #'backward-kill-word)
 
   ;; Minibuffer
   (define-key! evil-ex-completion-map
@@ -383,6 +380,7 @@
         :desc "Org store link" "l"  #'org-store-link
         :desc "View search"    "v"  #'org-search-view
         (:prefix ("c" . "Clock")
+          :desc "Pomodoro timer" "p" #'org-pomodoro
           :desc "Clock in" "c" #'counsel-org-clock-context
           :desc "Clock out" "C" #'org-clock-out
           :desc "Goto last" "g" #'counsel-org-clock-goto))
