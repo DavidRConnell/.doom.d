@@ -249,6 +249,8 @@ right sequence."
   (add-to-list 'org-latex-packages-alist
                '("" "booktabs" nil))
 
+  (require 'ox-extra)
+  (ox-extras-activate '(ignore-headlines))
   (setq org-export-with-toc nil))
 
 (after! org-ref
