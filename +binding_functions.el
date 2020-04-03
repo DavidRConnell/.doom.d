@@ -43,7 +43,7 @@
   (setq beg (1+ (count-lines (point-min) beg)))
   (setq end (count-lines (point-min) end))
   (let ((prefix (format "%d,%d" beg end)))
-    (evil-ex (concat prefix "s/\\<"))))
+    (evil-ex (concat prefix "s/"))))
 
 (defun dc--get-evil-ex-prefix ()
   "Format universal argument for use on evil-ex command state."

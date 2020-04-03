@@ -311,7 +311,7 @@
                             "s/\\<" (thing-at-point 'symbol) "\\>/"))))
 
       (:prefix ("R" . "Replace buffer")
-        :desc "custom" "c" (lambda! (evil-ex "%s/\\<"))
+        :desc "custom" "c" (lambda! (evil-ex "%s/"))
         :desc "word" "w" (lambda!
                           (evil-ex
                            (concat "%s/\\<" (thing-at-point 'word) "\\>/")))
