@@ -44,7 +44,8 @@
 
        :emacs
        (dired            ; making dired pretty [functional]
-        +icons)          ; colorful icons for dired-mode
+        +icons           ; colorful icons for dired-mode
+        +ranger)
        electric          ; smarter, keyword-based electric-indent
        vc                ; version-control and Emacs, sitting in a tree
 
