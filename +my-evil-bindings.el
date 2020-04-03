@@ -371,6 +371,7 @@
           :desc "diff" "d" #'magit-diff-buffer-file
           :desc "diff worktree" "D" #'magit-diff-working-tree
           :desc "checkout" "b" #'magit-branch-or-checkout
+          :desc "Browse remote" "B" #'forge-browse-remote
           (:prefix ("S" . "stash")
             :desc "pop" "P" #'magit-stash-pop
             :desc "push" "p" #'magit-stash-worktree
