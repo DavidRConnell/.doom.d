@@ -79,7 +79,8 @@
        markdown          ; writing docs for people to ignore
        (org              ; organize your plain life in plain text
         +pomodoro        ; be fruitful with the tomato technique
-        +present)        ; Emacs for presentations
+        +present         ; Emacs for presentations
+        +gnuplot)
        (python +lsp)     ; beautiful is better than ugly
        (sh +lsp)         ; she sells (ba|z|fi)sh shells on the C xor
 
