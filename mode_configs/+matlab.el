@@ -13,7 +13,7 @@
 (after! matlab
   (setq matlab-shell-command "/usr/local/MATLAB/bin/matlab")
   (setq matlab-shell-command-switches (list "-nodesktop" "-nosplash"))
-  (load (concat doom-private-dir "extras/+company-matlab.el"))
+  ;; (load (concat doom-private-dir "extras/+company-matlab.el"))
   (load (concat doom-private-dir "extras/+flycheck-matlab-mlint.el"))
   (setq flycheck-matlab-mlint-executable
         "/usr/local/MATLAB/bin/glnxa64/mlint")
