@@ -407,13 +407,11 @@
           :desc "Goto last" "g" #'counsel-org-clock-goto
           :desc "Select recent" "G" #'counsel-org-clock-history))
 
-      (:prefix ("n" . "Noter")
-        :desc "Run Noter" "n"    #'org-noter
-        :desc "Open Index" "i"  (lambda! (dc-open-in-workspace "Notes" refs-bib))
+      (:prefix ("n" . "Notes")
+        :desc "Open Index" "i"  (lambda! (dc-open-in-workspace "Notes" refs-bibs))
         :desc "Open Reference" "r" (lambda! (dc-open-in-workspace "Notes" refs-pdfs))
         :desc "Open Notes" "o" (lambda! (dc-open-in-workspace "Notes" refs-notes))
-        :desc "Go to Note" "g" (lambda! (dc-open-in-workspace "Notes" org-notes))
-        :desc "Insert Cite" "c" #'org-ref-insert-cite-with-completion
+        :desc "Go to Note" "g" (lambda! (dc-open-in-workspace "Notes" notes-dir))
         :desc "Deft" "d" #'deft)
 
       (:prefix ("d" . "Dictionary")

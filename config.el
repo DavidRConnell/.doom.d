@@ -38,10 +38,13 @@
 (setq doom-localleader-key ",")
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 
-(defvar org-notes "~/notes/")
+(defvar notes-dir "~/notes/")
+(defvar refs-notes (concat notes-dir  "refs/"))
 (defvar refs-pdfs "~/References/")
-(defvar refs-bib (concat refs-pdfs "index.bib"))
-(defvar refs-notes (concat org-notes "refs.org"))
+(defvar refs-bibs (concat notes-dir "bibs/"))
+
+(after! deft
+  (setq deft-directory notes-dir))
 
 (setq-hook! 'display-line-numbers-mode-hook
   display-line-numbers 'relative)
@@ -85,9 +88,6 @@
   (setq avy-enter-times-out t)
   (setq avy-timeout-seconds 1)
   (setq aw-keys '(?a ?o ?e ?u ?h ?t ?n ?s)))
-
-(after! deft
-  (setq deft-directory org-notes))
 
 (after! yasnippet
   (map! :map yas-keymap
