@@ -1,38 +1,54 @@
 ;;; +org.el --- description -*- lexical-binding: t; -*-
 
-(after! org
-  (map! :map org-mode-map
-        :nv "C-j" #'org-forward-heading-same-level
-        :nv "C-k" #'org-backward-heading-same-level
-        :nv "H" #'org-beginning-of-line
-        :nv "j" #'evil-next-visual-line
-        :nv "k" #'evil-previous-visual-line
-        :nv "zn" #'org-toggle-narrow-to-subtree
-        (:localleader
-          "n" #'org-add-note
-          "p" #'org-priority
-          "P" #'org-property-action
-          "A" #'org-archive-subtree)))
+(map!
+ (:after (org evil-org)
+   (:map (org-mode-map evil-org-mode-map)
+     :nv "C-j" #'org-forward-heading-same-level
+     :nv "C-k" #'org-backward-heading-same-level
+     :nv "H" #'org-beginning-of-line
+     :nv "j" #'evil-next-visual-line
+     :nv "k" #'evil-previous-visual-line
+     :nv "zn" #'org-toggle-narrow-to-subtree
+     :nv "C-i" #'better-jumper-jump-forward
+     (:localleader
+       "n" #'org-add-note
+       "p" #'org-priority
+       "A" #'org-archive-subtree
+       "\\" #'writeroom-mode
+       "e" nil
+       (:prefix ("e" . "export")
+         "l" #'org-ref-ivy-insert-label-link
+         "r" #'org-ref-ivy-insert-ref-link
+         "c" #'org-ref-ivy-insert-cite-link
+         "C" #'org-ref-insert-cite-with-completion
+         "e" #'org-ref
+         "t" #'orgtex-insert-table
+         "f" #'orgtex-insert-figure)
+       (:prefix "c"
+         "p" #'org-pomodoro)
+       (:prefix "l"
+         "h" #'counsel-org-link))))
 
-(after! org-agenda
-  (map! :mode org-agenda-mode
-        :m "J" #'evil-scroll-line-down
-        :m "K" #'evil-scroll-line-up
-        :m "C-j" #'org-agenda-forward-block
-        :m "C-k" #'org-agenda-backward-block
-        :m "/" #'org-agenda-filter-by-tag
-        :m "L" #'evil-end-of-line
-        :m "H" #'evil-beginning-of-line
-        :m "RET" #'+org/dwim-at-point
-        (:prefix "C-c"
-          "C-c" #'org-agenda-set-tags
-          "." #'org-agenda-date-prompt)
-        (:localleader
-          "n" #'org-agenda-add-note
-          "p" #'org-agenda-priority
-          "A" #'org-agenda-archive
-          (:prefix ("c" . "Clock")
-            "c" #'org-agenda-clock-in
-            "C" #'org-agenda-clock-out
-            "g" #'org-clock-goto
-            "r" #'org-agenda-clockreport-mode))))
+ (:after org-agenda
+   (:map org-agenda-mode-map
+     :m "J" #'evil-scroll-line-down
+     :m "K" #'evil-scroll-line-up
+     :m "C-j" #'org-agenda-forward-block
+     :m "C-k" #'org-agenda-backward-block
+     :m "/" #'org-agenda-filter-by-tag
+     :m "L" #'evil-end-of-line
+     :m "H" #'evil-beginning-of-line
+     :m "RET" #'+org/dwim-at-point
+     (:prefix "C-c"
+       "C-c" #'org-agenda-set-tags
+       "." #'org-agenda-date-prompt)
+     (:localleader
+       "n" #'org-agenda-add-note
+       "p" #'org-agenda-priority
+       "A" #'org-agenda-archive
+       (:prefix ("c" . "Clock")
+         "c" #'org-agenda-clock-in
+         "C" #'org-agenda-clock-out
+         "g" #'org-clock-goto
+         "p" #'org-pomodoro
+         "r" #'org-agenda-clockreport-mode)))))
