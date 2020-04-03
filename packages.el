@@ -19,4 +19,3 @@
   (:local-repo "~/.doom.d/evil-matchit-matlab"))
 
 (package! evil-snipe :disable t)
-(package! writegood-mode :disable t)
