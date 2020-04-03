@@ -2,6 +2,9 @@
   (flycheck-mode -1))
 
 (after! org
+  (require 'org-ref)
+  (load "~/projects/orgtex/orgtex.el")
+
   (setq org-directory "~/org/")
   (setq org-agenda-files (list "~/org/"))
 
@@ -219,10 +222,9 @@ right sequence."
                 ((org-agenda-overriding-header "On Errands"))))
          nil))))
 
-(load "~/projects/orgtex/orgtex.el")
-
 (after! (:and ox org)
-  (setq org-latex-pdf-process (list "latexmk -g -pdf -pdflatex=\"%latex\" -outdir=%o %f"))
+  (setq org-latex-prefer-user-labels t)
+  (setq org-latex-pdf-process (list "latexmk -g -pdf -\"%latex\" -outdir=%o %f"))
   (add-to-list 'org-latex-classes
                '("tufte-handout" "\\documentclass{tufte-handout}"
                  ("\\section{%s}" . "\\section*{%s}")
@@ -250,18 +252,18 @@ right sequence."
   (setq org-export-with-toc nil))
 
 (after! org-ref
+  (org-ref-ivy-cite-completion)
   (setq org-ref-completion-library 'org-ref-ivy-cite)
-  (setq reftex-default-bibliography (list refs-bib))
-  (setq org-ref-bibliography-notes refs-notes
-        org-ref-default-bibliography (list refs-bib)
-        org-ref-pdf-directory refs-pdfs)
-  (setq bibtex-completion-bibliography refs-bib
-        bibtex-completion-library-path refs-pdfs
-        bibtex-completion-notes-path refs-notes
-        bibtex-file-path (concat refs-bib ":" "~/projects/Connectivity/bibs")))
+  (setq org-ref-default-ref-type "cref")
+  (setq org-ref-bibliography-notes refs-notes)
+  (setq org-ref-default-bibliography
+        (directory-files refs-bibs t (rx ".bib")))
+  (setq org-ref-pdf-directory refs-pdfs))
 
-(after! org-noter
-  (setq org-noter-default-notes-file-names (list refs-notes)
-        org-noter-notes-search-path (list refs-pdfs)
-        org-noter-auto-save-last-location t
-        org-noter-insert-note-no-questions t))
+(after! bibtex
+  (setq bibtex-completion-bibliography
+        (directory-files refs-bibs t (rx ".bib")))
+  (setq bibtex-completion-library-path refs-pdfs)
+  (setq bibtex-completion-notes-path refs-notes)
+  (setq bibtex-completion-pdf-open-function
+        (lambda (fpath) (call-process "zathura" nil 0 nil fpath))))
