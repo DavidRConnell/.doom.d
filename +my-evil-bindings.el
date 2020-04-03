@@ -113,7 +113,7 @@
  :n  "gp"    #'+evil/reselect-paste
  :n  "g="    #'widen
  :v  "g="    #'+evil:narrow-buffer
- :nv "z="    #'flyspell-correct-word-generic
+ :nv "z="    #'flyspell-correct-at-point
  :nv "g@"    #'+evil:apply-macro
  :nv "Q"     #'+evil:apply-macro
  :nv "C-q"   #'evil-execute-macro
