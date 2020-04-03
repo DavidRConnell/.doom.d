@@ -11,7 +11,13 @@
           :desc "Run last command" "r" #'dc-matlab-run-last-command
           :desc "Close figures" "c"    #'dc-matlab-close-figures
           :desc "Apropos" "l"          #'matlab-shell-apropos
-          :desc "Matlab Shell" "p"     #'matlab-shell
+          :desc "Matlab shell" ","  (lambda (arg)
+                                      (interactive "p")
+                                      (cond ((= arg 4)
+                                             (dc-matlab-shell-toggle))
+                                            ((= arg 16)
+                                             (dc-matlab-shell-here))
+                                            (t (dc-matlab-shell))))
           (:prefix ("t" . "test")
             :desc "Toggle test file" "g"   #'dc-matlab-toggle-test-file
             :desc "Run tests" "t"          (lambda! (dc-matlab-shell-run-tests "file"))
@@ -187,4 +193,57 @@
       (goto-char end)
       (matlab-shell-run-region-or-line))
     (pop-mark)
-    (evil-force-normal-state)))
+    (evil-force-normal-state))
+
+  (defun dc-matlab-shell-here ()
+    "Wrapper around `matlab-shell' to add persp support"
+    (interactive)
+    (let* ((buffer (switch-to-buffer "*MATLAB*"))
+           (win (get-buffer-window buffer))
+           (dir default-directory))
+      (select-window win)
+      (when (bound-and-true-p evil-local-mode)
+        (evil-change-to-initial-state))
+      (goto-char (point-max))
+      (with-current-buffer (pop-to-buffer buffer)
+        (if (not (eq major-mode 'matlab-shell-mode))
+            (matlab-shell)
+          (cd dir)
+          (persp-add-buffer buffer)
+          (run-mode-hooks 'matlab-shell-mode-hook)))))
+
+  (defun dc-matlab-shell ()
+    "Wrapper around `matlab-shell' to open in pop-up"
+    (interactive)
+    (let* ((buffer (pop-to-buffer "*MATLAB*"))
+           (win (get-buffer-window buffer))
+           (dir default-directory))
+      (select-window win)
+      (when (bound-and-true-p evil-local-mode)
+        (evil-change-to-initial-state))
+      (goto-char (point-max))
+      (with-current-buffer (pop-to-buffer buffer)
+        (if (not (eq major-mode 'matlab-shell-mode))
+            (matlab-shell)
+          (cd dir)
+          (persp-add-buffer buffer)
+          (run-mode-hooks 'matlab-shell-mode-hook)))))
+
+  (defun dc-matlab-shell-toggle ()
+    "Toggle a persistent matlab-shell window.
+
+Mostly copied from `+shell/toggle'"
+    (interactive)
+    (let* ((buffer (get-buffer-create "*MATLAB*"))
+           (win (get-buffer-window buffer))
+           (dir default-directory))
+      (select-window win)
+      (when (bound-and-true-p evil-local-mode)
+        (evil-change-to-initial-state))
+      (goto-char (point-max))
+      (with-current-buffer (pop-to-buffer buffer)
+        (if (not (eq major-mode 'matlab-shell-mode))
+            (matlab-shell)
+          (cd dir)
+          (persp-add-buffer buffer)
+          (run-mode-hooks 'matlab-shell-mode-hook))))))
