@@ -142,4 +142,3 @@
   (setq +zen-text-scale 0.5))
 
 (load-files-in (concat doom-private-dir "mode_keybindings"))
-(load-theme doom-theme t nil)
