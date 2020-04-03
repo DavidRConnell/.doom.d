@@ -244,8 +244,6 @@
             "C-SPC" #'company-complete)))
 
       (:when (featurep! :completion ivy)
-        (:map (help-mode-map helpful-mode-map)
-          :n "Q" #'ivy-resume)
         (:after ivy
           :map ivy-minibuffer-map
           "C-SPC" #'ivy-partial-or-done ; preview file
