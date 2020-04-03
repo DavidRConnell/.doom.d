@@ -49,7 +49,7 @@
        vc                ; version-control and Emacs, sitting in a tree
 
        :term
-       eshell            ; a terminal REPL for Emacs
+       shell
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
