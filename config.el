@@ -134,9 +134,6 @@
 
 (after! projectile
   (setq projectile-enable-caching nil))
-;; (after! ess
-;;   (add-to-list 'auto-mode-alist
-;;                '("\\.jl" . julia-mode)))
 
 (after! writeroom-mode
   (setq +zen-text-scale 0.5))
