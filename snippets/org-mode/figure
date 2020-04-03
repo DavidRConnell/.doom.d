@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: figure
+# key: fig
+# condition: t
+# --
+
+#+CAPTION: $1
+#+NAME: fig:$2
+[[./figures/$0]]
