@@ -111,24 +111,18 @@
 
       (message test-file)
       (if (not (file-exists-p test-file))
-          (with-temp-buffer
-            (dc--matlab-insert-test-snippet (substring test-filename 0 -2))
-            (write-file test-file)
-            (goto-char 0)))
+          (let ((buffer (get-buffer-create test-filename)))
+            (with-current-buffer (switch-to-buffer buffer)
+              (matlab-mode)
+              (undo-tree-undo)
+              (evil-insert-state)
+              (dc--matlab-insert-test-snippet)
+              (write-file test-file)))
+        (find-file test-file))))
 
-      (find-file test-file)))
-
-  (defun dc--matlab-insert-test-snippet (classname)
+  (defun dc--matlab-insert-test-snippet ()
     "Add snippet for matlab function when opening a new .m file."
-    (insert (concat "classdef " classname
-                    " < matlab.unittest.TestCase\n\n"
-                    "\tproperties\n"
-                    "\tend\n\n"
-                    "\tmethods (TestMethodSetup)\n"
-                    "\tend\n\n"
-                    "\tmethods (Test, TestTags = {'Unit'})\n"
-                    "\tend\n\n"
-                    "end")))
+    (yas-expand-snippet (yas-lookup-snippet 'unittest 'matlab-mode)))
 
   (defun dc-matlab-shell-run-tests (scope tag)
     (interactive)
