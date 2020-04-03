@@ -283,8 +283,14 @@
       "B"    #'switch-to-buffer
       "+"    #'evil-numbers/inc-at-pt
       "-"    #'evil-numbers/dec-at-pt
-      ","    #'eshell
-      "e"    #'+eval/line-or-region
+      ","    (lambda (arg) (interactive "p")
+               (cond ((= arg 4)
+                      (+shell/toggle))
+                     ((= arg 16)
+                      (+shell/here))
+                     (t (shell))))
+      "<"    #'counsel-switch-to-shell-buffer
+
       :desc "journal" "j"    (lambda! (dc-open-in-workspace "Journal" "~/journal"))
 
       "s"    #'doom/open-scratch-buffer
