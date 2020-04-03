@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: increment var
-# key: inc
-# condition: t   
-# --
-${1:var} = $1 $0;
