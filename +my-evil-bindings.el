@@ -15,8 +15,13 @@
 
   ;; Minibuffer
   (define-key! evil-ex-completion-map
-    "C-a" #'move-beginning-of-line
-    "C-b" #'backward-word
+    "C-a"    #'move-beginning-of-line
+    "C-b"    #'backward-word
+    "C-h"    #'backward-char
+    "C-f"    #'forward-word
+    "C-l"    #'forward-char
+    "M-n"    #'+company/dabbrev
+    "M-p"    #'+company/dabbrev-code-previous
     [tab] (if (featurep! :completion ivy)
                 #'counsel-minibuffer-history
               #'helm-minibuffer-history)
@@ -29,12 +34,14 @@
     [escape] #'abort-recursive-edit
     "C-a"    #'move-beginning-of-line
     "C-b"    #'backward-word
+    "C-h"    #'backward-char
     "C-f"    #'forward-word
+    "C-l"    #'forward-char
     "C-r"    #'evil-paste-from-register
     "C-u"    #'doom/backward-kill-to-bol-and-indent
     "C-v"    #'yank
     "C-w"    #'backward-kill-word
-    "C-z"    (λ! (ignore-errors (call-interactively #'undo)))
+    "C-SPC"  #'+company/complete
     ;; Scrolling lines
     "C-n"    #'next-line
     "C-p"    #'previous-line
@@ -239,13 +246,16 @@
           :map ivy-minibuffer-map
           "C-SPC" #'ivy-partial-or-done ; preview file
           "C-l"   #'ivy-alt-done
+          "C-r"   #'counsel-minibuffer-history
           "C-v"   #'yank)
         (:after counsel
+          :map shell-mode-map
+          "C-r"   #'counsel-shell-history
           :map counsel-ag-map
           "C-SPC"    #'ivy-partial-or-done ; preview
           "C-l"      #'ivy-done
-          "C-c C-e"  #'+ivy/wgrep-occur      ; search/replace on results
-          [backtab]  #'+ivy/wgrep-occur      ; search/replace on results
+          "C-c C-e"  #'+ivy/woccur      ; search/replace on results
+          [backtab]  #'+ivy/woccur      ; search/replace on results
           [C-return] #'+ivy/git-grep-other-window-action)
         (:after swiper
           :map swiper-map
