@@ -73,13 +73,10 @@
         "C-n" #'git-timemachine-show-next-revision))
 
 (after! evil-magit
+  (setq evil-magit-want-horizontal-movement t)
   (map! :mode magit-mode
         "?" #'evil-search-backward
-        "K" #'evil-scroll-line-up
-        "L" #'evil-last-non-blank
-        "H" #'evil-first-non-blank
-        "l" #'evil-forward-char
-        "h" #'evil-backward-char))
+        "K" #'evil-scroll-line-up))
 
 (after! avy
   (setq avy-keys-alist
