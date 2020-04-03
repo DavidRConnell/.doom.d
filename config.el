@@ -135,6 +135,9 @@
 (after! projectile
   (setq projectile-enable-caching nil))
 
+(add-hook! 'minibuffer-setup-hook
+           #'company-mode)
+
 (after! writeroom-mode
   (setq +zen-text-scale 0.5))
 
