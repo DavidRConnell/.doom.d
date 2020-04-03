@@ -296,7 +296,7 @@
       "s"    #'doom/open-scratch-buffer
       :desc "Find file on server" "S" #'dc-find-file-on-server
       "!"    #'doom/sudo-this-file
-      ":"    #'eval-expression
+      ":"    #'helm-eval-expression
       ";"    #'execute-extended-command
       :desc ".doom.d" "."    (lambda! (dc-open-in-workspace "Doom" "~/.doom.d"))
       "m"    #'+popup/toggle
