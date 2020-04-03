@@ -234,7 +234,9 @@ right sequence."
   (add-to-list 'org-latex-classes
                '("rushdoc" "\\documentclass{rushdoc}"
                  ("\\section{%s}" . "\\section*{%s}")
-                 ("\\subsection{%s}" . "\\subsection*{%s}")))
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")))
   (add-to-list 'org-latex-classes
                '("rushpres" "\\documentclass{rushpresentation}"
                  ("\\section{%s}" . "\\section*{%s}")
