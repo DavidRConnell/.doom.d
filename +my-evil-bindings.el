@@ -141,7 +141,9 @@
  :n "C-k"    #'evil-scroll-page-up
  :v "C-j"    #'avy-goto-line-below
  :v "C-k"    #'avy-goto-line-above
+ :nv "C-'"   #'counsel-evil-registers
  :nv "C-m"   #'evil-goto-mark
+ :nv "M"     #'counsel-evil-marks
  :nv "ZZ"    #'save-buffers-kill-terminal
  :nv "/"     #'swiper
  :nv "?"     #'swiper-backward
@@ -149,6 +151,7 @@
  :nvi "M-/"  #'ace-link
  :nvi "C-u"  #'universal-argument
  :nv "U"     #'undo-tree-visualize
+ :nvi "C-c C-r" #'ivy-resume
 
  ;; Use C-s (snipe) instead of C-t becaulse C-t is my stumpwm key
  :nvm "C-s" (lambda! ; make exclusive (more like till than from)
@@ -225,7 +228,8 @@
             "C-s"     #'company-filter-candidates
             "C-S-s"   (cond ((featurep! :completion helm) #'helm-company)
                             ((featurep! :completion ivy)  #'counsel-company))
-            "C-SPC"   #'company-complete-common-or-cycle
+            "C-SPC"   #'company-complete-common
+            "C-i"     #'company-complete-common-or-cycle
             [tab]     #'company-complete-common-or-cycle
             [backtab] #'company-select-previous)
           (:map company-search-map  ; applies to `company-filter-map' too
@@ -275,6 +279,7 @@
       "w"    #'save-buffer
       "q"    #'kill-this-buffer
       "o"    #'find-file
+      "O"    #'counsel-locate
 
       "b"    #'persp-switch-to-buffer
       "B"    #'switch-to-buffer
@@ -385,15 +390,18 @@
         :desc "Agenda"         "a"  #'org-agenda
         :desc "Todo list"      "t"  #'org-todo-list
         :desc "Tags search"    "m"  #'org-tags-view
-        :desc "Org capture"    "x"  #'org-capture
+        :desc "Org capture"    "x"  #'counsel-org-capture
         :desc "Go to org file" "g"  #'dc-open-org-file
         :desc "Org store link" "l"  #'org-store-link
         :desc "View search"    "v"  #'org-search-view
         (:prefix ("c" . "Clock")
           :desc "Pomodoro timer" "p" #'org-pomodoro
-          :desc "Clock in" "c" #'counsel-org-clock-context
+          :desc "Clock in" "c" (lambda! (org-clock-in '(4)))
           :desc "Clock out" "C" #'org-clock-out
-          :desc "Goto last" "g" #'counsel-org-clock-goto))
+          :desc "Clock in last" "l" #'org-clock-in-last
+          :desc "Cancel" "x" #'org-clock-cancel
+          :desc "Goto last" "g" #'counsel-org-clock-goto
+          :desc "Select recent" "G" #'counsel-org-clock-history))
 
       (:prefix ("n" . "Noter")
         :desc "Run Noter" "n"    #'org-noter
@@ -408,4 +416,7 @@
         :desc "Define at point"     "d" #'define-word-at-point
         :desc "Define any word"     "D" #'define-word
         :desc "Thesaurus"           "t" #'powerthesaurus-lookup-word-dwim
-        :desc "Search with wordnut" "w" #'wordnut-lookup-current-word))
+        :desc "Wordnut at point" "w" #'wordnut-lookup-current-word
+        :desc "Wordnut search " "W" #'wordnut-search
+        :desc "Biblio lookup" "b" #'biblio-lookup
+        :desc "Search duck" "s" #'counsel-search))
