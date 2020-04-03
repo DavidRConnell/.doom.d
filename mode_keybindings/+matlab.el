@@ -20,8 +20,15 @@
                                             (t (dc-matlab-shell))))
           (:prefix ("t" . "test")
             :desc "Toggle test file" "g"   #'dc-matlab-toggle-test-file
-            :desc "Run tests" "t"          (lambda! (dc-matlab-shell-run-tests "file"))
-            :desc "Run all tests" "T"      (lambda! (dc-matlab-shell-run-tests "project"))
+            :desc "Find test file" "G" (lambda! (counsel-find-file (dc-matlab-get-test-dir)))
+            :desc "Run unit tests" "t"        (lambda! (dc-matlab-shell-run-tests
+                                                  "file" "Unit"))
+            :desc "Run all unit tests" "T"    (lambda! (dc-matlab-shell-run-tests
+                                                  "project" "Unit"))
+            :desc "Run integration tests" "i" (lambda! (dc-matlab-shell-run-tests
+                                                  "project" "Integration"))
+            :desc "Run functional tests" "f"  (lambda! (dc-matlab-shell-run-tests
+                                                  "project" "Functional"))
             :desc "Run perftests" "p"      (lambda! (dc-matlab-shell-run-performance-tests
                                                "file"))
             :desc "Run all pefrtests" "P"  (lambda! (dc-matlab-shell-run-performance-tests
@@ -76,7 +83,8 @@
                                        (dc--matlab-get-filename))
         (dc--matlab-find-test-file)))
 
-  (defun dc--matlab-get-test-dir ()
+  (defun dc-matlab-get-test-dir ()
+    (interactive)
     (concat (projectile-project-root) "tests/"))
 
   (defun dc--matlab-get-filename (&optional test)
@@ -96,7 +104,7 @@
                     (concat dir f "/") filename)))))
 
   (defun dc--matlab-find-test-file ()
-    (let* ((test-dir (dc--matlab-get-test-dir))
+    (let* ((test-dir (dc-matlab-get-test-dir))
            (test-filename (dc--matlab-get-filename 'test))
            (test-file (concat test-dir test-filename)))
 
@@ -124,9 +132,9 @@
                     "\tend\n\n"
                     "end")))
 
-  (defun dc-matlab-shell-run-tests (scope)
+  (defun dc-matlab-shell-run-tests (scope tag)
     (interactive)
-    (let ((test-suite "testSuite = matlab.unittest.TestSuite.from%s('%s', 'tag', 'Unit'); ")
+    (let ((test-suite "testSuite = matlab.unittest.TestSuite.from%s('%s', 'tag', '%s'); ")
           (command (concat "testResults = run(%s); "
                            "utils.summarizeTests(testResults)")))
 
@@ -135,14 +143,15 @@
               (concat
                (format test-suite
                        "File"
-                       (concat (dc--matlab-get-test-dir)
-                               (dc--matlab-get-filename 'test)))
+                       (concat (dc-matlab-get-test-dir)
+                               (dc--matlab-get-filename 'test))
+                       tag)
                (format command "testSuite"))))
 
             ((string= scope "project")
              (dc-matlab-run-command
               (concat
-               (format test-suite "Folder" (dc--matlab-get-test-dir))
+               (format test-suite "Folder" (dc-matlab-get-test-dir) tag)
                (format command "testSuite"))))
 
             ((string= scope "rerun")
