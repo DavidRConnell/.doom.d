@@ -43,8 +43,6 @@
 
   (add-hook! 'matlab-shell-mode-hook
     (map! :mode matlab-shell-mode
-          :n "k" #'matlab-shell-previous-matching-input-from-input
-          :n "j" #'matlab-shell-next-matching-input-from-input
           :n "C-p" #'matlab-shell-previous-matching-input-from-input
           :n "C-n" #'matlab-shell-next-matching-input-from-input
           :ni "C-d" #'matlab-shell-exit
@@ -81,7 +79,7 @@
     (if (string-match-p "Test" (buffer-name))
         (dc--matlab-find-original-file (projectile-project-root)
                                        (dc--matlab-get-filename))
-        (dc--matlab-find-test-file)))
+      (dc--matlab-find-test-file)))
 
   (defun dc-matlab-get-test-dir ()
     (interactive)
@@ -166,12 +164,12 @@
       (cond ((string= scope "file")
              (dc-matlab-run-command
               (format command (concat
-                               (dc--matlab-get-test-dir)
+                               (dc-matlab-get-test-dir)
                                (dc--matlab-get-filename 'test)))))
 
             ((string= scope "project")
              (dc-matlab-run-command
-              (format command (dc--matlab-get-test-dir)))))))
+              (format command (dc-matlab-get-test-dir)))))))
 
   (defun dc-matlab-shell-test-summary ()
     (interactive)
