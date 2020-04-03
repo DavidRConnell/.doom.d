@@ -3,5 +3,6 @@
 # key: if
 # condition: t
 # --
+
 if $0
 end

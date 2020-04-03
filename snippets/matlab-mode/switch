@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
 # name: switch
-# uuid:
 # key: switch
 # condition: t
 # --
+
 switch $0
 end
