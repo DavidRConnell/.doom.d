@@ -83,8 +83,18 @@
         '((avy-goto-char . (?a ?o ?e ?u ?h ?t ?n ?s))))
   (setq avy-keys '(?a ?o ?e ?u ?h ?t ?n ?s))
   (setq avy-enter-times-out t)
-  (setq avy-timeout-seconds 1)
-  (setq aw-keys '(?a ?o ?e ?u ?h ?t ?n ?s)))
+  (setq avy-timeout-seconds 0.75)
+  (setq aw-keys '(?a ?o ?e ?u ?h ?t ?n ?s))
+  (setq avy-flyspell-correct-function #'flyspell-correct-at-point)
+  (setq avy-dispatch-alist
+        '((120 . avy-action-kill-move)
+          (88 . avy-action-kill-stay)
+          (?T . avy-action-teleport)
+          (109 . avy-action-mark)
+          (110 . avy-action-copy)
+          (121 . avy-action-yank)
+          (105 . avy-action-ispell)
+          (122 . avy-action-zap-to-char))))
 
 (after! yasnippet
   (map! :map yas-keymap
