@@ -80,18 +80,22 @@
       (if (not dc--matlab-history)
           (progn
             (switch-to-buffer (concat "*" matlab-shell-buffer-name "*"))
-            (setq dc--matlab-history (mapcar 'list (cddr comint-input-ring)))
+            (setq dc--matlab-history (mapcar 'list
+                                             (cl-remove-duplicates
+                                              (cddr comint-input-ring) :test #'equal)))
             (switch-to-buffer curr-buffer)))
 
       (if (not command)
           (progn
             (setq command (completing-read "Command: "
                                            dc--matlab-history
-                                           nil nil))))
+                                           (lambda (x) (not (member (car x)
+                                                               (list "exit" nil " "))))
+                                           nil))))
 
       (switch-to-buffer (concat "*" matlab-shell-buffer-name "*"))
       (matlab-shell-send-string (concat command "\n"))
-      (add-to-list 'dc--matlab-history command)
+      (add-to-list 'dc--matlab-history (list command))
       (matlab-shell-add-to-input-history command)
       (switch-to-buffer curr-buffer)))
 
