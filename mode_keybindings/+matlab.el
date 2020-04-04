@@ -71,27 +71,27 @@
       (dc-matlab-run-command (comint-previous-input-string 0))
       (switch-to-buffer curr-buffer)))
 
+  (defvar dc--matlab-history nil)
   (defun dc-matlab-run-command (&optional command)
     "Send a command to the running matlab shell buffer."
     (interactive)
     (let ((curr-buffer (buffer-name)))
 
-      (if (not comint-input-ring-file-name)
+      (if (not dc--matlab-history)
           (progn
             (switch-to-buffer (concat "*" matlab-shell-buffer-name "*"))
-            (let ((history-file comint-input-ring-file-name))
-              (switch-to-buffer curr-buffer)
-              (setq comint-input-ring-file-name history-file))))
+            (setq dc--matlab-history (mapcar 'list (cddr comint-input-ring)))
+            (switch-to-buffer curr-buffer)))
 
       (if (not command)
           (progn
-            (comint-read-input-ring)
             (setq command (completing-read "Command: "
-                                           (mapcar 'list (cddr comint-input-ring))
+                                           dc--matlab-history
                                            nil nil))))
 
       (switch-to-buffer (concat "*" matlab-shell-buffer-name "*"))
       (matlab-shell-send-string (concat command "\n"))
+      (add-to-list 'dc--matlab-history command)
       (matlab-shell-add-to-input-history command)
       (switch-to-buffer curr-buffer)))
 
