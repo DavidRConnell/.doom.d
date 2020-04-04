@@ -102,3 +102,17 @@ If FILE is a directory search with `counsel-find-file'"
                              (directory-files man-dir))))
     (info-setup (concat man-dir "/" man "/" man ".info")
                 (pop-to-buffer "*info*"))))
+
+(defmacro dc--select-function-with-universal-arg (name func1 func2)
+  "Select a function to call based on the number of \\[universal-argument]
+
+If \\[universal-argument] not hit run FUNC1, one \\[universal-argument] selects
+  FUNC2, two \\[universal-argument] selects FUNC3 if it exists.
+If there no FUNC3 is provided defaults to FUNC2."
+
+  `(defun ,name (arg)
+    (interactive "p")
+    (cond ((= arg 1)
+           (call-interactively ,func1))
+          ((>= arg 4)
+           (call-interactively ,func2)))))

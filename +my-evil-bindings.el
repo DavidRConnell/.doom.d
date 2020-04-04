@@ -52,6 +52,14 @@
     "C-n" #'next-line-or-history-element
     "C-p" #'previous-line-or-history-element))
 
+(dc--select-function-with-universal-arg arg-swiper-isearch
+                                        #'swiper #'swiper-isearch)
+(dc--select-function-with-universal-arg arg-backward-swiper-isearch
+                                        #'swiper-backward #'swiper-isearch-backward)
+(dc--select-function-with-universal-arg arg-at-point-swiper-isearch
+                                        #'swiper-thing-at-point
+                                        #'swiper-isearch-thing-at-point)
+
 ;;
 ;;; Global evil keybinds
 (map!
@@ -145,9 +153,9 @@
  :nv "C-m"   #'evil-goto-mark
  :nv "M"     #'counsel-evil-marks
  :nv "ZZ"    #'save-buffers-kill-terminal
- :nv "/"     #'swiper
- :nv "?"     #'swiper-backward
- :nv "gn"    #'swiper-thing-at-point
+ :nv "/"     #'arg-swiper-isearch
+ :nv "?"     #'arg-backward-swiper-isearch
+ :nv "gn"    #'arg-at-point-swiper-isearch
  :nvi "M-/"  #'ace-link
  :nvi "C-u"  #'universal-argument
  :nv "U"     #'undo-tree-visualize
