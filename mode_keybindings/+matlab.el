@@ -264,7 +264,9 @@
 
 Mostly copied from `+shell/toggle'"
     (interactive)
-    (let* ((buffer (get-buffer-create "*MATLAB*"))
+    (evil-window-split)
+    (evil-window-down 1)
+    (let* ((buffer (switch-to-buffer "*MATLAB*"))
            (win (get-buffer-window buffer))
            (dir default-directory))
       (select-window win)
