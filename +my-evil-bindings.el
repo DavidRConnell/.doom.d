@@ -145,10 +145,8 @@
  :nv "L"     #'evil-end-of-line
  :nv "K"     #'evil-scroll-line-up
  :nv "J"     #'evil-scroll-line-down
- :n "C-j"    #'evil-scroll-page-down
- :n "C-k"    #'evil-scroll-page-up
- :v "C-j"    #'avy-goto-line-below
- :v "C-k"    #'avy-goto-line-above
+ :nv "C-j"    #'avy-goto-line-below
+ :nv "C-k"    #'avy-goto-line-above
  :nv "C-'"   #'counsel-evil-registers
  :nv "C-m"   #'evil-goto-mark
  :nv "M"     #'counsel-evil-marks
@@ -228,8 +226,6 @@
             "C-w"     nil  ; don't interfere with `evil-delete-backward-word'
             "C-n"     #'company-select-next
             "C-p"     #'company-select-previous
-            "C-j"     #'company-select-next
-            "C-k"     #'company-select-previous
             "C-h"     #'company-show-doc-buffer
             "C-u"     #'company-previous-page
             "C-d"     #'company-next-page
@@ -243,8 +239,6 @@
           (:map company-search-map  ; applies to `company-filter-map' too
             "C-n"     #'company-select-next-or-abort
             "C-p"     #'company-select-previous-or-abort
-            "C-j"     #'company-select-next-or-abort
-            "C-k"     #'company-select-previous-or-abort
             "C-s"     (λ! (company-search-abort) (company-filter-candidates))
             "ESC"     #'company-search-abort)
           ;; TAB auto-completion in term buffers
