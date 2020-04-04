@@ -1,14 +1,28 @@
 (after! matlab
   (map! :mode matlab-mode
         (:localleader
-          :desc "Help" "?"            (lambda! (matlab-shell-describe-command
-                                          (matlab-read-word-at-point)))
-          :desc "Find function" "."   (lambda! (matlab-shell-locate-fcn
-                                          (matlab-read-word-at-point)))
-          :desc "Help prompt" "C-?"   #'matlab-shell-describe-command
-          :desc "Find function prompt" "C-." #'matlab-shell-locate-fcn
-          :desc "Run command" "R"      #'dc-matlab-run-command
-          :desc "Run last command" "r" #'dc-matlab-run-last-command
+          :desc "Help" "?"            (lambda (arg)
+                                        (interactive "P")
+                                        (if arg
+                                            (call-interactively
+                                             #'matlab-shell-describe-command)
+                                          (matlab-shell-describe-command
+                                         (matlab-read-word-at-point))))
+          :desc "Find function" "."   (lambda (arg)
+                                        (interactive "P")
+                                        (if arg
+                                            (call-interactively
+                                             #'matlab-shell-locate-fcn)
+                                          (matlab-shell-locate-fcn
+                                           (matlab-read-word-at-point))))
+          :desc "Run command" "r"     (lambda (arg)
+                                        (interactive "P")
+                                        (if arg
+                                            (call-interactively
+                                             #'dc-matlab-run-command)
+                                          (call-interactively
+                                           #'dc-matlab-run-last-command)))
+
           :desc "Close figures" "c"    #'dc-matlab-close-figures
           :desc "Apropos" "l"          #'matlab-shell-apropos
           :desc "Matlab shell" ","  (lambda (arg)
