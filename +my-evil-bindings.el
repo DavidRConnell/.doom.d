@@ -251,7 +251,11 @@
           "C-SPC" #'ivy-partial-or-done ; preview file
           "C-l"   #'ivy-alt-done
           "C-r"   #'counsel-minibuffer-history
-          "C-v"   #'yank)
+          "C-v"   #'yank
+          "C-s"   #'ivy-mark
+          "C--"   #'ivy-unmark
+          "C-f"   #'ivy-toggle-marks
+          "C-a"   #'ivy-toggle-calling)
         (:after counsel
           :map shell-mode-map
           "C-r"   #'counsel-shell-history
