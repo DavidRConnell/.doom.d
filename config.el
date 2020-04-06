@@ -180,4 +180,6 @@
 (after! writeroom-mode
   (setq +zen-text-scale 0.5))
 
+(add-to-list 'auto-mode-alist '("\\.svg\\'" . image-mode))
+
 (load-files-in (concat doom-private-dir "mode_keybindings"))
