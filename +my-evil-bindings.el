@@ -335,6 +335,7 @@
       :desc "Surrond With" "{"    (lambda! (sp-rewrap-sexp (dc--get-sp-pair "{")))
       :desc "Surrond With" "("    (lambda! (sp-rewrap-sexp (dc--get-sp-pair "(")))
       :desc "Surrond With" "\""   (lambda! (sp-rewrap-sexp (dc--get-sp-pair "\"")))
+      :desc "Open Notes"   "N"    (lambda! (dc-open-in-workspace "Notes" notes-dir))
 
       (:prefix ("r" . "Replace line")
         :desc "custom" "c" (lambda!
@@ -434,9 +435,18 @@
           :desc "Cancel"         "x" #'org-clock-cancel
           :desc "Goto last"      "g" #'counsel-org-clock-goto
           :desc "Select recent"  "G" #'counsel-org-clock-history))
+
+      (:prefix ("n" . "Reference Notes")
+        :desc "Open Index" "i"  (lambda! (dc-open-in-workspace
+                                    "References" refs-bib))
         :desc "Ebib" "e" #'arg-ebib-open-bibtex-file
+        :desc "Open Reference" "r" (lambda! (dc-open-in-workspace
+                                       "References" refs-pdfs))
         :desc "Go to Note" "g" (lambda! (dc-open-org-file-in-workspace
                                              "References" refs-notes))
+        :desc "Open reading list" "l" (lambda! (dc-open-in-workspace
+                                          "References"
+                                          (concat refs-notes "readinglist.org")))
         :desc "Deft" "d" (lambda! (dc-run-deft-in-workspace
                              "References" refs-notes)))
 
