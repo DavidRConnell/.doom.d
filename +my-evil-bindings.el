@@ -314,7 +314,8 @@
                      (t (shell))))
       "<"    #'counsel-switch-to-shell-buffer
 
-      :desc "journal" "j"    (lambda! (dc-open-in-workspace "Journal" "~/journal"))
+      :desc "journal" "j"    (lambda! (dc-run-deft-in-workspace
+                                 "Journal" "~/journal/"))
 
       "s"    #'doom/open-scratch-buffer
       :desc "Find file on server" "S" #'dc-find-file-on-server
@@ -422,6 +423,8 @@
         :desc "Go to org file" "g"  #'dc-open-org-file
         :desc "Org store link" "l"  #'org-store-link
         :desc "View search"    "v"  #'org-search-view
+        :desc "Deft"           "d"  (lambda! (dc-run-deft-in-workspace
+                                        "Org" org-directory))
         (:prefix ("c" . "Clock")
           :desc "Pomodoro timer" "p" #'org-pomodoro
           :desc "Clock in"       "c" (lambda! (org-clock-in '(4)))
@@ -431,6 +434,9 @@
           :desc "Goto last"      "g" #'counsel-org-clock-goto
           :desc "Select recent"  "G" #'counsel-org-clock-history))
         :desc "Ebib" "e" #'arg-ebib-open-bibtex-file
+        :desc "Deft" "d" (lambda! (dc-run-deft-in-workspace
+                             "References" refs-notes)))
+
       (:prefix ("d" . "Define")
         :desc "Define at point"  "d" #'define-word-at-point
         :desc "Define any word"  "D" #'define-word

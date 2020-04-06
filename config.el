@@ -74,7 +74,16 @@
   (setq ebib-notes-template "#+TITLE:%t\n#+AUTHOR:%A\n#+CUSTOM_ID:%K\ncite:%K\n\n>|<"))
 
 (after! deft
-  (setq deft-directory notes-dir))
+  (setq deft-directory refs-notes)
+  (setq deft-extensions '("org"))
+  (map! :map 'deft-mode-map
+        :i "C-o" #'deft-open-file-other-window
+        :i "C-w" #'deft-filter-decrement-word
+        :i "C-n" #'next-line
+        :i "C-p" #'previous-line))
+
+(after! org-roam
+  (setq org-roam-directory refs-notes))
 
 (setq-hook! 'display-line-numbers-mode-hook
   display-line-numbers 'relative)
