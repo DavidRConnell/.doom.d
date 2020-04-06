@@ -420,7 +420,8 @@
         :desc "Todo list"      "t"  #'org-todo-list
         :desc "Tags search"    "m"  #'org-tags-view
         :desc "Org capture"    "x"  #'counsel-org-capture
-        :desc "Go to org file" "g"  #'dc-open-org-file
+        :desc "Go to org file" "g"  (lambda! (dc-open-org-file-in-workspace
+                                        "Org" org-directory))
         :desc "Org store link" "l"  #'org-store-link
         :desc "View search"    "v"  #'org-search-view
         :desc "Deft"           "d"  (lambda! (dc-run-deft-in-workspace
@@ -434,6 +435,8 @@
           :desc "Goto last"      "g" #'counsel-org-clock-goto
           :desc "Select recent"  "G" #'counsel-org-clock-history))
         :desc "Ebib" "e" #'arg-ebib-open-bibtex-file
+        :desc "Go to Note" "g" (lambda! (dc-open-org-file-in-workspace
+                                             "References" refs-notes))
         :desc "Deft" "d" (lambda! (dc-run-deft-in-workspace
                              "References" refs-notes)))
 

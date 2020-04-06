@@ -76,17 +76,25 @@ If FILE is a directory search with `counsel-find-file'"
       (counsel-find-file file)
     (find-file file)))
 
-(defun dc-open-org-file ()
-  "Open org file in org-directory."
+(defun dc-run-deft-in-workspace (name directory)
+  "Run deft over DIRECTORY in workspace NAME, creating it if necessary"
+  (progn (if (not (+workspace-exists-p name))
+             (+workspace-new name))
+         (+workspace-switch name)
+         (setq deft-directory directory)
+         (call-interactively #'deft)))
+
+(defun dc-open-org-file-in-workspace (name directory)
+  "Open org file from DIRECTORY in workspace NAME, creating it if necessary."
   (interactive)
-  (if (not (+workspace-exists-p "Org"))
-      (+workspace-new "Org"))
-  (+workspace-switch "Org")
+  (if (not (+workspace-exists-p name))
+      (+workspace-new name))
+  (+workspace-switch name)
 
   (let ((file (completing-read "Open file: "
-                               (directory-files org-directory)
+                               (directory-files directory)
                                #'(lambda (f) (string= (file-name-extension f) "org")))))
-    (find-file (concat org-directory file))))
+    (find-file (concat directory file))))
 
 (defun dc-find-file-on-server ()
   (interactive)
