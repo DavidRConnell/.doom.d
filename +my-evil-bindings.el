@@ -416,7 +416,7 @@
         :desc "toggle langcheck" "g" #'langtool-check
         :desc "list errors"      "l" #'counsel-flycheck)
 
-      (:prefix ("t" . "Org-mode")
+      (:prefix ("t" . "Todo")
         :desc "Agenda"         "a"  #'org-agenda
         :desc "Todo list"      "t"  #'org-todo-list
         :desc "Tags search"    "m"  #'org-tags-view
