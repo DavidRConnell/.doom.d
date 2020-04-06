@@ -110,53 +110,53 @@
    :desc "Top layer key map" "K" #'which-key-show-top-level
    :desc "External info manuals" "C-i" (lambda! (dc-find-external-manual "~/info")))
 
- :m  "]a"    #'evil-forward-arg
- :m  "[a"    #'evil-backward-arg
- :m  "]o"    #'outline-next-visible-heading
- :m  "[o"    #'outline-previous-visible-heading
- :n  "}"     #'next-buffer
- :n  "{"     #'previous-buffer
- :n  "zx"    #'kill-this-buffer
- :n  "ZX"    #'bury-buffer
- :n  "gp"    #'+evil/reselect-paste
- :n  "g="    #'widen
- :v  "g="    #'+evil:narrow-buffer
- :nv "z="    #'flyspell-correct-at-point
- :nv "g@"    #'+evil:apply-macro
- :nv "Q"     #'+evil:apply-macro
- :nv "C-q"   #'evil-execute-macro
- :nv "gx"    #'evil-exchange
- :nv "gK"    #'+lookup/documentation
- :nv "gc"    #'dc-comment-line-operator
- :nv "gr"    #'dc-apply-ex-substitute-word
- :nv "gR"    #'dc-apply-ex-substitute-WORD
- :nv "gk"    #'dc-apply-ex-substitute-custom
- :nv "C-a"   #'evil-numbers/inc-at-pt
- :nv "C-S-a" #'evil-numbers/dec-at-pt
- :v  "gp"    #'+evil/paste-preserve-register
- :v  "@"     #'+evil:apply-macro
- :v  "."     #'+evil:apply-macro
- :v  "<"     #'+evil/visual-dedent
- :v  ">"     #'+evil/visual-indent
- :nv "j"     #'evil-next-visual-line
- :nv "gj"    #'join-line
- :nv "k"     #'evil-previous-visual-line
- :nv "H"     #'evil-first-non-blank
- :nv "L"     #'evil-end-of-line
- :nv "K"     #'evil-scroll-line-up
- :nv "J"     #'evil-scroll-line-down
- :nv "C-j"    #'avy-goto-line-below
- :nv "C-k"    #'avy-goto-line-above
- :nv "C-'"   #'counsel-evil-registers
- :nv "C-m"   #'evil-goto-mark
- :nv "M"     #'counsel-evil-marks
- :nv "ZZ"    #'save-buffers-kill-terminal
- :nv "/"     #'arg-swiper-isearch
- :nv "?"     #'arg-backward-swiper-isearch
- :nv "gn"    #'arg-at-point-swiper-isearch
- :nvi "M-/"  #'ace-link
- :nvi "C-u"  #'universal-argument
- :nv "U"     #'undo-tree-visualize
+ :m   "]a"      #'evil-forward-arg
+ :m   "[a"      #'evil-backward-arg
+ :m   "]o"      #'outline-next-visible-heading
+ :m   "[o"      #'outline-previous-visible-heading
+ :n   "}"       #'next-buffer
+ :n   "{"       #'previous-buffer
+ :n   "zx"      #'kill-this-buffer
+ :n   "ZX"      #'bury-buffer
+ :n   "gp"      #'+evil/reselect-paste
+ :n   "g="      #'widen
+ :v   "g="      #'+evil:narrow-buffer
+ :nv  "z="      #'flyspell-correct-at-point
+ :nv  "g@"      #'+evil:apply-macro
+ :nv  "Q"       #'+evil:apply-macro
+ :nv  "C-q"     #'evil-execute-macro
+ :nv  "gx"      #'evil-exchange
+ :nv  "gK"      #'+lookup/documentation
+ :nv  "gc"      #'dc-comment-line-operator
+ :nv  "gr"      #'dc-apply-ex-substitute-word
+ :nv  "gR"      #'dc-apply-ex-substitute-WORD
+ :nv  "gk"      #'dc-apply-ex-substitute-custom
+ :nv  "C-a"     #'evil-numbers/inc-at-pt
+ :nv  "C-S-a"   #'evil-numbers/dec-at-pt
+ :v   "gp"      #'+evil/paste-preserve-register
+ :v   "@"       #'+evil:apply-macro
+ :v   "."       #'+evil:apply-macro
+ :v   "<"       #'+evil/visual-dedent
+ :v   ">"       #'+evil/visual-indent
+ :nv  "j"       #'evil-next-visual-line
+ :nv  "gj"      #'join-line
+ :nv  "k"       #'evil-previous-visual-line
+ :nv  "H"       #'evil-first-non-blank
+ :nv  "L"       #'evil-end-of-line
+ :nv  "K"       #'evil-scroll-line-up
+ :nv  "J"       #'evil-scroll-line-down
+ :nv  "C-j"     #'avy-goto-line-below
+ :nv  "C-k"     #'avy-goto-line-above
+ :nv  "C-'"     #'counsel-evil-registers
+ :nv  "C-m"     #'evil-goto-mark
+ :nv  "M"       #'counsel-evil-marks
+ :nv  "ZZ"      #'save-buffers-kill-terminal
+ :nv  "/"       #'arg-swiper-isearch
+ :nv  "?"       #'arg-backward-swiper-isearch
+ :nv  "gn"      #'arg-at-point-swiper-isearch
+ :nvi "M-/"     #'ace-link
+ :nvi "C-u"     #'universal-argument
+ :nv  "U"       #'undo-tree-visualize
  :nvi "C-c C-r" #'ivy-resume
 
  ;; Use C-s (snipe) instead of C-t becaulse C-t is my stumpwm key
@@ -166,10 +166,10 @@
 
  :nvm "C-f" #'avy-goto-char-in-line
  :nvm "C-/" #'avy-goto-char-2
- :m "C-e" #'+evil/easymotion  ; lazy-load `evil-easymotion'
+ :m   "C-e" #'+evil/easymotion  ; lazy-load `evil-easymotion'
 
- :o "j" #'evilem-motion-next-line
- :o "k" #'evilem-motion-previous-line
+ :o "j"   #'evilem-motion-next-line
+ :o "k"   #'evilem-motion-previous-line
  :o "C-w" #'evilem-motion-forward-word-begin
  :o "C-e" #'evilem-motion-forward-word-end
  :o "C-b" #'evilem-motion-backward-word-begin
@@ -276,9 +276,9 @@
       (:when (featurep! :editor format)
         :n "gQ" #'+format:region)
       (:when (featurep! :editor snippets)
-        :i "C-a" #'aya-expand
+        :i  "C-a" #'aya-expand
         :nv "C-a" #'aya-create
-        :i "C-s" #'yas-expand))
+        :i  "C-s" #'yas-expand))
 
 (map! :leader
       "w"    #'save-buffer
@@ -368,27 +368,27 @@
           :desc "Jump to next hunk"         "n"   #'git-gutter:next-hunk
           :desc "Jump to previous hunk"     "N"   #'git-gutter:previous-hunk)
         (:when (featurep! :tools magit)
-          :desc "status" "s" #'magit-status
-          :desc "add" "a" #'magit-stage-file
-          :desc "add all" "A" #'magit-stage-modified
-          :desc "unstage" "u" #'magit-unstage-file
-          :desc "file log" "l" #'magit-log-buffer-file
-          :desc "branch log" "L" #'magit-log-current
-          :desc "commit" "c" #'magit-commit-create
-          :desc "diff" "d" #'magit-diff-buffer-file
+          :desc "status"        "s" #'magit-status
+          :desc "add"           "a" #'magit-stage-file
+          :desc "add all"       "A" #'magit-stage-modified
+          :desc "unstage"       "u" #'magit-unstage-file
+          :desc "file log"      "l" #'magit-log-buffer-file
+          :desc "branch log"    "L" #'magit-log-current
+          :desc "commit"        "c" #'magit-commit-create
+          :desc "diff"          "d" #'magit-diff-buffer-file
           :desc "diff worktree" "D" #'magit-diff-working-tree
-          :desc "checkout" "b" #'magit-branch-or-checkout
+          :desc "checkout"      "b" #'magit-branch-or-checkout
           :desc "Browse remote" "B" #'forge-browse-remote
           (:prefix ("S" . "stash")
-            :desc "pop" "P" #'magit-stash-pop
-            :desc "push" "p" #'magit-stash-worktree
-            :desc "list" "l" #'magit-stash-list
-            :desc "show" "s" #'magit-stash-show
-            :desc "drop" "d" #'magit-stash-drop
+            :desc "pop"    "P" #'magit-stash-pop
+            :desc "push"   "p" #'magit-stash-worktree
+            :desc "list"   "l" #'magit-stash-list
+            :desc "show"   "s" #'magit-stash-show
+            :desc "drop"   "d" #'magit-stash-drop
             :desc "branch" "b" #'magit-stash-branch)))
 
       (:prefix ("M" . "Mail")
-        :desc "Go to mail" "g" #'=mu4e
+        :desc "Go to mail"   "g" #'=mu4e
         :desc "Compose mail" "c" #'mu4e-compose-new)
 
       (:prefix ("C" . "Code checking")
@@ -408,25 +408,17 @@
         :desc "View search"    "v"  #'org-search-view
         (:prefix ("c" . "Clock")
           :desc "Pomodoro timer" "p" #'org-pomodoro
-          :desc "Clock in" "c" (lambda! (org-clock-in '(4)))
-          :desc "Clock out" "C" #'org-clock-out
-          :desc "Clock in last" "l" #'org-clock-in-last
-          :desc "Cancel" "x" #'org-clock-cancel
-          :desc "Goto last" "g" #'counsel-org-clock-goto
-          :desc "Select recent" "G" #'counsel-org-clock-history))
-
-      (:prefix ("n" . "Notes")
-        :desc "Open Index" "i"  (lambda! (dc-open-in-workspace "Notes" refs-bibs))
-        :desc "Open Reference" "r" (lambda! (dc-open-in-workspace "Notes" refs-pdfs))
-        :desc "Open Notes" "o" (lambda! (dc-open-in-workspace "Notes" refs-notes))
-        :desc "Go to Note" "g" (lambda! (dc-open-in-workspace "Notes" notes-dir))
-        :desc "Deft" "d" #'deft)
-
-      (:prefix ("d" . "Dictionary")
-        :desc "Define at point"     "d" #'define-word-at-point
-        :desc "Define any word"     "D" #'define-word
-        :desc "Thesaurus"           "t" #'powerthesaurus-lookup-word-dwim
+          :desc "Clock in"       "c" (lambda! (org-clock-in '(4)))
+          :desc "Clock out"      "C" #'org-clock-out
+          :desc "Clock in last"  "l" #'org-clock-in-last
+          :desc "Cancel"         "x" #'org-clock-cancel
+          :desc "Goto last"      "g" #'counsel-org-clock-goto
+          :desc "Select recent"  "G" #'counsel-org-clock-history))
+      (:prefix ("d" . "Define")
+        :desc "Define at point"  "d" #'define-word-at-point
+        :desc "Define any word"  "D" #'define-word
+        :desc "Thesaurus"        "t" #'powerthesaurus-lookup-word-dwim
         :desc "Wordnut at point" "w" #'wordnut-lookup-current-word
-        :desc "Wordnut search " "W" #'wordnut-search
-        :desc "Biblio lookup" "b" #'biblio-lookup
-        :desc "Search duck" "s" #'counsel-search))
+        :desc "Wordnut search"   "W" #'wordnut-search
+        :desc "Biblio lookup"    "b" #'biblio-lookup
+        :desc "Search duck"      "s" #'counsel-search))
