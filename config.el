@@ -41,7 +41,8 @@
 (defvar notes-dir "~/notes/")
 (defvar refs-notes (concat notes-dir  "refs/"))
 (defvar refs-pdfs "~/References/")
-(defvar refs-bibs (concat notes-dir "bibs/"))
+(defvar refs-bib (concat refs-notes "index.bib"))
+
 (after! ebib
   (setq ebib-notes-directory refs-notes)
   (setq ebib-reading-list-file (concat refs-notes "readinglist.org"))

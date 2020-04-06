@@ -258,13 +258,11 @@ right sequence."
   (setq org-ref-completion-library 'org-ref-ivy-cite)
   (setq org-ref-default-ref-type "cref")
   (setq org-ref-bibliography-notes refs-notes)
-  (setq org-ref-default-bibliography
-        (directory-files refs-bibs t (rx ".bib")))
+  (setq org-ref-default-bibliography refs-bib)
   (setq org-ref-pdf-directory refs-pdfs))
 
 (after! bibtex
-  (setq bibtex-completion-bibliography
-        (directory-files refs-bibs t (rx ".bib")))
+  (setq bibtex-completion-bibliography refs-bib)
   (setq bibtex-completion-library-path refs-pdfs)
   (setq bibtex-completion-notes-path refs-notes)
   (setq bibtex-completion-pdf-open-function
