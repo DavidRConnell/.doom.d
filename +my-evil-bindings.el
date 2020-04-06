@@ -59,6 +59,22 @@
 (dc--select-function-with-universal-arg arg-at-point-swiper-isearch
                                         #'swiper-thing-at-point
                                         #'swiper-isearch-thing-at-point)
+(dc--select-function-with-universal-arg arg-ebib-open-bibtex-file
+                                        (lambda! (ebib refs-bib))
+                                        (lambda! (let* ((file-list
+                                                   (cl-remove-if-not
+                                                    (lambda (x) (string=
+                                                            (file-name-extension x)
+                                                            "bib"))
+                                                    (directory-files ".")))
+                                                  (file (cond ((eq (length file-list) 0)
+                                                               (error "No bib files in current directory"))
+                                                              ((eq (length file-list) 1)
+                                                               (first file-list))
+                                                              (t
+                                                               (completing-read "Bib: "
+                                                                                file-list)))))
+                                             (ebib (expand-file-name file)))))
 
 ;;
 ;;; Global evil keybinds
@@ -414,6 +430,7 @@
           :desc "Cancel"         "x" #'org-clock-cancel
           :desc "Goto last"      "g" #'counsel-org-clock-goto
           :desc "Select recent"  "G" #'counsel-org-clock-history))
+        :desc "Ebib" "e" #'arg-ebib-open-bibtex-file
       (:prefix ("d" . "Define")
         :desc "Define at point"  "d" #'define-word-at-point
         :desc "Define any word"  "D" #'define-word

@@ -42,6 +42,35 @@
 (defvar refs-notes (concat notes-dir  "refs/"))
 (defvar refs-pdfs "~/References/")
 (defvar refs-bibs (concat notes-dir "bibs/"))
+(after! ebib
+  (setq ebib-notes-directory refs-notes)
+  (setq ebib-reading-list-file (concat refs-notes "readinglist.org"))
+  (setq ebib-default-directory refs-notes)
+  (setq ebib-file-associations '(("pdf" . "xdg-open")))
+
+  (defun dc-ebib-create-org-title (key db)
+    (replace-regexp-in-string "[\t\n ]+" " " (or (ebib-get-field-value "title" key db 'noerror 'unbraced 'xref)
+                    "(No Title)")))
+
+  (defun dc-ebib-create-org-author (key db)
+    (replace-regexp-in-string "[\t\n ]+ " " " (or (ebib-get-field-value "author" key db 'noerror 'unbraced 'xref)
+                     (ebib-get-field-value "editor" key db 'noerror 'unbraced 'xref)
+                     "(No Author)")))
+
+  (defun dc-ebib-create-org-identifier (key _)
+    key)
+
+  (setq ebib-notes-template-specifiers
+        '((?K . dc-ebib-create-org-identifier)
+          (?T . ebib-create-org-title)
+          (?t . dc-ebib-create-org-title)
+          (?A . dc-ebib-create-org-author)
+          (?L . ebib-create-org-link)
+          (?F . ebib-create-org-file-link)
+          (?D . ebib-create-org-doi-link)
+          (?U . ebib-create-org-url-link)))
+
+  (setq ebib-notes-template "#+TITLE:%t\n#+AUTHOR:%A\n#+CUSTOM_ID:%K\ncite:%K\n\n>|<"))
 
 (after! deft
   (setq deft-directory notes-dir))
