@@ -340,7 +340,7 @@
       (:prefix ("r" . "Replace line")
         :desc "custom" "c" (lambda!
                             (evil-ex
-                             (concat (dc--get-evil-ex-prefix) "s/\\<")))
+                             (concat (dc--get-evil-ex-prefix) "s/")))
 
         :desc "word" "w" (lambda!
                           (evil-ex
