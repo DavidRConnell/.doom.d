@@ -45,8 +45,8 @@
     ;; Scrolling lines
     "C-n"    #'next-line
     "C-p"    #'previous-line
-    "C-j"  #'scroll-up-command
-    "C-k"  #'scroll-down-command)
+    "C-j"    #'scroll-up-command
+    "C-k"    #'scroll-down-command)
 
   (define-key! :keymaps '(read-expression-map minibuffer-local-map)
     "C-n" #'next-line-or-history-element
@@ -249,7 +249,8 @@
         (:after ivy
           :map ivy-minibuffer-map
           "C-SPC" #'ivy-partial-or-done ; preview file
-          "C-l"   #'ivy-alt-done
+          "C-j"   #'ivy-alt-done
+          "C-k"   nil
           "C-r"   #'counsel-minibuffer-history
           "C-v"   #'yank
           "C-s"   #'ivy-mark
@@ -261,7 +262,7 @@
           "C-r"   #'counsel-shell-history
           :map counsel-ag-map
           "C-SPC"    #'ivy-partial-or-done ; preview
-          "C-l"      #'ivy-done
+          "C-j"      #'ivy-done
           "C-c C-e"  #'+ivy/woccur      ; search/replace on results
           [backtab]  #'+ivy/woccur      ; search/replace on results
           [C-return] #'+ivy/git-grep-other-window-action)
