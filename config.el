@@ -125,15 +125,24 @@
   (setq avy-timeout-seconds 0.75)
   (setq aw-keys '(?a ?o ?e ?u ?h ?t ?n ?s))
   (setq avy-flyspell-correct-function #'flyspell-correct-at-point)
+  (defun dc-avy-action-kill-move (pt)
+    "Kill sexp at PT and move there."
+    (goto-char pt)
+    (avy-forward-item)
+    (kill-region pt (point))
+    (message "Killed: %s" (current-kill 0))
+    (point)
+    (evil-insert-state))
+
   (setq avy-dispatch-alist
-        '((120 . avy-action-kill-move)
-          (88 . avy-action-kill-stay)
-          (?T . avy-action-teleport)
-          (109 . avy-action-mark)
-          (110 . avy-action-copy)
-          (121 . avy-action-yank)
-          (105 . avy-action-ispell)
-          (122 . avy-action-zap-to-char))))
+        '((?c . dc-avy-action-kill-move)
+          (?d . avy-action-kill-stay)
+          (?g . avy-action-teleport)
+          (?m . avy-action-mark)
+          (?n . avy-action-copy)
+          (?y . avy-action-yank)
+          (?i . avy-action-ispell)
+          (?z . avy-action-zap-to-char))))
 
 (after! yasnippet
   (map! :map yas-keymap
