@@ -274,7 +274,10 @@ right sequence."
 
 (after! bibtex
   (setq bibtex-completion-bibliography refs-bib)
-  (setq bibtex-completion-library-path refs-pdfs)
+  (setq bibtex-completion-library-path
+        (remove-if-not
+         (lambda (f) (find-lisp-file-predicate-is-directory f refs-pdfs))
+               (directory-files-recursively refs-pdfs "." 'dirs)))
   (setq bibtex-completion-notes-path refs-notes)
   (setq bibtex-completion-pdf-open-function
         (lambda (fpath) (call-process "xdg-open" nil 0 nil fpath))))
