@@ -254,17 +254,27 @@ right sequence."
   (ox-extras-activate '(ignore-headlines))
   (setq org-export-with-toc nil))
 
+(add-to-list 'org-file-apps '("\\.pdf\\'" . (lambda (_file link)
+                                              (call-process "xdg-open" nil 0 nil link))))
 (after! org-ref
   (org-ref-ivy-cite-completion)
   (setq org-ref-completion-library 'org-ref-ivy-cite)
   (setq org-ref-default-ref-type "cref")
   (setq org-ref-bibliography-notes refs-notes)
-  (setq org-ref-default-bibliography refs-bib)
-  (setq org-ref-pdf-directory refs-pdfs))
+  (setq org-ref-notes-function #'org-ref-notes-function-many-files)
+  (setq org-ref-default-bibliography (list refs-bib))
+  (setq org-ref-pdf-directory refs-pdfs)
+  (setq org-ref-get-pdf-filename-function
+        (lambda (key)
+          (let ((files (directory-files-recursively org-ref-pdf-directory
+                                                    (concat key ".pdf"))))
+               (if (= 1 (length files))
+                   (car files)
+                 (completing-read "Choose: " files))))))
 
 (after! bibtex
   (setq bibtex-completion-bibliography refs-bib)
   (setq bibtex-completion-library-path refs-pdfs)
   (setq bibtex-completion-notes-path refs-notes)
   (setq bibtex-completion-pdf-open-function
-        (lambda (fpath) (call-process "zathura" nil 0 nil fpath))))
+        (lambda (fpath) (call-process "xdg-open" nil 0 nil fpath))))
