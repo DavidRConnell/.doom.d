@@ -71,7 +71,7 @@
           (?D . ebib-create-org-doi-link)
           (?U . ebib-create-org-url-link)))
 
-  (setq ebib-notes-template "#+TITLE:%t\n#+AUTHOR:%A\n#+CUSTOM_ID:%K\ncite:%K\n\n>|<"))
+  (setq ebib-notes-template "#+TITLE: %t\n#+AUTHOR: %A\n#+CUSTOM_ID: %K\ncite:%K\n\n>|<"))
 
 (after! deft
   (setq deft-directory refs-notes)
