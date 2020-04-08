@@ -429,12 +429,11 @@
                                         "Org" org-directory))
         (:prefix ("c" . "Clock")
           :desc "Pomodoro timer" "p" #'org-pomodoro
-          :desc "Clock in"       "c" (lambda! (org-clock-in '(4)))
+          :desc "Clock in"       "c" #'counsel-org-clock-context
           :desc "Clock out"      "C" #'org-clock-out
           :desc "Clock in last"  "l" #'org-clock-in-last
           :desc "Cancel"         "x" #'org-clock-cancel
-          :desc "Goto last"      "g" #'counsel-org-clock-goto
-          :desc "Select recent"  "G" #'counsel-org-clock-history))
+          :desc "Goto last"      "g" #'counsel-org-clock-goto))
 
       (:prefix ("n" . "Reference Notes")
         :desc "Open Index" "i"  (lambda! (dc-open-in-workspace

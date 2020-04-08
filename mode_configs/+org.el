@@ -12,6 +12,7 @@
   (setq org-startup-truncated nil)
   (setq org-pretty-entities t)
 
+  (setq counsel-org-clock-default-action 'clock-in)
 
   (add-hook! 'org-mode-hook
              #'+org-pretty-mode

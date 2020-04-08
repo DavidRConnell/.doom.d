@@ -180,6 +180,9 @@
 (after! writeroom-mode
   (setq +zen-text-scale 0.5))
 
+(after! counsel-org-clock
+  (counsel-org-clock-rebuild-history))
+
 (add-to-list 'auto-mode-alist '("\\.svg\\'" . image-mode))
 
 (load-files-in (concat doom-private-dir "mode_keybindings"))
