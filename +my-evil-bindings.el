@@ -298,6 +298,20 @@
         :nv "C-a" #'aya-create
         :i  "C-s" #'yas-expand))
 
+(dc--select-function-with-universal-arg arg-define-word
+                                        #'define-word-at-point
+                                        (lambda (word)
+                                          (interactive "MWord: ")
+                                          (define-word word 'wordnik)))
+
+(dc--select-function-with-universal-arg arg-thesaurus-word
+                                        #'powerthesaurus-lookup-word-at-point
+                                        #'powerthesaurus-lookup-word)
+
+(dc--select-function-with-universal-arg arg-wordnut-word
+                                        #'wordnut-lookup-current-word
+                                        #'wordnut-search)
+
 (map! :leader
       "w"    #'save-buffer
       "q"    #'kill-this-buffer
@@ -452,10 +466,9 @@
                              "References" refs-notes)))
 
       (:prefix ("d" . "Define")
-        :desc "Define at point"  "d" #'define-word-at-point
-        :desc "Define any word"  "D" #'define-word
-        :desc "Thesaurus"        "t" #'powerthesaurus-lookup-word-dwim
-        :desc "Wordnut at point" "w" #'wordnut-lookup-current-word
-        :desc "Wordnut search"   "W" #'wordnut-search
+        :desc "Define at point"  "d" #'arg-define-word
+        :desc "Define any word"  "D" #'mw-thesaurus-lookup-at-point
+        :desc "Thesaurus"        "t" #'arg-thesaurus-word
+        :desc "Wordnut at point" "w" #'arg-wordnut-word
         :desc "Biblio lookup"    "b" #'biblio-lookup
         :desc "Search duck"      "s" #'counsel-search))
