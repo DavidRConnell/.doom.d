@@ -55,6 +55,8 @@
          (directory-files-recursively refs-pdfs "." 'dirs)))
   (setq ebib-file-associations '(("pdf" . "xdg-open")))
 
+  (doom-themes-set-faces nil
+    '(ebib-marked-face :foreground green))
 
   (map! :map 'ebib-index-mode-map
         "/" #'swiper)
@@ -190,6 +192,22 @@
   (add-hook 'text-mode-hook
             #'flyspell-mode
             #'flycheck-mode))
+
+(after! (:and flyspell doom-one-theme)
+  (doom-themes-set-faces nil
+  '(flyspell-incorrect :slant 'italic :foreground red :underline nil)
+  '(flyspell-duplicate :slant 'italic :foreground yellow :underline nil)))
+
+(after! (:and org-roam doom-one-theme)
+  (doom-themes-set-faces nil
+    '(org-roam-link :slant 'italic :underline t :foreground green)))
+
+(after! (:and writegood-mode doom-one-theme)
+  (doom-themes-set-faces nil
+  '(writegood-weasels-face :slant 'italic :foreground blue)
+  '(writegood-duplicates-face :slant 'italic :foreground orange))
+  (add-hook 'writegood-mode-hook
+            #'writegood-passive-voice-turn-off))
 
 (after! evil-surround
   (add-to-list 'evil-surround-pairs-alist
