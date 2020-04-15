@@ -51,6 +51,7 @@
 
        :term
        shell
+       vterm
 
        :checkers
        syntax              ; tasing you for every semicolon you forget

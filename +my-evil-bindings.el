@@ -312,6 +312,16 @@
                                         #'wordnut-lookup-current-word
                                         #'wordnut-search)
 
+(after! vterm
+  (add-hook! 'vterm-mode-hook
+             #'evil-emacs-state)
+
+  (map! :map 'vterm-mode-map
+        :n "a" #'evil-emacs-state
+        :n "i" #'evil-emacs-state
+        :nie "C-d" #'vterm-send-C-d
+        :e "C-g" #'evil-normal-state))
+
 (map! :leader
       "w"    #'save-buffer
       "q"    #'kill-this-buffer
@@ -324,10 +334,10 @@
       "-"    #'evil-numbers/dec-at-pt
       ","    (lambda (arg) (interactive "p")
                (cond ((= arg 4)
-                      (+shell/toggle))
+                      (call-interactively #'+vterm/toggle))
                      ((= arg 16)
-                      (+shell/here))
-                     (t (shell))))
+                      (call-interactively #'+vterm/here))
+                     (t (vterm))))
       "<"    #'counsel-switch-to-shell-buffer
 
       :desc "journal" "j"    (lambda! (dc-run-deft-in-workspace
