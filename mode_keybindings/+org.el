@@ -1,5 +1,8 @@
 ;;; +org.el --- description -*- lexical-binding: t; -*-
 
+(dc--select-function-with-universal-arg arg-org-insert-cite-link
+                                        #'org-ref-ivy-insert-cite-link
+                                        #'org-ref-insert-cite-with-completion)
 (map!
  (:after (org evil-org)
    (:map (org-mode-map evil-org-mode-map)
@@ -19,11 +22,11 @@
        (:prefix ("e" . "export")
          "l" #'org-ref-ivy-insert-label-link
          "r" #'org-ref-ivy-insert-ref-link
-         "c" #'org-ref-ivy-insert-cite-link
-         "C" #'org-ref-insert-cite-with-completion
-         "e" #'org-ref
-         "t" #'orgtex-insert-table
-         "f" #'orgtex-insert-figure)
+         "c" #'arg-org-insert-cite-link
+         "b" #'org-ref-insert-bibliography-link
+         "s" #'org-ref-insert-bibliographystyle-link
+         "i" #'org-ref-index
+         "e" #'org-ref)
        (:prefix "c"
          "p" #'org-pomodoro)
        (:prefix "l"
