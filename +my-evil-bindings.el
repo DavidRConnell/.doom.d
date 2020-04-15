@@ -106,13 +106,13 @@
  :i "C-j"           #'+default/newline    ; default behavior
 
  (:after help :map help-mode-map
-   :n "o"       #'ace-link-help)
+   :ni [return]       #'link-hint-open-link-at-point)
  (:after helpful :map helpful-mode-map
-   :n "o"       #'ace-link-help)
+   :ni [return]       #'link-hint-open-link-at-point)
  (:after info :map Info-mode-map
-   :n "o"       #'ace-link-info)
+   :ni [return]       #'link-hint-open-link-at-point)
  (:after apropos :map apropos-mode-map
-   :n "o"       #'ace-link-help
+   :ni [return] #'link-hint-open-link-at-point
    :n "TAB"     #'forward-button
    :n [tab]     #'forward-button
    :n [backtab] #'backward-button)
@@ -170,7 +170,7 @@
  :nv  "/"       #'arg-swiper-isearch
  :nv  "?"       #'arg-backward-swiper-isearch
  :nv  "gn"      #'arg-at-point-swiper-isearch
- :nvi "M-/"     #'ace-link
+ :nvi "M-/"     #'link-hint-open-link
  :nvi "C-u"     #'universal-argument
  :nv  "U"       #'undo-tree-visualize
  :nvi "C-c C-r" #'ivy-resume
