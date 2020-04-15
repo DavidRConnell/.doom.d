@@ -47,6 +47,7 @@
   (setq ebib-notes-directory refs-notes)
   (setq ebib-reading-list-file (concat refs-notes "readinglist.org"))
   (setq ebib-default-directory refs-notes)
+  (setq ebib-keywords-file (concat refs-notes ".keywords.txt"))
   (setq ebib-file-associations '(("pdf" . "xdg-open")))
 
   (defun dc-ebib-create-org-title (key db)
