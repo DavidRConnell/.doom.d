@@ -81,16 +81,20 @@
     key)
 
   (setq ebib-notes-template-specifiers
-        '((?K . dc-ebib-create-org-identifier)
+        '((?K . ebib-create-org-identifier)
+          (?k . dc-ebib-create-org-identifier)
           (?T . ebib-create-org-title)
           (?t . dc-ebib-create-org-title)
           (?A . dc-ebib-create-org-author)
           (?L . ebib-create-org-link)
           (?F . ebib-create-org-file-link)
           (?D . ebib-create-org-doi-link)
-          (?U . ebib-create-org-url-link)))
+          (?U . ebib-create-org-url-link)
+          (?M . ebib-reading-list-todo-marker)))
+  (setq ebib-reading-list-template-specifiers ebib-notes-template-specifiers)
 
-  (setq ebib-notes-template "#+TITLE: %t\n#+AUTHOR: %A\n#+CUSTOM_ID: %K\ncite:%K\n\n>|<"))
+  (setq ebib-reading-list-template "* %M [[file:%k.org][%A: %t]]\n:PROPERTIES:\n:Custom_id: %k\n:END:\n")
+  (setq ebib-notes-template "#+TITLE: %t\n#+AUTHOR: %A\n#+CUSTOM_ID: %k\ncite:%k\n\n>|<"))
 
 (after! deft
   (setq deft-extensions '("org"))
