@@ -55,6 +55,10 @@
          (directory-files-recursively refs-pdfs "." 'dirs)))
   (setq ebib-file-associations '(("pdf" . "xdg-open")))
 
+
+  (map! :map 'ebib-index-mode-map
+        "/" #'swiper)
+
   (defun dc-ebib-create-org-title (key db)
     (replace-regexp-in-string "[\t\n ]+"
                               " "
