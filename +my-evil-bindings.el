@@ -462,18 +462,19 @@
           :desc "Goto last"      "g" #'counsel-org-clock-goto))
 
       (:prefix ("n" . "Reference Notes")
-        :desc "Open Index" "i"  (lambda! (dc-open-in-workspace
-                                    "References" refs-bib))
-        :desc "Ebib" "e" #'arg-ebib-open-bibtex-file
-        :desc "Open Reference" "r" (lambda! (dc-open-in-workspace
-                                       "References" refs-pdfs))
-        :desc "Go to Note" "g" (lambda! (dc-open-org-file-in-workspace
-                                             "References" refs-notes))
+        :desc "Ebib"              "e" #'arg-ebib-open-bibtex-file
+        :desc "bibtex"            "b" #'ivy-bibtex
+        :desc "Open Index"        "i" (lambda! (dc-open-in-workspace
+                                                "References" refs-bib))
+        :desc "Open Reference"    "r" (lambda! (dc-open-in-workspace
+                                                "References" refs-pdfs))
+        :desc "Go to Note"        "g" (lambda! (dc-open-org-file-in-workspace
+                                                "References" refs-notes))
         :desc "Open reading list" "l" (lambda! (dc-open-in-workspace
-                                          "References"
-                                          (concat refs-notes "readinglist.org")))
-        :desc "Deft" "d" (lambda! (dc-run-deft-in-workspace
-                             "References" refs-notes)))
+                                                "References"
+                                                (concat refs-notes "readinglist.org")))
+        :desc "Deft"              "d" (lambda! (dc-run-deft-in-workspace
+                                                "References" refs-notes)))
 
       (:prefix ("d" . "Define")
         :desc "Define at point"  "d" #'arg-define-word
