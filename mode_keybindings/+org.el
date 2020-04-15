@@ -3,6 +3,12 @@
 (dc--select-function-with-universal-arg arg-org-insert-cite-link
                                         #'org-ref-ivy-insert-cite-link
                                         #'org-ref-insert-cite-with-completion)
+
+(dc--select-function-with-universal-arg arg-langtool-check
+                                        (lambda! (evil-visual-char)
+                                           (evil-org-inner-subtree)
+                                           (langtool-check-buffer))
+                                        #'langtool-check-buffer)
 (map!
  (:after (org evil-org)
    (:map (org-mode-map evil-org-mode-map)
@@ -29,6 +35,10 @@
          "e" #'org-ref)
        (:prefix "c"
          "p" #'org-pomodoro)
+       (:prefix ("G" . "grammar check")
+         "r" #'arg-langtool-check
+         "c" #'langtool-correct-buffer
+         "d" #'langtool-check-done)
        (:prefix "l"
          "h" #'counsel-org-link))))
 
