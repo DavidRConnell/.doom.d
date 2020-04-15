@@ -50,13 +50,20 @@
   (setq ebib-file-associations '(("pdf" . "xdg-open")))
 
   (defun dc-ebib-create-org-title (key db)
-    (replace-regexp-in-string "[\t\n ]+" " " (or (ebib-get-field-value "title" key db 'noerror 'unbraced 'xref)
+    (replace-regexp-in-string "[\t\n ]+"
+                              " "
+                              (or (ebib-get-field-value
+                                   "title" key db 'noerror 'unbraced 'xref)
                     "(No Title)")))
 
   (defun dc-ebib-create-org-author (key db)
-    (replace-regexp-in-string "[\t\n ]+ " " " (or (ebib-get-field-value "author" key db 'noerror 'unbraced 'xref)
-                     (ebib-get-field-value "editor" key db 'noerror 'unbraced 'xref)
-                     "(No Author)")))
+    (replace-regexp-in-string "[\t\n ]+ "
+                              " "
+                              (or (ebib-get-field-value
+                                   "author" key db 'noerror 'unbraced 'xref)
+                                  (ebib-get-field-value
+                                   "editor" key db 'noerror 'unbraced 'xref)
+                                  "(No Author)")))
 
   (defun dc-ebib-create-org-identifier (key _)
     key)
