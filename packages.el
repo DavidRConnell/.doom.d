@@ -12,7 +12,6 @@
 (package! matlab-mode)
 (package! flycheck-julia)
 (package! ripgrep)
-(package! ace-link)
 (package! function-args)
 (package! wordnut)
 (package! ebib)
