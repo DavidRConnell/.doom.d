@@ -48,6 +48,11 @@
   (setq ebib-reading-list-file (concat refs-notes "readinglist.org"))
   (setq ebib-default-directory refs-notes)
   (setq ebib-keywords-file (concat refs-notes ".keywords.txt"))
+  (setq ebib-notes-show-note-method nil)
+  (setq ebib-file-search-dirs
+        (remove-if-not
+         (lambda (f) (find-lisp-file-predicate-is-directory f refs-pdfs))
+         (directory-files-recursively refs-pdfs "." 'dirs)))
   (setq ebib-file-associations '(("pdf" . "xdg-open")))
 
   (defun dc-ebib-create-org-title (key db)
