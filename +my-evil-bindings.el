@@ -172,8 +172,8 @@
  :i   "C-u"     #'doom/backward-kill-to-bol-and-indent
  :nv  "U"       #'undo-tree-visualize
  :nvi "C-c C-r" #'ivy-resume
- :nvm   "C-n"     #'evil-next-line
- :nvm   "C-p"     #'evil-previous-line
+ :nvm "C-n"     #'evil-next-line
+ :nvm "C-p"     #'evil-previous-line
 
  ;; Use C-s (snipe) instead of C-t becaulse C-t is my stumpwm key
  :nvm "C-s" (lambda! ; make exclusive (more like till than from)

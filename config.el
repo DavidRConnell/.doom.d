@@ -66,7 +66,7 @@
                               " "
                               (or (ebib-get-field-value
                                    "title" key db 'noerror 'unbraced 'xref)
-                    "(No Title)")))
+                                  "(No Title)")))
 
   (defun dc-ebib-create-org-author (key db)
     (replace-regexp-in-string "[\t\n ]+ "

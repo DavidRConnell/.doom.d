@@ -23,7 +23,7 @@
 
   (setq org-enforce-todo-dependencies t)
   (add-hook! 'org-todo-repeat-hook
-            #'org-reset-subtasks)
+             #'org-reset-subtasks)
 
   (defun org-reset-subtasks ()
     (save-restriction
