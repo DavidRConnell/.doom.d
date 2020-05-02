@@ -168,7 +168,8 @@
  :nv  "?"       #'arg-backward-swiper-isearch
  :nv  "gn"      #'arg-at-point-swiper-isearch
  :nvi "M-/"     #'link-hint-open-link
- :nvi "C-u"     #'universal-argument
+ :nv  "C-u"     #'universal-argument
+ :i   "C-u"     #'doom/backward-kill-to-bol-and-indent
  :nv  "U"       #'undo-tree-visualize
  :nvi "C-c C-r" #'ivy-resume
  :nvm   "C-n"     #'evil-next-line
