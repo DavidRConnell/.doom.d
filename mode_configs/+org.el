@@ -271,23 +271,43 @@ right sequence."
   (setq org-ref-completion-library 'org-ref-ivy-cite)
   (setq org-ref-default-ref-type "cref")
   (setq org-ref-bibliography-notes refs-notes)
-  (setq org-ref-notes-function #'org-ref-notes-function-many-files)
+  (setq org-ref-notes-function (lambda (key)
+                                 (interactive)
+                                 (dc-goto-or-create-workspace "References")
+                                 (org-ref-notes-function-many-files key)))
+
   (setq org-ref-default-bibliography (list refs-bib))
   (setq org-ref-pdf-directory refs-pdfs)
   (setq org-ref-get-pdf-filename-function
         (lambda (key)
           (let ((files (directory-files-recursively org-ref-pdf-directory
                                                     (concat key ".pdf"))))
-               (if (= 1 (length files))
-                   (car files)
-                 (completing-read "Choose: " files))))))
+            (if (= 1 (length files))
+                (car files)
+              (completing-read "Choose: " files)))))
+
+  (defun org-ref-open-pdf-at-point (arg)
+    "Open the pdf for bibtex key under point if it exists.
+Redefined so pdf is opened in emacs when prefed with `\\[universal-argument]'
+instead externally"
+    (interactive "p")
+    (let* ((results (org-ref-get-bibtex-key-and-file))
+           (key (car results))
+           (pdf-file (funcall org-ref-get-pdf-filename-function key)))
+      (if (file-exists-p pdf-file)
+          (if (= arg 1)
+              (org-open-file pdf-file)
+            (org-open-file pdf-file 'open-in-emacs))
+        (message "no pdf found for %s" key)))))
 
 (after! bibtex
+  (require 'find-lisp)
   (setq bibtex-completion-bibliography refs-bib)
+  (setq bibtex-completion-additional-search-fields '(keywords))
   (setq bibtex-completion-library-path
         (remove-if-not
          (lambda (f) (find-lisp-file-predicate-is-directory f refs-pdfs))
-               (directory-files-recursively refs-pdfs "." 'dirs)))
+         (directory-files-recursively refs-pdfs "." 'dirs)))
   (setq bibtex-completion-notes-path refs-notes)
   (setq bibtex-completion-pdf-open-function
-        (lambda (fpath) (call-process "xdg-open" nil 0 nil fpath))))
+        (lambda (fpath) (call-process "xdg-open" nil 0 nil fpath)))
