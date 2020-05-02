@@ -64,13 +64,17 @@
   "Get pair in format for use with sp-rewrap sexp."
   (--first (equal prefix (car it)) (sp--get-pair-list-context 'wrap)))
 
+(defun dc-goto-or-create-workspace (name)
+  "Go to workspace NAME; if it doesn't exist already create it first."
+  (if (not (+workspace-exists-p name))
+           (+workspace-new name))
+  (+workspace-switch name))
+
 (defun dc-open-in-workspace (name file)
   "Open FILE in the workspace NAME creating it if it doesn't already exist.
 If FILE is a directory search with `counsel-find-file'"
   (interactive)
-  (if (not (+workspace-exists-p name))
-      (+workspace-new name))
-  (+workspace-switch name)
+  (dc-goto-or-create-workspace name)
 
   (if (file-directory-p file)
       (counsel-find-file file)
@@ -78,18 +82,14 @@ If FILE is a directory search with `counsel-find-file'"
 
 (defun dc-run-deft-in-workspace (name directory)
   "Run deft over DIRECTORY in workspace NAME, creating it if necessary"
-  (progn (if (not (+workspace-exists-p name))
-             (+workspace-new name))
-         (+workspace-switch name)
+  (progn (dc-goto-or-create-workspace name)
          (setq deft-directory directory)
          (call-interactively #'deft)))
 
 (defun dc-open-org-file-in-workspace (name directory)
   "Open org file from DIRECTORY in workspace NAME, creating it if necessary."
   (interactive)
-  (if (not (+workspace-exists-p name))
-      (+workspace-new name))
-  (+workspace-switch name)
+  (dc-goto-or-create-workspace name)
 
   (let ((file (completing-read "Open file: "
                                (directory-files directory)
@@ -98,9 +98,7 @@ If FILE is a directory search with `counsel-find-file'"
 
 (defun dc-find-file-on-server ()
   (interactive)
-  (if (not (+workspace-exists-p "Server"))
-      (+workspace-new "Server"))
-  (+workspace-switch "Server")
+  (dc-goto-or-create-workspace "Server")
 
   (counsel-find-file "/ssh:"))
 

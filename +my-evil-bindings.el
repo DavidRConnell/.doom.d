@@ -59,22 +59,26 @@
 (dc--select-function-with-universal-arg arg-at-point-swiper-isearch
                                         #'swiper-thing-at-point
                                         #'swiper-isearch-thing-at-point)
-(dc--select-function-with-universal-arg arg-ebib-open-bibtex-file
-                                        (lambda! (ebib refs-bib))
-                                        (lambda! (let* ((file-list
-                                                   (cl-remove-if-not
-                                                    (lambda (x) (string=
-                                                            (file-name-extension x)
-                                                            "bib"))
-                                                    (directory-files ".")))
-                                                  (file (cond ((eq (length file-list) 0)
-                                                               (error "No bib files in current directory"))
-                                                              ((eq (length file-list) 1)
-                                                               (first file-list))
-                                                              (t
-                                                               (completing-read "Bib: "
-                                                                                file-list)))))
-                                             (ebib (expand-file-name file)))))
+
+(dc--select-function-with-universal-arg
+ arg-ebib-open-bibtex-file
+ (lambda! (dc-goto-or-create-workspace "References")
+    (ebib refs-bib))
+ (lambda! (let* ((file-list
+            (cl-remove-if-not
+             (lambda (x) (string=
+                     (file-name-extension x)
+                     "bib"))
+             (directory-files ".")))
+           (file (cond ((eq (length file-list) 0)
+                        (error "No bib files in current directory"))
+                       ((eq (length file-list) 1)
+                        (first file-list))
+                       (t
+                        (completing-read "Bib: "
+                                         file-list)))))
+      (dc-goto-or-create-workspace "References")
+      (ebib (expand-file-name file)))))
 
 ;;
 ;;; Global evil keybinds
