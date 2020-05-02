@@ -26,6 +26,8 @@
      :nv "s-c" #'org-ref-open-citation-at-point
      :nv "s-s" #'org-ref-google-scholar-at-point
      :nv "s-d" #'dc-org-ref-get-key-at-point
+     (:prefix "C-e"
+      "h" #'avy-org-goto-heading-timer)
      (:localleader
        "n" #'org-add-note
        "p" #'org-priority
