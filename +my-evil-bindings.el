@@ -130,10 +130,6 @@
    :desc "Top layer key map" "K" #'which-key-show-top-level
    :desc "External info manuals" "C-i" (lambda! (dc-find-external-manual "~/info")))
 
- :m   "]a"      #'evil-forward-arg
- :m   "[a"      #'evil-backward-arg
- :m   "]o"      #'outline-next-visible-heading
- :m   "[o"      #'outline-previous-visible-heading
  :n   "}"       #'next-buffer
  :n   "{"       #'previous-buffer
  :n   "zx"      #'kill-this-buffer
@@ -151,9 +147,6 @@
  :nv  "gr"      #'dc-apply-ex-substitute-word
  :nv  "gR"      #'dc-apply-ex-substitute-WORD
  :nv  "gk"      #'dc-apply-ex-substitute-custom
- :nv  "C-a"     #'evil-numbers/inc-at-pt
- :nv  "C-S-a"   #'evil-numbers/dec-at-pt
- :v   "gp"      #'+evil/paste-preserve-register
  :v   "@"       #'+evil:apply-macro
  :v   "."       #'+evil:apply-macro
  :v   "<"       #'+evil/visual-dedent
@@ -188,13 +181,15 @@
 
  :nvm "C-f" #'avy-goto-char-in-line
  :nvm "C-/" #'avy-goto-char-2
- :m   "C-e" #'+evil/easymotion  ; lazy-load `evil-easymotion'
 
- :o "j"   #'evilem-motion-next-line
- :o "k"   #'evilem-motion-previous-line
- :o "C-w" #'evilem-motion-forward-word-begin
- :o "C-e" #'evilem-motion-forward-word-end
- :o "C-b" #'evilem-motion-backward-word-begin
+ (:after evil-easymotion
+   :m   "C-e" evilem-map
+
+   :o "j"   #'evilem-motion-next-line
+   :o "k"   #'evilem-motion-previous-line
+   :o "C-w" #'evilem-motion-forward-word-begin
+   :o "C-e" #'evilem-motion-forward-word-end
+   :o "C-b" #'evilem-motion-backward-word-begin)
 
  (:after org
    :map org-mode-map
@@ -459,10 +454,10 @@
                                         "Org" org-directory))
         (:prefix ("c" . "Clock")
           :desc "Pomodoro timer" "p" #'org-pomodoro
-          :desc "Clock in"       "c" #'counsel-org-clock-context
-          :desc "Clock out"      "C" #'org-clock-out
-          :desc "Clock in last"  "l" #'org-clock-in-last
-          :desc "Cancel"         "x" #'org-clock-cancel
+          :desc "Clock in"       "i" #'counsel-org-clock-context
+          :desc "Clock out"      "o" #'org-clock-out
+          :desc "Clock in last"  "I" #'org-clock-in-last
+          :desc "Cancel"         "c" #'org-clock-cancel
           :desc "Goto last"      "g" #'counsel-org-clock-goto))
 
       (:prefix ("n" . "Reference Notes")
