@@ -485,5 +485,6 @@
         :desc "Define any word"  "D" #'mw-thesaurus-lookup-at-point
         :desc "Thesaurus"        "t" #'arg-thesaurus-word
         :desc "Wordnut at point" "w" #'arg-wordnut-word
+        :desc "Wiki summary"     "k" #'arg-wiki-word
         :desc "Biblio lookup"    "b" #'biblio-lookup
         :desc "Search duck"      "s" #'counsel-search))

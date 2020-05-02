@@ -6,6 +6,7 @@
 (package! counsel-org-clock)
 (package! define-word)
 (package! synosaurus)
+(package! wiki-summary)
 (package! mw-thesaurus)
 (package! evil-matchit)
 (package! scad-mode)
