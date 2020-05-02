@@ -437,7 +437,10 @@
 
       (:prefix ("M" . "Mail")
         :desc "Go to mail"   "g" #'=mu4e
-        :desc "Compose mail" "c" #'mu4e-compose-new)
+        :desc "Compose mail" "c" #'mu4e-compose-new
+        :desc "Open draft"   "d" (lambda! (counsel-find-file (concat
+                                                        mu4e-maildir
+                                                        "gmail/drafts/cur"))))
 
       (:prefix ("C" . "Code checking")
         :desc "toggle spell"     "s" #'flyspell-mode
