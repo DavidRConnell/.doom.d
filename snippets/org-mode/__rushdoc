@@ -8,5 +8,5 @@
 #+LATEX_CLASS: rushdoc
 #+LATEX_COMPILER: xelatex
 #+OPTIONS: toc:t ^:{} num:3 H:4
-#+TAGS: noexport ignore
+#+TAGS: noexport(x) ignore(i)
 $0
