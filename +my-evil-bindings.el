@@ -484,10 +484,11 @@
                                                 "References" refs-notes)))
 
       (:prefix ("d" . "Define")
-        :desc "Define at point"  "d" #'arg-define-word
-        :desc "Define any word"  "D" #'mw-thesaurus-lookup-at-point
+        :desc "Define word"      "d" #'arg-define-word
+        :desc "MW Define word"   "D" #'mw-thesaurus-lookup-at-point
         :desc "Thesaurus"        "t" #'arg-thesaurus-word
-        :desc "Wordnut at point" "w" #'arg-wordnut-word
+        :desc "Wordnut"          "w" #'arg-wordnut-word
         :desc "Wiki summary"     "k" #'arg-wiki-word
         :desc "Biblio lookup"    "b" #'biblio-lookup
+        :desc "Add bib entry"    "c" #'doi-utils-add-entry-from-crossref-query
         :desc "Search duck"      "s" #'counsel-search))
