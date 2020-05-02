@@ -51,7 +51,7 @@
                     "WAITING(w@)"
                     "CANCELLED(c)"
                     "|" "DONE(d!/)")
-          (sequence "NOTES(N)" "|")
+          (type "NOTES(N)")
           (sequence "[ ]([)" "[-](-!/)" "|" "[x](x!/)")))
 
   (setq org-todo-keyword-faces
