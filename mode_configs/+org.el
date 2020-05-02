@@ -311,3 +311,6 @@ instead externally"
   (setq bibtex-completion-notes-path refs-notes)
   (setq bibtex-completion-pdf-open-function
         (lambda (fpath) (call-process "xdg-open" nil 0 nil fpath)))
+  (setq bibtex-completion-notes-template-multiple-files
+        "${title}\n#+AUTHOR: ${author-or-editor}\n#+ROAM_KEY: ${=key=}\n"))
+
