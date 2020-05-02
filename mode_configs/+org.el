@@ -250,6 +250,7 @@ right sequence."
   (add-to-list 'org-latex-packages-alist
                '("" "booktabs" nil))
 
+  (load (concat doom-private-dir "extras/+ox-word.el"))
   (require 'ox-extra)
   (ox-extras-activate '(ignore-headlines))
   (setq org-export-with-toc nil))

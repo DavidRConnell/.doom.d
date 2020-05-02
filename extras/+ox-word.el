@@ -1,232 +1,135 @@
-;;; ox-word.el --- Collection of functions to export org-mode to MS Word documents
-;; Collection of ideas to get Word documents from org-documents
+;;; ox-word.el --- export org-mode to MS Word docx
 ;;
 ;;; Commentary:
-;; This library has only been tested in scimax. It may not work reliably outside
-;; of scimax.
-
-;; * Using pandoc via LaTeX
-
-;; In this approach we export the org-document to latex, and use pandoc to
-;; convert to Word. This leverages Pandoc's ability to get pretty reasonable
-;; bibliographies and citations using CSL. The Pandoc I have tested with does
-;; not do a good job with cross-references (figures and tables are linked ,but
-;; not numbered), so here we post-process the tex file to hard code figure and
-;; table numbers in it, and to replace references to them in the text. This has
-;; the benefit that they are numbered, but they are not links in the word
-;; document, so they will not be updatable in the Word document if you edit it
-;; further.
-
-;; Use #+PANDOC-CSL: /full/path/to/some/style.csl to set
-;; the bibliography style. You can get the csl files from
-;; https://www.zotero.org/styles
-
+;; Uses org-mode to latex export followed by pandoc to convert latex to docx.
+;; After created the latex file, converts all tikz figures to png and numbers
+;; all figures, equations, and tables as pandoc doesn't do this.
+;; Also adds a Reference section if citations used.
+;;
+;; Depends on org-ref, pandoc, and pandoc-crossref.
 ;;; Code:
+
 (require 'org-ref)
 
-(defcustom ox-word-pandoc-executable "pandoc"
-  "Path to the pandoc executable.")
+(defun org-word-export-to-docx (&optional async subtreep visible-only body-only options)
+  "Export current buffer to a word docx file via ox-latex and pandoc."
+  (interactive)
+  (org-latex-export-to-latex async subtreep visible-only body-only options)
+  (let* ((bib-file (if (> (length (org-ref-get-bibtex-keys)) 0)
+                       (expand-file-name (first (org-ref-find-bibliography)))
+                     nil))
+         (basename (file-name-sans-extension (buffer-file-name)))
+         (tex-file (concat basename ".tex"))
+         (docx-file (concat basename ".docx"))
+         (pandoc-command (concat "pandoc "
+                                 tex-file
+                                 " --filter pandoc-crossref "
+                                 " --filter pandoc-citeproc "
+                                 (if bib-file
+                                     (concat "--bibliography=" bib-file " "))
+                                 "-o "
+                                 docx-file))
 
+         (buf (find-file-noselect tex-file)))
 
-(defun ox-export-get-pandoc-version ()
-  "Returns the major version of pandoc.
-Assumes the version command returns something like \"pandoc
-2.7.8\" and extracts the substring."
-  (string-to-number
-   (substring (shell-command-to-string (format "%s --version" ox-word-pandoc-executable)) 7 8)))
+    (with-current-buffer buf
+      (convert-file-tikz-figures-to-png)
+      (ow-fix-references)
+      (if bib-file
+          (ow-add-reference-header))
+      (save-buffer)
+      (kill-buffer buf))
 
-
-(defun ox-export-call-pandoc-tex-to-docx (biboption csl tex-file docx-file)
-  "Run pandoc to convert the exported tex file to docx."
-  (let* ((pandoc-version (ox-export-get-pandoc-version))
-         (pandoc-command-template
-          (if (>= pandoc-version 2)
-              "%s -F pandoc-crossref -s %s%s\"%s\" --to=docx -o \"%s\""
-            "%s -s -S %s%s\"%s\" -o \"%s\""))
-	 (pandoc-command (format pandoc-command-template ox-word-pandoc-executable biboption csl tex-file docx-file)))
-    (message "Running %S" pandoc-command)
     (shell-command pandoc-command)))
 
+(defun convert-file-tikz-figures-to-png ()
+  "Convert all tikz figures in file to png."
 
-(defun ox-export-call-pandoc-tex-to-html (biboption csl tex-file html-file)
-  "Run pandoc to convert the exported tex file to html."
-  (let* ((pandoc-version (ox-export-get-pandoc-version))
-         (pandoc-command-template
-          (if (>= pandoc-version 2)
-              "%s -s %s%s\"%s\" --to=html+smart -o \"%s\""
-            "%s -s -S %s%s\"%s\" -o \"%s\""))
-	 (pandoc-command (format pandoc-command-template ox-word-pandoc-executable biboption csl tex-file html-file)))
-    (message "running %s" pandoc-command)
-    (shell-command pandoc-command)))
+  (let* ((tikz-regex "\\\\input{\\(.*?\\).tikz}")
+         (figure-regex (concat "\\(\\\\resizebox{\\(.*?\\)}{!}{" tikz-regex "}\\)"
+                               "\\|"
+                               "\\(" tikz-regex "\\)"))
+         (png-width "[width=%s]")
+         (png-command "\\\\includegraphics%s{%s.png}"))
 
+    (goto-char (point-min))
+    (while (re-search-forward figure-regex nil t)
+      (let ((basename (if (match-string 1)
+                          (match-string 3)
+                        (match-string 5)))
+            (size (if (match-string 1)
+                      (format png-width
+                              (replace-regexp-in-string "\\\\" "\\\\\\\\" (match-string 2)))
+                    "")))
 
-(defun ox-export-via-latex-pandoc-to-docx-and-open (&optional async subtreep visible-only body-only options)
-  "Export the current org file as a docx via LaTeX."
-  (interactive)
-  (let* ((bibfiles (mapcar 'expand-file-name (org-ref-find-bibliography)))
-	 (temp-bib)
-	 (bibtex-entries)
-	 biboption
-	 csl
-	 ;; this is probably a full path
-	 (current-file (buffer-file-name))
-	 (basename (file-name-sans-extension current-file))
-	 (tex-file (concat basename ".tex"))
-	 (docx-file (concat basename ".docx")))
+        (replace-match (format png-command
+                               size
+                               basename))
 
-    (save-buffer)
+        (if (or (not (file-exists-p (concat basename ".png")))
+                (< (ow-file-modification-time (concat basename ".png"))
+                   (ow-file-modification-time (concat basename ".tikz"))))
 
-    ;; I make a temp bibfile because my big one causes pandoc to choke. This
-    ;; should only create a file with the required entries.
-    (when bibfiles
-      (setq bibtex-entries (let* ((bibtex-files bibfiles)
-				  (keys (reverse (org-ref-get-bibtex-keys)))
-				  (bibtex-entry-kill-ring-max (length keys))
-				  (bibtex-entry-kill-ring '()))
+            (progn
+              (ow-tikz2png basename)
+              (message (concat basename ".tikz converted to png"))))))))
 
-			     (save-window-excursion
-			       (cl-loop for key in keys
-					do
-					(bibtex-search-entry key t)
-					(bibtex-kill-entry t)))
-			     (mapconcat
-			      'identity
-			      bibtex-entry-kill-ring
-			      "\n\n"))
-	    temp-bib (make-temp-file "ox-word-" nil ".bib")
-	    biboption (format " --bibliography=%s " temp-bib))
-      (with-temp-file temp-bib
-	(insert bibtex-entries)))
+(defun ow-file-modification-time (file)
+  "Posix time of last modification."
+  (string-to-number (format-time-string "%s"
+                      (file-attribute-modification-time
+                       (file-attributes file)))))
 
-    (setq csl (cdr (assoc "PANDOC-CSL"
-			  (org-element-map (org-element-parse-buffer) 'keyword
-			    (lambda (key) (cons
-					   (org-element-property :key key)
-					   (org-element-property :value key)))))))
-    (if csl (setq csl (format " --csl=%s " csl))
-      (setq csl " "))
+(defun ow-tikz2png (basename)
+  "Convert tikz figure FILENAME to a png file."
+  (let ((textemplate (concat
+                      "\\documentclass[preview,border=4mm,convert={density=600,outfile=%1$s.png}]{standalone}\n"
+                      "\\usepackage{pgfplots}\n"
+                      "\\pgfplotsset{compat=1.16}\n"
+                      "\\usepackage{graphicx}\n"
+                      "\\usepackage{tikz}\n"
+                      "\\usepackage{url}\n"
+                      "\\usepackage{xcolor}\n"
+                      "\\begin{document}\n"
+                      "\\input{%1$s.tikz}\n"
+                      "\\end{document}"))
+        (command "latex --shell-escape"))
+    (with-temp-buffer
+      (insert (format textemplate basename))
+      (write-file "temp.tex"))
+    (shell-command (concat command " temp.tex"))
+    (dolist (f (directory-files "." nil "temp\..*"))
+      (delete-file f))))
 
-    (org-latex-export-to-latex async subtreep visible-only body-only options)
-    ;; Now we do some post-processing on the tex-file. pandoc does not seem to
-    ;; put numbers on tables and figures. Here we do it manually. If there is a
-    ;; better way to get pandoc to do this, I prefer to remove this code! Tables
-    ;; first.
-    (let* ((table-regex "\\\\begin{table}.*
-\\\\caption{\\(?1:\\(?2:.*\\)\\\\label{\\(?3:.*\\)}\\)}")
-    	   (buf (find-file-noselect tex-file))
-    	   (i 0)
-    	   labels)
-      (with-current-buffer buf
-    	(goto-char (point-min))
-    	(while (re-search-forward table-regex nil t)
-    	  (incf i)
-    	  (push (cons (match-string 3) i) labels)
-    	  (replace-match (format "Table %d. \\2" i) nil nil nil 1))
-	;; Now replace the refs.
-	(goto-char (point-min))
-	(while (re-search-forward "\\\\ref{\\(?1:.*?\\)}" nil t)
-	  (when (cdr (assoc (match-string 1) labels))
-	    (replace-match (format "%d" (cdr (assoc (match-string 1) labels))))))
-    	(save-buffer))
-      (message "done with tables."))
+(defun ow-fix-references ()
+  (let ((ref-regex "\\\\cref{\\(.*?\\):\\(.*?\\)}")
+        type)
+    (goto-char (point-min))
+    (while (re-search-forward ref-regex nil t)
+      (setq type (cond
+                  ((string= (match-string 1) "fig")
+                   "Figure ")
+                  ((string= (match-string 1) "sec")
+                   "Section ")
+                  ((string= (match-string 1) "tab")
+                   "Table ")
+                  ((string= (match-string 1) "eq")
+                   "eq ")))
 
-    ;; Now figures. We want to find the labels, and then replace the ref links.
-    (let* ((fig-regex "includegraphics.*
-\\\\caption{\\(?1:.*\\)\\(?2:\\\\label{\\(?3:.*\\)}\\)"
-		      ;; "\\includegraphics.*
-		      ;; \\\\caption{\\(?3:\\(?1:.*\\)\\\\label{\\(?2:.*\\)}\\)}"
-		      )
-	   (buf (find-file-noselect tex-file))
-	   (i 0)
-	   labels)
-      (with-current-buffer buf
-	(goto-char (point-min))
-	(while (re-search-forward fig-regex nil t)
-	  (incf i)
-	  (push (cons (match-string 3) i) labels)
-	  (replace-match (format "Figure %d. \\1" i) nil nil nil 3))
-    	;; Now replace the refs.
-    	(goto-char (point-min))
-    	(while (re-search-forward "\\\\ref{\\(?1:.*?\\)}" nil t)
-    	  (when (cdr (assoc (match-string 1) labels))
-    	    (replace-match (format "%d" (cdr (assoc (match-string 1) labels))))))
-	(save-buffer)
-	(kill-buffer buf)))
+      (replace-match (concat type
+                             "\\\\ref{" (match-string 1) ":" (match-string 2) "}")))))
 
-
-    (when (file-exists-p docx-file) (delete-file docx-file))
-    (ox-export-call-pandoc-tex-to-docx biboption csl tex-file docx-file)
-    (when (file-exists-p temp-bib)
-      (delete-file temp-bib))
-    (org-open-file docx-file '(16))))
-
-
-(defun ox-export-via-latex-pandoc-to-html-and-open (&optional async subtreep visible-only body-only options)
-  "Export the current org file as a html via LaTeX."
-  (interactive)
-  (let* ((bibfile (expand-file-name (car (org-ref-find-bibliography))))
-	 (temp-bib)
-	 (bibtex-entries)
-	 biboption
-	 csl
-	 ;; this is probably a full path
-	 (current-file (buffer-file-name))
-	 (basename (file-name-sans-extension current-file))
-	 (tex-file (concat basename ".tex"))
-	 (html-file (concat basename ".html")))
-
-    (save-buffer)
-
-    ;; I make a temp bibfile because my big one causes pandoc to choke. This
-    ;; should only create a file with the required entries.
-    (when bibfile
-      (setq bibtex-entries (let* ((bibtex-files (org-ref-find-bibliography))
-				  (keys (reverse (org-ref-get-bibtex-keys)))
-				  (bibtex-entry-kill-ring-max (length keys))
-				  (bibtex-entry-kill-ring '()))
-
-			     (save-window-excursion
-			       (cl-loop for key in keys
-					do
-					(bibtex-search-entry key t)
-					(bibtex-kill-entry t)))
-			     (mapconcat
-			      'identity
-			      bibtex-entry-kill-ring
-			      "\n\n"))
-	    temp-bib (make-temp-file "ox-html-" nil ".bib")
-	    biboption (format " --bibliography=%s " temp-bib))
-      (with-temp-file temp-bib
-	(insert bibtex-entries)))
-
-    (setq csl (cdr (assoc "PANDOC-CSL"
-			  (org-element-map (org-element-parse-buffer) 'keyword
-			    (lambda (key) (cons
-					   (org-element-property :key key)
-					   (org-element-property :value key)))))))
-    (if csl (setq csl (format " --csl=%s " csl))
-      (setq csl " "))
-
-    (org-latex-export-to-latex async subtreep visible-only body-only options)
-
-    (when (file-exists-p html-file) (delete-file html-file))
-    (ox-export-call-pandoc-tex-to-html biboption csl tex-file html-file)
-
-    (when (file-exists-p temp-bib)
-      (delete-file temp-bib))
-    (browse-url html-file)))
-
+(defun ow-add-reference-header ()
+  (goto-char (point-max))
+  (re-search-backward "\\\\bibliography{.*?}" nil t)
+  (if (match-string 0)
+      ;; extra \\ needed because replace-match wants for but match-string returns only 2
+      (replace-match (concat "\\\\section{References}\n\\" (match-string 0)))))
 
 (org-export-define-derived-backend 'MSWord 'latex
   :menu-entry
   '(?w "Export to MS Word"
-       ((?p "via Pandoc/LaTeX" ox-export-via-latex-pandoc-to-docx-and-open))))
-
-
-(org-export-define-derived-backend 'pandoc-html 'latex
-  :menu-entry
-  '(?h "Export to HTML"
-       ((?p "via Pandoc/LaTeX" ox-export-via-latex-pandoc-to-html-and-open))))
+       ((?p "via Pandoc/LaTeX" org-word-export-to-docx))))
 
 (provide 'ox-word)
 
