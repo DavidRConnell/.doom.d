@@ -143,7 +143,7 @@
  :nv  "C-q"     #'evil-execute-macro
  :nv  "gx"      #'evil-exchange
  :nv  "gK"      #'+lookup/documentation
- :nv  "gc"      #'dc-comment-line-operator
+ :nv  "gc"      #'evilnc-comment-operator
  :nv  "gr"      #'dc-apply-ex-substitute-word
  :nv  "gR"      #'dc-apply-ex-substitute-WORD
  :nv  "gk"      #'dc-apply-ex-substitute-custom
