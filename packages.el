@@ -5,7 +5,7 @@
 (package! ivy-bibtex)
 (package! counsel-org-clock)
 (package! define-word)
-(package! powerthesaurus)
+(package! synosaurus)
 (package! mw-thesaurus)
 (package! evil-matchit)
 (package! scad-mode)

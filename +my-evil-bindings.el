@@ -305,8 +305,12 @@
                                           (define-word word 'wordnik)))
 
 (dc--select-function-with-universal-arg arg-thesaurus-word
-                                        #'powerthesaurus-lookup-word-at-point
-                                        #'powerthesaurus-lookup-word)
+                                        (lambda! (synosaurus-lookup (word-at-point)))
+                                        #'synosaurus-lookup)
+
+(dc--select-function-with-universal-arg arg-wiki-word
+                                        (lambda! (wiki-summary (word-at-point)))
+                                        #'wiki-summary)
 
 (dc--select-function-with-universal-arg arg-wordnut-word
                                         #'wordnut-lookup-current-word
