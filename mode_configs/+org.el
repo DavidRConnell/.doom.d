@@ -11,6 +11,10 @@
   (setq org-startup-truncated nil)
   (setq org-pretty-entities t)
 
+  (add-to-list 'org-file-apps
+               '("\\.pdf\\'" . (lambda (_file link)
+                                 (call-process "xdg-open" nil 0 nil link))))
+
   (setq counsel-org-clock-default-action 'clock-in)
 
   (add-hook! 'org-mode-hook
