@@ -19,6 +19,13 @@
      :nv "k" #'evil-previous-visual-line
      :nv "zn" #'org-toggle-narrow-to-subtree
      :nv "C-i" #'better-jumper-jump-forward
+     ;; org-ref open cite bindings
+     :nv "s-p" #'org-ref-open-pdf-at-point
+     :nv "s-n" #'org-ref-open-notes-at-point
+     :nv "s-u" #'org-ref-open-url-at-point
+     :nv "s-c" #'org-ref-open-citation-at-point
+     :nv "s-s" #'org-ref-google-scholar-at-point
+     :nv "s-d" #'dc-org-ref-get-key-at-point
      (:localleader
        "n" #'org-add-note
        "p" #'org-priority
