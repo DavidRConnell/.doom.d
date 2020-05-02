@@ -22,6 +22,7 @@
              #'turn-off-auto-fill
              #'visual-line-mode
              #'turn-off-flycheck
+             (lambda () (hl-fill-column-mode -1))
              #'flyspell-mode)
 
   (setq org-enforce-todo-dependencies t)
