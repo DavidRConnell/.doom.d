@@ -47,7 +47,15 @@
          "c" #'langtool-correct-buffer
          "d" #'langtool-check-done)
        (:prefix "l"
-         "h" #'counsel-org-link))))
+         "h" #'counsel-org-link)
+       (:prefix "m"
+         "x" #'org-roam-capture
+         "o" #'dc-plop-ref-outline
+         "p" (lambda! (org-open-file
+                 (funcall org-ref-get-pdf-filename-function
+                          (file-name-sans-extension (buffer-name)))))
+         "n" (lambda! (org-ref-open-notes-at-point
+                 (format "%s" (symbol-at-point))))))))
 
  (:after org-agenda
    (:map org-agenda-mode-map
