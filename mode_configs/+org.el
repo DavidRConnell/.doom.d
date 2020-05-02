@@ -1,12 +1,11 @@
 (defun turn-off-flycheck ()
   (flycheck-mode -1))
 
-(after! org
-  (require 'org-ref)
-  (load "~/projects/orgtex/orgtex.el")
+(setq org-directory "~/org/")
+(setq org-agenda-files (list "~/org/"))
 
-  (setq org-directory "~/org/")
-  (setq org-agenda-files (list "~/org/"))
+(after! org
+  ;; (require 'org-ref)
 
   (setq org-startup-folded t)
   (setq org-startup-truncated nil)
