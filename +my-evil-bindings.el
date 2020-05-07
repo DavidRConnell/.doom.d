@@ -127,6 +127,9 @@
 
  (:prefix "C-h"
    :desc "Find info manual" "RET" #'info-display-manual
+   :desc "Open project README" "P" (lambda! (dc-project-help
+                                       (concat doom-emacs-dir
+                                               ".local/straight/repos/")))
    :desc "Top layer key map" "K" #'which-key-show-top-level
    :desc "External info manuals" "C-i" (lambda! (dc-find-external-manual "~/info")))
 

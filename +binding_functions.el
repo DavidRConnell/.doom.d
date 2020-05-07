@@ -100,6 +100,19 @@ If FILE is a directory search with `counsel-find-file'"
     (info-setup (concat man-dir "/" man "/" man ".info")
                 (pop-to-buffer "*info*"))))
 
+(defun dc-project-help (parent-dir)
+  (interactive)
+  (let* ((project (completing-read "Project: "
+                                   (directory-files parent-dir)))
+         (file-base (concat parent-dir project "/README")))
+    (cond ((file-exists-p (concat file-base ".org"))
+           (find-file (concat file-base ".org")))
+          ((file-exists-p (concat file-base ".md"))
+           (find-file (concat file-base ".md")))
+          ((file-exists-p (concat parent-dir project "/" project ".el"))
+           (find-file (concat parent-dir project "/" project ".el")))
+          (t (message "Could not find README file")))))
+
 (defmacro dc-call-with-univeral-arg (func1 func2 &optional func3)
   "Select a function to call based on the number of \\[universal-argument]
 
