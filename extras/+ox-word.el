@@ -23,8 +23,7 @@
          (docx-file (concat basename ".docx"))
          (pandoc-command (concat "pandoc "
                                  tex-file
-                                 " --filter pandoc-crossref "
-                                 " --filter pandoc-citeproc "
+                                 " --filter=pandoc-citeproc "
                                  (if bib-file
                                      (concat "--bibliography=" bib-file " "))
                                  "-o "
