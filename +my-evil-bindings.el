@@ -62,9 +62,9 @@
 
 (dc--select-function-with-universal-arg
  arg-ebib-open-bibtex-file
- (lambda! (dc-goto-or-create-workspace "References")
+ (cmd! (dc-goto-or-create-workspace "References")
     (ebib refs-bib))
- (lambda! (let* ((file-list
+ (cmd! (let* ((file-list
             (cl-remove-if-not
              (lambda (x) (string=
                      (file-name-extension x)
@@ -127,11 +127,11 @@
 
  (:prefix "C-h"
    :desc "Find info manual" "RET" #'info-display-manual
-   :desc "Open project README" "P" (lambda! (dc-project-help
+   :desc "Open project README" "P" (cmd! (dc-project-help
                                        (concat doom-emacs-dir
                                                ".local/straight/repos/")))
    :desc "Top layer key map" "K" #'which-key-show-top-level
-   :desc "External info manuals" "C-i" (lambda! (dc-find-external-manual "~/info")))
+   :desc "External info manuals" "C-i" (cmd! (dc-find-external-manual "~/info")))
 
  :n   "}"       #'next-buffer
  :n   "{"       #'previous-buffer
@@ -178,8 +178,8 @@
  :nvm "C-n"     #'evil-next-line
  :nvm "C-p"     #'evil-previous-line
 
- ;; Use C-s (snipe) instead of C-t becaulse C-t is my stumpwm key
- :nvm "C-s" (lambda! ; make exclusive (more like till than from)
+ ;; Use C-s (snipe) instead of C-t because C-t is my stumpwm key
+ :nvm "C-s" (cmd! ; make exclusive (more like till than from)
              (call-interactively #'avy-goto-char-in-line)
              (point))
 
@@ -308,11 +308,11 @@
                                           (define-word word 'wordnik)))
 
 (dc--select-function-with-universal-arg arg-thesaurus-word
-                                        (lambda! (synosaurus-lookup (word-at-point)))
+                                        (cmd! (synosaurus-lookup (word-at-point)))
                                         #'synosaurus-lookup)
 
 (dc--select-function-with-universal-arg arg-wiki-word
-                                        (lambda! (wiki-summary (word-at-point)))
+                                        (cmd! (wiki-summary (word-at-point)))
                                         #'wiki-summary)
 
 (dc--select-function-with-universal-arg arg-wordnut-word
@@ -347,7 +347,7 @@
                      (t (vterm))))
       "<"    #'counsel-switch-to-shell-buffer
 
-      :desc "journal" "j"    (lambda! (dc-run-deft-in-workspace
+      :desc "journal" "j"    (cmd! (dc-run-deft-in-workspace
                                  "Journal" "~/journal/"))
 
       "s"    #'doom/open-scratch-buffer
@@ -355,7 +355,7 @@
       "!"    #'doom/sudo-this-file
       ":"    #'helm-eval-expression
       ";"    #'execute-extended-command
-      :desc ".doom.d" "."    (lambda! (dc-open-in-workspace "Doom" "~/.doom.d"))
+      :desc ".doom.d" "."    (cmd! (dc-open-in-workspace "Doom" "~/.doom.d"))
       "m"    #'+popup/toggle
       "/"    #'evil-ex-nohighlight
       "\\"   #'toggle-truncate-lines
@@ -364,42 +364,42 @@
       :desc "Search for symbol in project" "*" #'+default/search-project-for-symbol-at-point
       :desc "show functions" "l" #'imenu
 
-      :desc "Surrond With" "["    (lambda! (sp-rewrap-sexp (dc--get-sp-pair "[")))
-      :desc "Surrond With" "{"    (lambda! (sp-rewrap-sexp (dc--get-sp-pair "{")))
-      :desc "Surrond With" "("    (lambda! (sp-rewrap-sexp (dc--get-sp-pair "(")))
-      :desc "Surrond With" "\""   (lambda! (sp-rewrap-sexp (dc--get-sp-pair "\"")))
-      :desc "Open Notes"   "N"    (lambda! (dc-open-in-workspace "Notes" notes-dir))
+      :desc "Surrond With" "["    (cmd! (sp-rewrap-sexp (dc--get-sp-pair "[")))
+      :desc "Surrond With" "{"    (cmd! (sp-rewrap-sexp (dc--get-sp-pair "{")))
+      :desc "Surrond With" "("    (cmd! (sp-rewrap-sexp (dc--get-sp-pair "(")))
+      :desc "Surrond With" "\""   (cmd! (sp-rewrap-sexp (dc--get-sp-pair "\"")))
+      :desc "Open Notes"   "N"    (cmd! (dc-open-in-workspace "Notes" notes-dir))
 
       (:prefix ("r" . "Replace line")
-        :desc "custom" "c" (lambda!
+        :desc "custom" "c" (cmd!
                             (evil-ex
                              (concat (dc--get-evil-ex-prefix) "s/")))
 
-        :desc "word" "w" (lambda!
+        :desc "word" "w" (cmd!
                           (evil-ex
                            (concat
                             (dc--get-evil-ex-prefix)
                             "s/\\<" (thing-at-point 'word) "\\>/")))
 
-        :desc "WORD" "W" (lambda!
+        :desc "WORD" "W" (cmd!
                           (evil-ex
                            (concat
                             (dc--get-evil-ex-prefix)
                             "s/\\<" (thing-at-point 'symbol) "\\>/"))))
 
       (:prefix ("R" . "Replace buffer")
-        :desc "custom" "c" (lambda! (evil-ex "%s/"))
-        :desc "word" "w" (lambda!
+        :desc "custom" "c" (cmd! (evil-ex "%s/"))
+        :desc "word" "w" (cmd!
                           (evil-ex
                            (concat "%s/\\<" (thing-at-point 'word) "\\>/")))
 
-        :desc "WORD" "W" (lambda!
+        :desc "WORD" "W" (cmd!
                           (evil-ex
                            (concat "%s/\\<" (thing-at-point 'symbol) "\\>/"))))
 
       (:prefix ("p" . "Projects")
-        :desc "open emacs.d" "e" (lambda! (dc-open-in-workspace "Emacs" "~/.emacs.d"))
-        :desc "open config" "c" (lambda! (dc-open-in-workspace "Config" "~/.config/"))
+        :desc "open emacs.d" "e" (cmd! (dc-open-in-workspace "Emacs" "~/.emacs.d"))
+        :desc "open config" "c" (cmd! (dc-open-in-workspace "Config" "~/.config/"))
         "R" #'projectile-replace
         "g" #'+ivy/project-search
         "o" #'projectile-switch-project
@@ -441,7 +441,7 @@
       (:prefix ("M" . "Mail")
         :desc "Go to mail"   "g" #'=mu4e
         :desc "Compose mail" "c" #'mu4e-compose-new
-        :desc "Open draft"   "d" (lambda! (counsel-find-file (concat
+        :desc "Open draft"   "d" (cmd! (counsel-find-file (concat
                                                         mu4e-maildir
                                                         "gmail/drafts/cur"))))
 
@@ -457,11 +457,11 @@
         :desc "Todo list"      "t"  #'org-todo-list
         :desc "Tags search"    "m"  #'org-tags-view
         :desc "Org capture"    "x"  #'counsel-org-capture
-        :desc "Go to org file" "g"  (lambda! (dc-open-org-file-in-workspace
+        :desc "Go to org file" "g"  (cmd! (dc-open-org-file-in-workspace
                                         "Org" org-directory))
         :desc "Org store link" "l"  #'org-store-link
         :desc "View search"    "v"  #'org-search-view
-        :desc "Deft"           "d"  (lambda! (dc-run-deft-in-workspace
+        :desc "Deft"           "d"  (cmd! (dc-run-deft-in-workspace
                                         "Org" org-directory))
         (:prefix ("c" . "Clock")
           :desc "Pomodoro timer" "p" #'org-pomodoro
@@ -472,19 +472,35 @@
           :desc "Goto last"      "g" #'counsel-org-clock-goto))
 
       (:prefix ("n" . "Reference Notes")
-        :desc "Ebib"              "e" #'arg-ebib-open-bibtex-file
-        :desc "bibtex"            "b" #'ivy-bibtex
-        :desc "Open Index"        "i" (lambda! (dc-open-in-workspace
-                                                "References" refs-bib))
-        :desc "Open Reference"    "r" (lambda! (dc-open-in-workspace
-                                                "References" refs-pdfs))
-        :desc "Go to Note"        "g" (lambda! (dc-open-org-file-in-workspace
-                                                "References" refs-notes))
-        :desc "Open reading list" "l" (lambda! (dc-open-in-workspace
-                                                "References"
-                                                (concat refs-notes "readinglist.org")))
-        :desc "Deft"              "d" (lambda! (dc-run-deft-in-workspace
-                                                "References" refs-notes)))
+       :desc "Ebib"              "e" #'arg-ebib-open-bibtex-file
+       :desc "bibtex"            "b" #'ivy-bibtex
+       :desc "Master bib file"   "m" (cmd! (dc-open-in-workspace
+                                         "References" refs-bib))
+       :desc "Open Reference"    "r" (cmd! (dc-open-in-workspace
+                                         "References" refs-pdfs))
+       :desc "Go to notes"       "g" (cmd! (dc-open-org-file-in-workspace
+                                         "References" refs-notes))
+       :desc "Open reading list" "l" (cmd! (dc-open-in-workspace
+                                         "References"
+                                         (concat refs-notes "readinglist.org")))
+       :desc "Deft"              "d" (cmd! (dc-run-deft-in-workspace
+                                         "References" refs-notes)))
+
+      (:prefix ("z" . "Zettle")
+       :desc "Go to zettle"      "g" (cmd! (dc-goto-or-create-workspace "Zettle")
+                                        (org-roam-find-file))
+       :desc "Capture"           "x" #'org-roam-capture
+       :desc "Deft"              "d" (cmd! (dc-run-deft-in-workspace
+                                         "Zettle" zettle-dir))
+       :desc "Go to todo"        "t" (cmd! (dc-open-in-workspace
+                                         "Zettle"
+                                         (concat zettle-dir "todo.org")))
+       :desc "Go to next"        "n" (cmd! (dc-open-in-workspace
+                                         "Zettle"
+                                         (concat zettle-dir "next.org")))
+       :desc "Go to index"       "i" (cmd! (dc-open-in-workspace
+                                         "Zettle"
+                                         (concat zettle-dir "index.org"))))
 
       (:prefix ("d" . "Define")
         :desc "Define word"      "d" #'arg-define-word

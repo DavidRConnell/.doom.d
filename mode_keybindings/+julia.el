@@ -6,7 +6,7 @@
         "r" #'julia-repl-send-buffer
         "p" #'julia-repl
         "v" #'julia-repl-send-region-or-line
-        "o" (lambda! (dc-open-in-workspace "Julia Package" "~/.julia/packages")))
+        "o" (cmd! (dc-open-in-workspace "Julia Package" "~/.julia/packages")))
       (:prefix "C-c"
         "C-c" #'julia-repl-send-region-or-line
         "C-l" #'julia-repl-send-buffer))

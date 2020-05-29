@@ -34,20 +34,20 @@
                                             (t (dc-matlab-shell))))
           (:prefix ("t" . "test")
             :desc "Toggle test file" "g"   #'dc-matlab-toggle-test-file
-            :desc "Find test file" "G" (lambda! (counsel-find-file (dc-matlab-get-test-dir)))
-            :desc "Run unit tests" "t"        (lambda! (dc-matlab-shell-run-tests
+            :desc "Find test file" "G" (cmd! (counsel-find-file (dc-matlab-get-test-dir)))
+            :desc "Run unit tests" "t"        (cmd! (dc-matlab-shell-run-tests
                                                   "file" "Unit"))
-            :desc "Run all unit tests" "T"    (lambda! (dc-matlab-shell-run-tests
+            :desc "Run all unit tests" "T"    (cmd! (dc-matlab-shell-run-tests
                                                   "project" "Unit"))
-            :desc "Run integration tests" "i" (lambda! (dc-matlab-shell-run-tests
+            :desc "Run integration tests" "i" (cmd! (dc-matlab-shell-run-tests
                                                   "project" "Integration"))
-            :desc "Run functional tests" "f"  (lambda! (dc-matlab-shell-run-tests
+            :desc "Run functional tests" "f"  (cmd! (dc-matlab-shell-run-tests
                                                   "project" "Functional"))
-            :desc "Run perftests" "p"      (lambda! (dc-matlab-shell-run-performance-tests
+            :desc "Run perftests" "p"      (cmd! (dc-matlab-shell-run-performance-tests
                                                "file"))
-            :desc "Run all pefrtests" "P"  (lambda! (dc-matlab-shell-run-performance-tests
+            :desc "Run all pefrtests" "P"  (cmd! (dc-matlab-shell-run-performance-tests
                                                "project"))
-            :desc "Rerun failed tests" "r" (lambda! (dc-matlab-shell-run-tests "rerun"))
+            :desc "Rerun failed tests" "r" (cmd! (dc-matlab-shell-run-tests "rerun"))
             :desc "Show test summary" "s"  #'dc-matlab-shell-test-summary))
         (:prefix "C-c"
           "C-c" #'matlab-shell-run-cell
