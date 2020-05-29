@@ -5,9 +5,11 @@
 
 (defun fix-matlab-imenu-generic-expression ()
     (setq imenu-generic-expression
-          '(("Function" "^\\s-*\\(function\\)\\s-*\\([^\\.\n]*\\)\n" 2)
-            ("Function" "^\\s-*\\(function\\)\\s-*\\([^\\.]*\\.\\.\\.\\s-*\n.*\\)" 2)
+          '(("Function" "^\\s-*\\(function\\)\\s-*\\([^\\.\n]*\\)" 2)
+            ("Function" "^\\s-*\\(function\\)\\s-*\\([^\\.\n]*\\.\\.\\.\\s-*\n.*\\)" 2)
             ("Class" "^\\s-*\\(classdef\\)\\s-*\\(.*\\)" 2)
+            ("Methods" "^\\s-*\\(methods\\)\\s-*\\(.*\\)?" 2)
+            ("Properties" "^\\s-*\\(properties\\)\\s-*\\(.*\\)?" 2)
             ("Section" "^\\s-*%%\\s-*\\(.*\\)$" 1))))
 
 (after! matlab
