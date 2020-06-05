@@ -174,7 +174,7 @@
 (after! emacs
   (set-pretty-symbols! '(emacs-lisp-mode)
     :lambda "lambda"
-    :Lambda "lambda!"))
+    :Lambda "cmd!"))
 
 (after! flycheck
   (flycheck-define-checker proselint

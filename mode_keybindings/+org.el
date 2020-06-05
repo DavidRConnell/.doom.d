@@ -30,8 +30,8 @@
     (:prefix ("e" . "export")
      "l" #'org-ref-ivy-insert-label-link
      "r" #'org-ref-ivy-insert-ref-link
-     "c" (dc-call-with-univeral-arg #'org-ref-ivy-insert-cite-link
-                                    #'org-ref-insert-cite-with-completion)
+     "c" (dc-arg-cmd #'org-ref-ivy-insert-cite-link
+                     #'org-ref-insert-cite-with-completion)
      "b" #'org-ref-insert-bibliography-link
      "s" #'org-ref-insert-bibliographystyle-link
      "i" #'org-ref-index
@@ -51,10 +51,10 @@
      "c" #'org-drill-cram
      "r" #'org-drill-resume)
     (:prefix ("G" . "grammar check")
-     "r" (dc-call-with-univeral-arg (cmd! (evil-visual-char)
-                                       (evil-org-inner-subtree)
-                                       (langtool-check-buffer))
-                                    #'langtool-check-buffer)
+     "r" (dc-arg-cmd (cmd! (evil-visual-char)
+                        (evil-org-inner-subtree)
+                        (langtool-check-buffer))
+                     #'langtool-check-buffer)
      "c" #'langtool-correct-buffer
      "d" #'langtool-check-done)
     (:prefix "l"

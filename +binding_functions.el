@@ -114,7 +114,7 @@ If FILE is a directory search with `counsel-find-file'"
            (find-file (concat parent-dir project "/" project ".el")))
           (t (message "Could not find README file")))))
 
-(defmacro dc-call-with-univeral-arg (func1 func2 &optional func3)
+(defmacro dc-arg-cmd (func1 func2 &optional func3)
   "Select a function to call based on the number of \\[universal-argument]
 
 If \\[universal-argument] not hit run FUNC1, one \\[universal-argument] selects
@@ -137,7 +137,7 @@ If \\[universal-argument] not hit run FUNC1, one \\[universal-argument] selects
   FUNC2, two \\[universal-argument] selects FUNC3 if it exists.
 If there no FUNC3 is provided defaults to FUNC2."
 
-  (declare (obsolete dc-call-with-univeral-arg "Wed May 6 19:19:22 2020"))
+  (declare (obsolete dc-arg-cmd "Wed May 6 19:19:22 2020"))
   `(defun ,name (arg)
     (interactive "p")
     (cond ((= arg 1)
