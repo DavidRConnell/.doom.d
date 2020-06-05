@@ -47,6 +47,7 @@
         +icons           ; colorful icons for dired-mode
         +ranger)
        electric          ; smarter, keyword-based electric-indent
+       (undo +tree)      ; persistent, smarter undo for your inevitable mistakes
        vc                ; version-control and Emacs, sitting in a tree
 
        :term
@@ -54,42 +55,53 @@
        vterm
 
        :checkers
-       syntax              ; tasing you for every semicolon you forget
-       spell             ; tasing you for misspelling mispelling
+       (syntax           ; tasing you for every semicolon you forget
+        +childframe)
+       (spell            ; tasing you for misspelling mispelling
+        +everywhere)
        grammar           ; tasing grammar mistake every you make
 
        :tools
+       (debugger +lsp)   ; FIXME stepping through code, to help you add bugs
        editorconfig      ; let someone else argue about tabs vs spaces
        (eval +overlay)   ; run code, run (also, repls)
        (lookup           ; helps you navigate your code and documentation
         +docsets)        ; ...or in Dash docsets locally
-       lsp
+       (lsp +peek)
        magit             ; a git porcelain for Emacs
-       ;;make            ; run make tasks from Emacs
+       make              ; run make tasks from Emacs
        pdf               ; pdf enhancements
 
        :lang
-       (cc +lsp)         ; C/C++/Obj-C madness
-       common-lisp       ; if you've seen one lisp, you've seen them all
-       data              ; config/data formats
-       emacs-lisp        ; drown in parentheses
-       ess               ; emacs speaks statistics
-       julia             ; a better, faster MATLAB
-       latex             ; writing papers in Emacs has never been so fun
-       ledger            ; an accounting system in Emacs
-       markdown          ; writing docs for people to ignore
-       (org              ; organize your plain life in plain text
-        +pomodoro        ; be fruitful with the tomato technique
-        +present         ; Emacs for presentations
+       (cc +lsp)     ; C/C++/Obj-C madness
+       common-lisp   ; if you've seen one lisp, you've seen them all
+       data          ; config/data formats
+       emacs-lisp    ; drown in parentheses
+       (ess +lsp)    ; emacs speaks statistics
+       (julia +lsp)  ; a better, faster MATLAB
+       (latex        ; writing papers in Emacs has never been so fun
+        +lsp
+        +latexmk
+        +fold)
+       ;; ledger     ; an accounting system in Emacs
+       ;; scheme
+       markdown      ; writing docs for people to ignore
+       web
+       (org          ; organize your plain life in plain text
+        +pomodoro    ; be fruitful with the tomato technique
+        +present     ; Emacs for presentations
         +gnuplot
+        +pandoc
+        +hugo
         +roam)
-       (python +lsp)     ; beautiful is better than ugly
-       (sh +lsp)         ; she sells (ba|z|fi)sh shells on the C xor
+       (python +lsp) ; beautiful is better than ugly
+       (sh +lsp)     ; she sells (ba|z|fi)sh shells on the C xor
 
        :email
        (mu4e +gmail)
 
        :app
+       rss
 
        :config
        (default +smartparens))
