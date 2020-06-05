@@ -135,6 +135,8 @@
 
  :n   "}"       #'next-buffer
  :n   "{"       #'previous-buffer
+ :n   "za"      #'spell-fu-word-add
+ :n   "zr"      #'spell-fu-word-remove
  :n   "zx"      #'kill-this-buffer
  :n   "ZX"      #'bury-buffer
  :n   "gp"      #'+evil/reselect-paste
