@@ -327,10 +327,23 @@
              #'evil-emacs-state)
 
   (map! :map 'vterm-mode-map
-        :n "a" #'evil-emacs-state
-        :n "i" #'evil-emacs-state
+        :n "a" (cmd! (evil-emacs-state)
+                  (vterm-send-key (kbd "C-["))
+                  (vterm-send-key (kbd "l"))
+                  (vterm-send-key (kbd "a")))
+        :n "i" (cmd! (evil-emacs-state)
+                  (vterm-send-key (kbd "C-["))
+                  (vterm-send-key (kbd "l"))
+                  (vterm-send-key (kbd "i")))
+        :e "C-[" (cmd! (vterm-send-key (kbd "C-[")))
         :nie "C-d" #'vterm-send-C-d
-        :e "C-g" #'evil-normal-state))
+        :e "C-g" #'evil-normal-state
+        (:localleader
+         "j" #'multi-vterm-next
+         "k" #'multi-vterm-prev
+         "n" #'multi-vterm
+         "t" #'multi-vterm-dedicated-toggle
+         "p" #'multi-vterm-projectile)))
 
 (map! :leader
       "w"    #'save-buffer
