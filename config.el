@@ -161,6 +161,13 @@
     (point)
     (evil-insert-state))
 
+  (defun dc-avy-action-add-word-to-dictionary (pt)
+    "Kill sexp at PT and move there."
+    (save-excursion
+      (goto-char pt)
+      (spell-fu-word-add)
+      (message "Saved to dictionary: %s" (word-at-point))))
+
   (setq avy-dispatch-alist
         '((?c . dc-avy-action-kill-move)
           (?d . avy-action-kill-stay)
@@ -169,6 +176,7 @@
           (?n . avy-action-copy)
           (?y . avy-action-yank)
           (?i . avy-action-ispell)
+          (?I . dc-avy-action-add-word-to-dictionary)
           (?z . avy-action-zap-to-char))))
 
 (after! yasnippet
