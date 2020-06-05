@@ -17,6 +17,9 @@
 (package! function-args)
 (package! wordnut)
 (package! ebib)
+(package! org-ref-ox-hugo :recipe
+  (:host github :repo "jethrokuan/org-ref-ox-hugo" :branch "custom/overrides"))
+
 
 (package! evil-matchit-matlab :recipe
   (:local-repo "~/.doom.d/evil-matchit-matlab"))
