@@ -102,6 +102,7 @@ If FILE is a directory search with `counsel-find-file'"
 
 (defun dc-project-help (parent-dir)
   (interactive)
+  (dc-goto-or-create-workspace "Package")
   (let* ((project (completing-read "Project: "
                                    (directory-files parent-dir)))
          (file-base (concat parent-dir project "/README")))
