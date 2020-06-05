@@ -3,9 +3,9 @@
 
 (setq evil-collection-key-blacklist
       ;;; Code:
-      (list "C-j" "C-k" "gd" "gf" "J" "K" "[" "]" "gz" "Spc" "gr" "gR"
-            doom-leader-key doom-localleader-key
-            doom-leader-alt-key doom-localleader-alt-key))
+      (list "gd" "gf" "J" "K" "[" "]" "Spc" "gR"
+            doom-leader-key doom-localleader-key))
+
 
 (when (featurep! :editor evil +everywhere)
   ;; Have C-u behave similarly to `doom/backward-to-bol-or-indent'.
