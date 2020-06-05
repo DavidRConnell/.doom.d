@@ -1,6 +1,8 @@
 (setq doom-localleader-alt-key "C-H-a")
 (setq doom-leader-alt-key "C-H-b")
 
+(setq user-full-name "David R. Connell")
+
 (load! "+binding_functions")
 (if (featurep 'evil)
     (load! "+my-evil-bindings"))
