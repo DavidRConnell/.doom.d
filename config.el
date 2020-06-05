@@ -273,6 +273,12 @@ Only search the range between just after the point and BOUND."
   (push 'link-hint-org-ref-cite
         link-hint-types))
 
+(after! ess
+  (map! :map 'ess-r-mode-map
+        (:prefix "C-c"
+         "C-a" (cmd! (insert " <- "))))
+  (set-popup-rule! "\*R.*\*" :ignore t))
+
 (add-to-list 'auto-mode-alist '("\\DS\\'" . mu4e-compose-mode))
 
 (load-files-in (concat doom-private-dir "mode_keybindings"))
