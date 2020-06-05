@@ -1,6 +1,7 @@
 ;;; ~/.doom.d/mode_configs/+julia.el -*- lexical-binding: t; -*-
 
 (after! julia-menu
+  (setq lsp-julia-default-environment "~/.julia/environments/v1.4")
   (setq julia-imenu-generic-expression
         '(("Function (_)" "[ 	]*function[ 	]+\\(_[^ 	\n]*\\)" 1)
           ("Function" "^[ 	]*function[ 	]+\\([^_][^	\n]*\\)" 1)
