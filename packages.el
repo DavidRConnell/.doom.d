@@ -18,6 +18,9 @@
 (package! function-args)
 (package! wordnut)
 (package! ebib)
+(package! sed-mode)
+(package! spell-fu)
+(package! pdfgrep)
 (package! org-ref-ox-hugo :recipe
   (:host github :repo "jethrokuan/org-ref-ox-hugo" :branch "custom/overrides"))
 
