@@ -326,6 +326,10 @@ instead externally"
   (setq bibtex-completion-notes-template-multiple-files
         "${title}\n#+AUTHOR: ${author-or-editor}\ncite:${=key=}"))
 
+(after! ivy-bibtex
+  (advice-add
+   #'ivy-bibtex-edit-notes :before (lambda (_) (dc-goto-or-create-workspace "References"))))
+
 
 (after! org-drill
   (setq org-drill-add-random-noise-to-intervals-p t))
