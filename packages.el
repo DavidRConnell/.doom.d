@@ -12,7 +12,7 @@
 (package! evil-matchit)
 (package! scad-mode)
 (package! matlab-mode)
-(package! flycheck-julia)
+(package! lsp-julia :recipe (:host github :repo "non-jedi/lsp-julia"))
 (package! ripgrep)
 (package! function-args)
 (package! wordnut)
