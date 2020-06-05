@@ -44,6 +44,7 @@
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 
 (defvar notes-dir "~/notes/")
+(defvar zettle-dir (concat notes-dir "zettle/"))
 (defvar refs-notes (concat notes-dir  "refs/"))
 (defvar refs-pdfs "~/References/")
 (defvar refs-bib (concat refs-notes "master.bib"))
