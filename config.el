@@ -240,7 +240,6 @@
 (after! counsel-org-clock
   (counsel-org-clock-rebuild-history))
 
-(add-to-list 'auto-mode-alist '("\\.svg\\'" . image-mode))
 (after! org-roam
   (setq org-roam-index-file "index.org")
   (setq org-roam-buffer-height 0.5)
