@@ -14,6 +14,7 @@
 (package! matlab-mode)
 (package! lsp-julia :recipe (:host github :repo "non-jedi/lsp-julia"))
 (package! ripgrep)
+(package! multi-vterm)
 (package! function-args)
 (package! wordnut)
 (package! ebib)
