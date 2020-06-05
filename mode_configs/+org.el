@@ -326,3 +326,6 @@ instead externally"
   (setq bibtex-completion-notes-template-multiple-files
         "${title}\n#+AUTHOR: ${author-or-editor}\ncite:${=key=}"))
 
+
+(after! org-drill
+  (setq org-drill-add-random-noise-to-intervals-p t))
