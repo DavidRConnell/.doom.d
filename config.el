@@ -206,13 +206,19 @@
 
 (after! (:and flycheck flyspell)
   (add-hook 'text-mode-hook
-            #'flyspell-mode
             #'flycheck-mode))
 
-(after! (:and flyspell doom-one-theme)
+(after! (:and doom-one-theme flyspell)
   (doom-themes-set-faces nil
-  '(flyspell-incorrect :slant 'italic :foreground red :underline nil)
-  '(flyspell-duplicate :slant 'italic :foreground yellow :underline nil)))
+    '(flyspell-duplicate :slant 'italic :foreground yellow :underline nil)
+    '(flyspell-incorrect :slant 'italic :foreground red :underline nil)))
+
+(after! (:and doom-one-theme spell-fu)
+  (doom-themes-set-faces nil
+    '(spell-fu-incorrect-face :slant 'italic :foreground red)))
+
+(after! ispell
+  (setq ispell-personal-dictionary "~/.aspell.en.pws"))
 
 (after! (:and org-roam doom-one-theme)
   (doom-themes-set-faces nil
