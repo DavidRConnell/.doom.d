@@ -244,5 +244,10 @@
   (counsel-org-clock-rebuild-history))
 
 (add-to-list 'auto-mode-alist '("\\.svg\\'" . image-mode))
+(after! org-roam
+  (setq org-roam-index-file "index.org")
+  (setq org-roam-buffer-height 0.5)
+  (setq org-roam-buffer-position 'bottom))
+
 
 (load-files-in (concat doom-private-dir "mode_keybindings"))
