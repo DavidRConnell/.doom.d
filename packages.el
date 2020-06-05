@@ -2,6 +2,7 @@
 ;;; ~/.doom.d/packages.el
 
 (package! org-ref)
+(package! org-drill)
 (package! ivy-bibtex)
 (package! counsel-org-clock)
 (package! define-word)

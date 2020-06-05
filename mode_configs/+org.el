@@ -6,6 +6,7 @@
 
 (after! org
   ;; (require 'org-ref)
+  (require 'org-drill)
 
   (setq org-startup-folded t)
   (setq org-startup-truncated nil)
