@@ -46,14 +46,12 @@
         '((sequence "TODO(t)"
                     "NEXT(n)"
                     "EMAIL(e)"
-                    "MAYBE(m)"
-                    "LATER(l)"
                     "STAGNANT(s)"
                     "WAITING(w@)"
-                    "CANCELLED(c)"
                     "|" "DONE(d!/)")
+          (sequence "MAYBE(m)" "LATER(l)" "|" "CANCELLED(c)")
           (type "NOTES(N)")
-          (sequence "[ ]([)" "[-](-!/)" "|" "[x](x!/)")))
+          (sequence "[ ]([)" "[-](-!/)" "|" "[x](x!/)" "[/](/)")))
 
   (setq org-todo-keyword-faces
         '(("TODO" . (:foreground "#98be65" :weight bold))
