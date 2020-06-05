@@ -222,7 +222,7 @@
 
 (after! (:and org-roam doom-one-theme)
   (doom-themes-set-faces nil
-    '(org-roam-link :slant 'italic :underline t :foreground green)))
+    '(org-roam-link :slant 'italic :underline nil :foreground green)))
 
 (after! (:and writegood-mode doom-one-theme)
   (doom-themes-set-faces nil
