@@ -249,5 +249,27 @@
   (setq org-roam-buffer-height 0.5)
   (setq org-roam-buffer-position 'bottom))
 
+(after! (:and org-ref link-hint)
+  (defun link-hint--next-org-ref-cite (&optional bound)
+    "Find the next org-ref citation.
+Only search the range between just after the point and BOUND."
+    (link-hint--next-regexp org-ref-cite-re bound))
+
+  (defun link-hint--org-ref-cite-at-point-p ()
+    "Return the org-ref citation at the point or nil."
+    (let ((sym (format "%s" (symbol-at-point))))
+      (if (string-match-p org-ref-cite-re sym)
+          sym
+        nil)))
+
+  (link-hint-define-type 'org-ref-cite
+    :next #'link-hint--next-org-ref-cite
+    :at-point-p #'link-hint--org-ref-cite-at-point-p
+    :open #'org-ref-open-notes-at-point
+    :copy #'org-ref-open-pdf-at-point)
+
+  (push 'link-hint-org-ref-cite
+        link-hint-types))
+
 
 (load-files-in (concat doom-private-dir "mode_keybindings"))
