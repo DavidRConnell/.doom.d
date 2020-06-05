@@ -236,6 +236,7 @@ right sequence."
 (after! (:and ox org)
   (setq org-latex-prefer-user-labels t)
   (setq org-latex-pdf-process (list "latexmk --shell-escape -g -pdf -%latex %f"))
+  (setq org-latex-tables-booktabs t)
   (add-to-list 'org-latex-classes
                '("tufte-handout" "\\documentclass{tufte-handout}"
                  ("\\section{%s}" . "\\section*{%s}")
@@ -258,9 +259,18 @@ right sequence."
   (add-to-list 'org-latex-packages-alist
                '("" "pgfplots" nil))
   (add-to-list 'org-latex-packages-alist
+               '("newfloat" "minted" nil))
+  (add-to-list 'org-latex-packages-alist
                '("" "booktabs" nil))
 
   (load (concat doom-private-dir "extras/+ox-word.el"))
+  (add-to-list 'org-latex-listings-langs '(matlab "matlab"))
+  (setq org-latex-listings 'minted)
+  (setq org-latex-minted-options '(("frame" "lines") ("framesep" "3mm")
+                                   ("fontsize" "\\small") ("bgcolor" "mintedbg")))
+  (setq org-latex-to-mathml-convert-command
+        "latexmlmath \"%i\" --presentationmathml=%o")
+
   (require 'ox-extra)
   (ox-extras-activate '(ignore-headlines))
   (setq org-export-with-toc nil))
