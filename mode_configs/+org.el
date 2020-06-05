@@ -59,10 +59,12 @@
           ("EMAIL" . (:foreground "#da8548" :weight bold))
           ("MAYBE" . (:foreground "#ecbe7b" :weight bold))
           ("WAITING" . (:foreground "#46d9ff" :weight bold))
-          ("CANCELLED" . (:foreground "#46d9ff" :weight bold))
           ("LATER" . (:foreground "#46d9ff" :weight bold))
           ("STAGNANT" . (:foreground "#bf5150" :weight bold))
           ("NOTES" . (:foreground "#d2691e" :weight bold))
+          ("QUESTION" . (:foreground "#bd93f9" :weight bold))
+          ("FILE" . (:foreground "#ecbe7b" :weight bold))
+          ("INPROGRESS" . (:foreground "#bd93f9" :weight bold))
           ("[ ]" . (:foreground "#98be65" :weight bold))
           ("[-]" . (:foreground "#ecbe7b" :weight bold))))
 
