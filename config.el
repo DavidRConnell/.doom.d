@@ -271,5 +271,6 @@ Only search the range between just after the point and BOUND."
   (push 'link-hint-org-ref-cite
         link-hint-types))
 
+(add-to-list 'auto-mode-alist '("\\DS\\'" . mu4e-compose-mode))
 
 (load-files-in (concat doom-private-dir "mode_keybindings"))
