@@ -251,8 +251,6 @@
             "C-n"     #'company-select-next
             "C-p"     #'company-select-previous
             "C-h"     #'company-show-doc-buffer
-            "C-u"     #'company-previous-page
-            "C-d"     #'company-next-page
             "C-s"     #'company-filter-candidates
             "C-S-s"   (cond ((featurep! :completion helm) #'helm-company)
                             ((featurep! :completion ivy)  #'counsel-company))
@@ -272,15 +270,17 @@
       (:when (featurep! :completion ivy)
         (:after ivy
           :map ivy-minibuffer-map
-          "C-SPC" #'ivy-partial-or-done ; preview file
-          "C-j"   #'ivy-alt-done
-          "C-k"   nil
-          "C-r"   #'counsel-minibuffer-history
-          "C-v"   #'yank
-          "C-s"   #'ivy-mark
-          "C--"   #'ivy-unmark
-          "C-f"   #'ivy-toggle-marks
-          "C-a"   #'ivy-toggle-calling)
+          "C-SPC"   #'ivy-partial-or-done ; preview file
+          "C-j"     #'ivy-alt-done
+          "C-k"     nil
+          "C-r"     #'counsel-minibuffer-history
+          "C-v"     #'yank
+          "C-s"     #'ivy-mark
+          "C--"     #'ivy-unmark
+          "C-c C-m" #'ivy-toggle-marks
+          "C-c C-i" #'ivy-toggle-ignore
+          "C-c C-f" #'ivy-toggle-fuzzy
+          "C-c C-a" #'ivy-toggle-calling)
         (:after counsel
           :map shell-mode-map
           "C-r"   #'counsel-shell-history
