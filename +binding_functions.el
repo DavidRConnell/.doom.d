@@ -152,6 +152,5 @@ If there no FUNC3 is provided defaults to FUNC2."
          (file (funcall org-ref-get-pdf-filename-function key))
          (depth))
     (dolist (elm (pdf-info-outline file))
-      (setq depth (- (cdr (first elm)) 1))
-      (if (> depth 0)
-          (insert (concat (make-string depth ?*) " " (cdr (third elm)) "\n"))))))
+      (setq depth (cdr (first elm)))
+      (insert (concat (make-string depth ?*) " " (cdr (third elm)) "\n")))))
