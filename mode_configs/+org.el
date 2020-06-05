@@ -298,7 +298,7 @@ right sequence."
                 (car files)
               (completing-read "Choose: " files)))))
 
-  (defun org-ref-open-pdf-at-point (arg)
+  (defun dc-open-pdf-at-point (arg)
     "Open the pdf for bibtex key under point if it exists.
 Redefined so pdf is opened in emacs when prefed with `\\[universal-argument]'
 instead externally"
