@@ -330,6 +330,15 @@ instead externally"
   (advice-add
    #'ivy-bibtex-edit-notes :before (lambda (_) (dc-goto-or-create-workspace "References"))))
 
+(setq org-roam-directory zettle-dir)
+(after! (:and org org-roam)
+  (setq org-roam-graph-viewer "/usr/bin/qutebrowser")
+  (setq org-roam-capture-templates
+        '(("d" "default" plain #'org-roam-capture--get-point
+           "%?"
+           :file-name "%<%Y%m%d%H%M%S>"
+           :head "#+TITLE: ${title}\n"
+           :unnarrowed t))))
 
 (after! org-drill
   (setq org-drill-add-random-noise-to-intervals-p t))
