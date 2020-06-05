@@ -275,8 +275,6 @@ right sequence."
   (ox-extras-activate '(ignore-headlines))
   (setq org-export-with-toc nil))
 
-(add-to-list 'org-file-apps '("\\.pdf\\'" . (lambda (_file link)
-                                              (call-process "xdg-open" nil 0 nil link))))
 (after! ob-octave
   (load (concat doom-private-dir "extras/+ob-octave-fix.el")))
 
