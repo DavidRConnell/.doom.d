@@ -235,7 +235,7 @@ right sequence."
 
 (after! (:and ox org)
   (setq org-latex-prefer-user-labels t)
-  (setq org-latex-pdf-process (list "latexmk -g -pdf -%latex %f"))
+  (setq org-latex-pdf-process (list "latexmk --shell-escape -g -pdf -%latex %f"))
   (add-to-list 'org-latex-classes
                '("tufte-handout" "\\documentclass{tufte-handout}"
                  ("\\section{%s}" . "\\section*{%s}")
