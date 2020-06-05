@@ -154,3 +154,10 @@ If there no FUNC3 is provided defaults to FUNC2."
     (dolist (elm (pdf-info-outline file))
       (setq depth (cdr (first elm)))
       (insert (concat (make-string depth ?*) " " (cdr (third elm)) "\n")))))
+
+(after! vterm
+		(push (list "send-to-popup"
+            (lambda (file)
+              (other-window 1)
+              (find-file file)))
+          vterm-eval-cmds))
