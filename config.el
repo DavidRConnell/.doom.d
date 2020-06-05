@@ -1,3 +1,6 @@
+(setq doom-localleader-alt-key "C-H-a")
+(setq doom-leader-alt-key "C-H-b")
+
 (load! "+binding_functions")
 (if (featurep 'evil)
     (load! "+my-evil-bindings"))
