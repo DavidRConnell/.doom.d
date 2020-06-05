@@ -45,6 +45,8 @@
               #'matlab-toggle-functions-have-end
               #'insert-function-snippet
               #'fix-matlab-imenu-generic-expression
+              #'yas-reload-all
               #'yas-minor-mode
               #'hl-todo-mode
-              #'rainbow-delimiters-mode))
+              #'rainbow-delimiters-mode
+              #'spell-fu-mode))
