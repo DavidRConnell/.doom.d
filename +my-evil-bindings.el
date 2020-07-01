@@ -218,6 +218,12 @@
    :nv "M-t"   #'+workspace/new
    :nv "M-T"   #'+workspace/display
    :nv "M-q"   #'+workspace/delete
+   (:prefix "C-c"
+    (:prefix ("C-w" . "Workspaces")
+     "h"   #'+workspace/switch-left
+     "l"   #'+workspace/switch-right
+     "r"   #'+workspace/rename
+     "g"   #'+workspace/switch-to))
    :nv "M-1"   (λ! (+workspace/switch-to 0))
    :nv "M-2"   (λ! (+workspace/switch-to 1))
    :nv "M-3"   (λ! (+workspace/switch-to 2))
