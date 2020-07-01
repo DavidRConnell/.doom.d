@@ -514,9 +514,9 @@
        :desc "Capture"           "x" #'org-roam-capture
        :desc "Deft"              "d" (cmd! (dc-run-deft-in-workspace
                                          "Zettle" zettle-dir))
-       :desc "Go to todo"        "t" (cmd! (dc-open-in-workspace
+       :desc "Go to today"       "t" (cmd! (dc-open-in-workspace
                                          "Zettle"
-                                         (concat zettle-dir "todo.org")))
+                                         (concat zettle-dir "today.org")))
        :desc "Go to next"        "n" (cmd! (dc-open-in-workspace
                                          "Zettle"
                                          (concat zettle-dir "next.org")))
