@@ -49,17 +49,20 @@
 (defvar refs-pdfs "~/References/")
 (defvar refs-bib (concat refs-notes "master.bib"))
 
-(after! ebib
-  (setq ebib-notes-directory refs-notes)
-  (setq ebib-reading-list-file (concat refs-notes "readinglist.org"))
-  (setq ebib-default-directory refs-notes)
-  (setq ebib-keywords-file (concat refs-notes ".keywords.txt"))
-  (setq ebib-notes-show-note-method nil)
+(use-package! ebib
+  :commands ebib
+  :config
+  (setq ebib-notes-directory refs-notes
+        ebib-reading-list-file (concat refs-notes "readinglist.org")
+        ebib-default-directory refs-notes
+        ebib-keywords-file (concat refs-notes ".keywords.txt")
+        ebib-notes-show-note-method nil
+        ebib-file-associations '(("pdf" . "xdg-open")))
+
   (setq ebib-file-search-dirs
-        (remove-if-not
+        (cl-remove-if-not
          (lambda (f) (find-lisp-file-predicate-is-directory f refs-pdfs))
          (directory-files-recursively refs-pdfs "." 'dirs)))
-  (setq ebib-file-associations '(("pdf" . "xdg-open")))
 
   (doom-themes-set-faces nil
     '(ebib-marked-face :foreground green))
@@ -97,10 +100,11 @@
           (?D . ebib-create-org-doi-link)
           (?U . ebib-create-org-url-link)
           (?M . ebib-reading-list-todo-marker)))
+
   (setq ebib-reading-list-template-specifiers ebib-notes-template-specifiers)
 
-  (setq ebib-reading-list-template "* %M [[file:%k.org][%A: %t]]\n:PROPERTIES:\n:Custom_id: %k\n:END:\n")
-  (setq ebib-notes-template "#+TITLE: %t\n#+AUTHOR: %A\n#+CUSTOM_ID: %k\ncite:%k\n\n>|<"))
+  (setq ebib-reading-list-template "* %M [[file:%k.org][%t]]\n:PROPERTIES:\n:AUTHOR: %A\n:END:\ncite:%k\n\n")
+  (setq ebib-notes-template "#+TITLE: %t\n#+AUTHOR: %A\ncite:%k\n\n>|<"))
 
 (after! deft
   (setq deft-extensions '("org"))
