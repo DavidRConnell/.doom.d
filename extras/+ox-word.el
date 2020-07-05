@@ -44,10 +44,10 @@
          (buf (find-file-noselect tex-file)))
 
     (with-current-buffer buf
-      (ow-fix-references)
       (ow--convert-file-figures-to-pdf)
+      (ow--fix-references)
       (if bib-file
-          (ow-add-reference-header))
+          (ow--add-reference-header))
       (save-buffer)
       (kill-buffer buf))
 
@@ -109,9 +109,9 @@
     (dolist (f (directory-files "." nil "temp\..*"))
       (delete-file f))))
 
-(defun ow-fix-references ()
   (let ((ref-regex "\\\\cref{\\(.*?\\):\\(.*?\\)}")
         type)
+(defun ow--fix-references ()
     (goto-char (point-min))
     (while (re-search-forward ref-regex nil t)
       (setq type (cond
@@ -128,6 +128,7 @@
                              "\\\\ref{" (match-string 1) ":" (match-string 2) "}")))))
 
 (defun ow-add-reference-header ()
+(defun ow--add-reference-header ()
   (goto-char (point-max))
   (re-search-backward "\\\\bibliography{.*?}" nil t)
   (if (match-string 0)
