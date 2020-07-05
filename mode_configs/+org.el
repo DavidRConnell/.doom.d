@@ -338,7 +338,14 @@ instead externally"
            "%?"
            :file-name "%<%Y%m%d%H%M%S>"
            :head "#+TITLE: ${title}\n"
-           :unnarrowed t))))
+           :unnarrowed t)))
+  (setq org-roam-capture-immediate-template
+        '("d" "default" plain #'org-roam-capture--get-point
+           "%?"
+           :file-name "%<%Y%m%d%H%M%S>"
+           :head "#+TITLE: ${title}\n"
+           :unnarrowed t
+           :immediate-finish t)))
 
 (after! org-drill
   (setq org-drill-add-random-noise-to-intervals-p t))
