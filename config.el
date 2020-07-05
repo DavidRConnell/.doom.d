@@ -147,7 +147,8 @@
   (setq evil-magit-want-horizontal-movement t)
   (map! :mode magit-mode
         "?" #'evil-search-backward
-        "K" #'evil-scroll-line-up))
+        "K" #'evil-scroll-line-up
+        :n "gr" #'magit-refresh))
 
 (after! avy
   (setq avy-keys-alist

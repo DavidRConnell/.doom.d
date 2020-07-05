@@ -4,6 +4,7 @@
   (map! :mode mu4e-headers-mode
         :n "J" #'evil-scroll-line-down
         :n "K" #'evil-scroll-line-up
+        :n "gr" #'mu4e-update-index
         (:prefix "C-c"
           :n "C-j" #'mu4e~headers-jump-to-maildir))
 
