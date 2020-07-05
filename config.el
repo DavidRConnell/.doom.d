@@ -269,6 +269,10 @@ Only search the range between just after the point and BOUND."
   (push 'link-hint-org-ref-cite
         link-hint-types))
 
+(use-package! nov
+  :commands nov-mode
+  :config (add-hook 'nov-mode-hook #'writeroom-mode))
+
 (after! ess
   (map! :map 'ess-r-mode-map
         (:prefix "C-c"
