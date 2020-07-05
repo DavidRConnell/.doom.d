@@ -24,7 +24,7 @@
 (require 'org-ref)
 
 (defvar ow-label-re "\\\\label{\\(\\(.*?\\):.*?\\)}")
-(defvar ow-ref-re "\\\\\\(c|auto\\)ref{\\(\\(.*?\\):.*?\\)}")
+(defvar ow-ref-re "\\\\\\(c\\|auto\\)ref{\\(\\(.*?\\):.*?\\)}")
 (defvar ow-eq-re "\\(^\s*\\)\\(.*?\\)\\(\n\\\\end{.*?}\\)")
 (defvar ow-graphicx-re "\\\\includegraphic{.*?}")
 
