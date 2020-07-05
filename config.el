@@ -65,9 +65,6 @@
          (lambda (f) (find-lisp-file-predicate-is-directory f refs-pdfs))
          (directory-files-recursively refs-pdfs "." 'dirs)))
 
-  ;; (doom-themes-set-faces nil
-  ;;   '(ebib-marked-face :foreground green))
-
   (map! :map 'ebib-index-mode-map
         "/" #'swiper)
 
