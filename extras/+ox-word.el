@@ -1,12 +1,24 @@
-;;; ox-word.el --- export org-mode to MS Word docx
+;;; ox-word.el --- export org-mode to MS Word docx -*- lexical-binding: t; -*-
+;;
+;; Copyright (C) 2020 David R. Connell
+;;
+;; Author: David R. Connell <https://github/DavidRConnell>
+;; Created: May 14, 2020
+;; Modified: Jul 4, 2020
+;; Version: 0.0.1
+;; Keywords:
+;; Package-Requires: ((emacs 28.0.50) (cl-lib "0.5") (org-ref) (pandoc "2.0")
+;; (pandoc-crossref))
+;;
+;; This file is not part of GNU Emacs.
 ;;
 ;;; Commentary:
 ;; Uses org-mode to latex export followed by pandoc to convert latex to docx.
-;; After created the latex file, converts all tikz figures to png and numbers
-;; all figures, equations, and tables as pandoc doesn't do this.
-;; Also adds a Reference section if citations used.
+;; Based off ideas from John Kitchin's ox-word.el After created the latex file,
+;; converts all tikz and svg figures to pdf and numbers all figures, equations,
+;; and tables as pandoc doesn't do this. Also adds a Reference section if
+;; citations used.
 ;;
-;; Depends on org-ref, pandoc, and pandoc-crossref.
 ;;; Code:
 
 (require 'org-ref)
