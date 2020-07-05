@@ -223,6 +223,7 @@
      "h"   #'+workspace/switch-left
      "l"   #'+workspace/switch-right
      "r"   #'+workspace/rename
+     "o"   #'+workspace/other
      "g"   #'+workspace/switch-to))
    :nv "M-1"   (λ! (+workspace/switch-to 0))
    :nv "M-2"   (λ! (+workspace/switch-to 1))
