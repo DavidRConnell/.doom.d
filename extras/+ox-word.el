@@ -13,11 +13,11 @@
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; Commentary:
-;; Uses org-mode to latex export followed by pandoc to convert latex to docx.
-;; Based off ideas from John Kitchin's ox-word.el After created the latex file,
-;; converts all tikz and svg figures to pdf and numbers all figures, equations,
-;; and tables as pandoc doesn't do this. Also adds a Reference section if
-;; citations used.
+;; Uses org-mode to LaTeX exporter followed by pandoc to convert LaTeX to docx.
+;; Based off ideas from John Kitchin's ox-word.el. After exporting to LaTeX the
+;; resulting TeX file is processed, converting all tikz and svg figures to pdf
+;; and numbers all figures, equations, and tables as pandoc doesn't do this.
+;; Also adds a Reference section if citations used.
 ;;
 ;;; Code:
 
