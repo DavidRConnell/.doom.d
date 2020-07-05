@@ -8,7 +8,7 @@
 ;; Version: 0.0.1
 ;; Keywords:
 ;; Package-Requires: ((emacs 28.0.50) (cl-lib "0.5") (org-ref) (pandoc "2.0")
-;; (pandoc-crossref))
+;; (pandoc-crossref) (svg2pdf))
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
