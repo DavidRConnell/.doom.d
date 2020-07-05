@@ -64,8 +64,8 @@
          (lambda (f) (find-lisp-file-predicate-is-directory f refs-pdfs))
          (directory-files-recursively refs-pdfs "." 'dirs)))
 
-  (doom-themes-set-faces nil
-    '(ebib-marked-face :foreground green))
+  ;; (doom-themes-set-faces nil
+  ;;   '(ebib-marked-face :foreground green))
 
   (map! :map 'ebib-index-mode-map
         "/" #'swiper)
@@ -212,23 +212,24 @@
   (add-hook 'text-mode-hook
             #'flycheck-mode))
 
-(after! (:and doom-one-theme flyspell)
+(load! (concat doom-private-dir "extras/+colors.el"))
+(after! flyspell
   (doom-themes-set-faces nil
     '(flyspell-duplicate :slant 'italic :foreground yellow :underline nil)
     '(flyspell-incorrect :slant 'italic :foreground red :underline nil)))
 
-(after! (:and doom-one-theme spell-fu)
+(after! spell-fu
   (doom-themes-set-faces nil
     '(spell-fu-incorrect-face :slant 'italic :foreground red)))
 
 (after! ispell
   (setq ispell-personal-dictionary "~/.aspell.en.pws"))
 
-(after! (:and org-roam doom-one-theme)
+(after! org-roam
   (doom-themes-set-faces nil
     '(org-roam-link :slant 'italic :underline nil :foreground green)))
 
-(after! (:and writegood-mode doom-one-theme)
+(after! writegood-mode
   (doom-themes-set-faces nil
   '(writegood-weasels-face :slant 'italic :foreground blue)
   '(writegood-duplicates-face :slant 'italic :foreground orange))
