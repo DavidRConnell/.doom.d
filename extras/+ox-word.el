@@ -44,8 +44,8 @@
          (buf (find-file-noselect tex-file)))
 
     (with-current-buffer buf
-      (convert-file-tikz-figures-to-png)
       (ow-fix-references)
+      (ow--convert-file-figures-to-pdf)
       (if bib-file
           (ow-add-reference-header))
       (save-buffer)
@@ -53,15 +53,15 @@
 
     (shell-command pandoc-command)))
 
-(defun convert-file-tikz-figures-to-png ()
-  "Convert all tikz figures in file to png."
+(defun ow--convert-file-figures-to-pdf ()
+  "Convert all tikz and svg figures in file to pdf."
 
   (let* ((tikz-regex "\\\\input{\\(.*?\\).tikz}")
          (figure-regex (concat "\\(\\\\resizebox{\\(.*?\\)}{!}{" tikz-regex "}\\)"
                                "\\|"
                                "\\(" tikz-regex "\\)"))
-         (png-width "[width=%s]")
-         (png-command "\\\\includegraphics%s{%s.png}"))
+         (pdf-width "[width=%s]")
+         (pdf-command "\\\\includegraphics%s{%s.pdf}"))
 
     (goto-char (point-min))
     (while (re-search-forward figure-regex nil t)
@@ -69,21 +69,21 @@
                           (match-string 3)
                         (match-string 5)))
             (size (if (match-string 1)
-                      (format png-width
+                      (format pdf-width
                               (replace-regexp-in-string "\\\\" "\\\\\\\\" (match-string 2)))
                     "")))
 
-        (replace-match (format png-command
+        (replace-match (format pdf-command
                                size
                                basename))
 
-        (if (or (not (file-exists-p (concat basename ".png")))
-                (< (ow-file-modification-time (concat basename ".png"))
+        (if (or (not (file-exists-p (concat basename ".pdf")))
+                (< (ow-file-modification-time (concat basename ".pdf"))
                    (ow-file-modification-time (concat basename ".tikz"))))
 
             (progn
-              (ow-tikz2png basename)
-              (message (concat basename ".tikz converted to png"))))))))
+              (ow-tikz2pdf basename)
+              (message (concat basename ".tikz converted to pdf"))))))))
 
 (defun ow-file-modification-time (file)
   "Posix time of last modification."
@@ -91,16 +91,13 @@
                       (file-attribute-modification-time
                        (file-attributes file)))))
 
-(defun ow-tikz2png (basename)
-  "Convert tikz figure FILENAME to a png file."
+(defun ow-tikz2pdf (basename)
+  "Convert tikz figure FILENAME to a pdf file."
   (let ((textemplate (concat
-                      "\\documentclass[preview,border=4mm,convert={density=600,outfile=%1$s.png}]{standalone}\n"
+                      "\\documentclass[tikz,convert={outfile=%1$s.pdf}]{standalone}\n"
+                      "\\usepackage{graphicx}\n"
                       "\\usepackage{pgfplots}\n"
                       "\\pgfplotsset{compat=1.16}\n"
-                      "\\usepackage{graphicx}\n"
-                      "\\usepackage{tikz}\n"
-                      "\\usepackage{url}\n"
-                      "\\usepackage{xcolor}\n"
                       "\\begin{document}\n"
                       "\\input{%1$s.tikz}\n"
                       "\\end{document}"))
