@@ -25,6 +25,8 @@
 (package! org-ref-ox-hugo :recipe
   (:host github :repo "jethrokuan/org-ref-ox-hugo" :branch "custom/overrides"))
 
+(package! flycheck-textlint :recipe
+  (:host github :repo "kisaragi-hiu/flycheck-textlint"))
 
 (package! evil-matchit-matlab :recipe
   (:local-repo "~/.doom.d/evil-matchit-matlab"))
