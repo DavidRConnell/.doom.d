@@ -62,42 +62,59 @@
   "Convert all tikz and svg figures in file to pdf."
 
   (let* ((tikz-regex "\\\\input{\\(.*?\\).tikz}")
+         (svg-regex "\\\\includesvg\\[width=\\(.*?\\)\\]{\\(.*?\\)}")
          (figure-regex (concat "\\(\\\\resizebox{\\(.*?\\)}{!}{" tikz-regex "}\\)"
                                "\\|"
-                               "\\(" tikz-regex "\\)"))
+                               "\\(" tikz-regex "\\)"
+                               "\\|"
+                               "\\(" svg-regex "\\)"))
          (pdf-width "[width=%s]")
          (pdf-command "\\\\includegraphics%s{%s.pdf}"))
 
     (goto-char (point-min))
     (while (re-search-forward figure-regex nil t)
-      (let ((basename (if (match-string 1)
-                          (match-string 3)
-                        (match-string 5)))
-            (size (if (match-string 1)
-                      (format pdf-width
-                              (replace-regexp-in-string "\\\\" "\\\\\\\\" (match-string 2)))
-                    "")))
+      (let ((basename (cond ((match-string 1)
+                             (match-string 3))
+                            ((match-string 4)
+                             (match-string 5))
+                            ((match-string 6)
+                             (match-string 8))))
+            (ext (cond ((or (match-string 1) (match-string 4))
+                        ".tikz")
+                       ((match-string 6)
+                        ".svg")))
+            (size (cond ((match-string 1)
+                         (format pdf-width
+                                 (replace-regexp-in-string
+                                  "\\\\" "\\\\\\\\" (match-string 2))))
+                        ((match-string 6)
+                         (format pdf-width
+                                 (replace-regexp-in-string
+                                  "\\\\" "\\\\\\\\" (match-string 7))))
+                        (t ""))))
 
         (replace-match (format pdf-command
                                size
                                basename))
 
         (if (or (not (file-exists-p (concat basename ".pdf")))
-                (< (ow-file-modification-time (concat basename ".pdf"))
-                   (ow-file-modification-time (concat basename ".tikz"))))
+                (< (ow--file-modification-time (concat basename ".pdf"))
+                   (ow--file-modification-time (concat basename ext))))
 
             (progn
-              (ow-tikz2pdf basename)
-              (message (concat basename ".tikz converted to pdf"))))))))
+              (if (string= ext ".tikz")
+                  (ow--tikz2pdf basename))
+              (ow--svg2pdf basename)
+              (message (concat basename ext " converted to pdf"))))))))
 
-(defun ow-file-modification-time (file)
+(defun ow--file-modification-time (file)
   "Posix time of last modification."
   (string-to-number (format-time-string "%s"
                       (file-attribute-modification-time
                        (file-attributes file)))))
 
-(defun ow-tikz2pdf (basename)
-  "Convert tikz figure FILENAME to a pdf file."
+(defun ow--tikz2pdf (basename)
+  "Convert tikz figure BASENAME to a PDF file."
   (let ((textemplate (concat
                       "\\documentclass[tikz,convert={outfile=%1$s.pdf}]{standalone}\n"
                       "\\usepackage{graphicx}\n"
@@ -113,6 +130,10 @@
     (shell-command (concat command " temp.tex"))
     (dolist (f (directory-files "." nil "temp\..*"))
       (delete-file f))))
+
+(defun ow--svg2pdf (basename)
+  "convert SVG figure BASENAME to a PDF file."
+  (shell-command (concat "svg2pdf " basename ".svg " basename ".pdf")))
 
 (defun ow--fix-references ()
   (let ((counter-alist)
