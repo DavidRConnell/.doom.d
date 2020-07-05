@@ -41,6 +41,7 @@
 
 (setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 16))
 (setq doom-localleader-key ",")
+(setq doom-theme 'spacemacs-light)
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
 
 (defvar notes-dir "~/notes/")

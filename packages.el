@@ -21,6 +21,7 @@
 (package! sed-mode)
 (package! spell-fu)
 (package! pdfgrep)
+(package! spacemacs-theme)
 (package! org-ref-ox-hugo :recipe
   (:host github :repo "jethrokuan/org-ref-ox-hugo" :branch "custom/overrides"))
 
