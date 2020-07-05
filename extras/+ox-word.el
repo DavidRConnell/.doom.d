@@ -23,6 +23,11 @@
 
 (require 'org-ref)
 
+(defvar ow-label-re "\\\\label{\\(\\(.*?\\):.*?\\)}")
+(defvar ow-ref-re "\\\\\\(c|auto\\)ref{\\(\\(.*?\\):.*?\\)}")
+(defvar ow-eq-re "\\(^\s*\\)\\(.*?\\)\\(\n\\\\end{.*?}\\)")
+(defvar ow-graphicx-re "\\\\includegraphic{.*?}")
+
 (defun org-word-export-to-docx (&optional async subtreep visible-only body-only options)
   "Export current buffer to a word docx file via ox-latex and pandoc."
   (interactive)
@@ -109,25 +114,61 @@
     (dolist (f (directory-files "." nil "temp\..*"))
       (delete-file f))))
 
-  (let ((ref-regex "\\\\cref{\\(.*?\\):\\(.*?\\)}")
-        type)
 (defun ow--fix-references ()
+  (let ((counter-alist)
+        (reference-alist)
+        (label)
+        (type))
+
     (goto-char (point-min))
-    (while (re-search-forward ref-regex nil t)
+    (while (re-search-forward ow-label-re nil t)
+      (setq type (match-string 2))
+      (setq label (match-string 1))
+      (if (assoc type counter-alist)
+          (setf (cdr (assoc type counter-alist))
+                (+ 1 (cdr (assoc type counter-alist))))
+        (push (cons type 1) counter-alist))
+      (push (cons label (cdr (assoc type counter-alist)))
+            reference-alist)
+      (cond ((string= type "fig")
+             (replace-match (format "Figure %s: "
+                                    (cdr (assoc label
+                                                reference-alist)))))
+            ((string= type "tab")
+             (replace-match (format "Table %s: "
+                                    (cdr (assoc label
+                                                reference-alist)))))
+            ((string= type "eq")
+             (progn
+               (replace-match "")
+               (re-search-forward ow-eq-re nil t)
+               (replace-match
+                (format "%s%s \\\\qquad \\\\left(%s\\\\right)%s"
+                        (match-string 1)
+                        (ow--fix-backslashes (match-string 2))
+                        (cdr (assoc label reference-alist))
+                        (ow--fix-backslashes (match-string 3))))))))
+
+    (goto-char (point-min))
+    (while (re-search-forward ow-ref-re nil t)
       (setq type (cond
-                  ((string= (match-string 1) "fig")
-                   "Figure ")
-                  ((string= (match-string 1) "sec")
-                   "Section ")
-                  ((string= (match-string 1) "tab")
-                   "Table ")
-                  ((string= (match-string 1) "eq")
-                   "eq ")))
+                  ((string= (match-string 3) "fig")
+                   "Figure")
+                  ((string= (match-string 3) "sec")
+                   "Section")
+                  ((string= (match-string 3) "tab")
+                   "Table")
+                  ((string= (match-string 3) "eq")
+                   "eq")))
 
-      (replace-match (concat type
-                             "\\\\ref{" (match-string 1) ":" (match-string 2) "}")))))
+      (replace-match
+       (format "%s %s"
+               type
+               (cdr (assoc (match-string 2) reference-alist)))))))
 
-(defun ow-add-reference-header ()
+(defun ow--fix-backslashes (str)
+  (replace-regexp-in-string "\\\\" "\\\\\\\\" str))
+
 (defun ow--add-reference-header ()
   (goto-char (point-max))
   (re-search-backward "\\\\bibliography{.*?}" nil t)
