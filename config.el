@@ -227,6 +227,13 @@
   (add-hook 'writegood-mode-hook
             #'writegood-passive-voice-turn-off))
 
+(use-package! smartparens
+  :config
+  (setq smartparens-strict-mode t))
+
+(use-package! evil-smartparens
+  :config (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode))
+
 (after! evil-surround
   (add-to-list 'evil-surround-pairs-alist
                '(?< . ("< " . " >")))

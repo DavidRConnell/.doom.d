@@ -22,6 +22,7 @@
 (package! spell-fu)
 (package! pdfgrep)
 (package! spacemacs-theme)
+(package! evil-smartparens)
 (package! nov)
 ;; (package! exwm)
 
