@@ -277,8 +277,11 @@ Only search the range between just after the point and BOUND."
         link-hint-types))
 
 (use-package! nov
-  :commands nov-mode
-  :config (add-hook 'nov-mode-hook #'writeroom-mode))
+  :mode ("\\epub\\'" . nov-mode)
+  :config
+  (add-hook 'nov-mode-hook #'writeroom-mode)
+  (setq writeroom-mode-line t)
+  (setq nov-text-width 60))
 
 (after! ess
   (map! :map 'ess-r-mode-map
