@@ -286,6 +286,7 @@ Only search the range between just after the point and BOUND."
          "C-a" (cmd! (insert " <- "))))
   (set-popup-rule! "\*R.*\*" :ignore t))
 
-(add-to-list 'auto-mode-alist '("\\DS\\'" . mu4e-compose-mode))
+(use-package! mu4e
+  :mode ("\\DS\\'" . mu4e-compose-mode))
 
 (load-files-in (concat doom-private-dir "mode_keybindings"))
