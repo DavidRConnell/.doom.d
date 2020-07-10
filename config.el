@@ -4,6 +4,10 @@
 (defvar refs-pdfs "~/References/")
 (defvar refs-bib (concat refs-notes "master.bib"))
 
+(add-hook 'emacs-startup-hook (cmd! (find-file
+                                  (concat zettle-dir "today.org"))
+                                 (persp-rename "Zettle")))
+
 (setq doom-localleader-alt-key "C-H-a")
 (setq doom-leader-alt-key "C-H-b")
 
