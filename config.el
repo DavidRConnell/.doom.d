@@ -285,7 +285,7 @@ Only search the range between just after the point and BOUND."
   :config
   (add-hook 'nov-mode-hook #'writeroom-mode)
   (setq writeroom-mode-line t)
-  (setq nov-text-width 60))
+  (setq nov-text-width 40))
 
 (after! ess
   (map! :map 'ess-r-mode-map
