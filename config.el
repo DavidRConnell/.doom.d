@@ -200,7 +200,8 @@
 
 (after! flycheck
   (setq flycheck-textlint-config "~/.textlintrc"
-        flycheck-textlint-executable "~/node_modules/textlint/bin/textlint.js"))
+        flycheck-textlint-executable "~/node_modules/textlint/bin/textlint.js")
+  (setq flycheck-checkers (remove 'proselint flycheck-checkers)))
 
 (after! (:and flycheck flyspell)
   (add-hook 'text-mode-hook
