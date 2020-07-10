@@ -145,7 +145,6 @@
         "C-n" #'git-timemachine-show-next-revision))
 
 (after! evil-magit
-  (setq evil-magit-want-horizontal-movement t)
   (map! :mode magit-mode
         "?" #'evil-search-backward
         "K" #'evil-scroll-line-up
