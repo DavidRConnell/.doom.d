@@ -264,6 +264,7 @@ right sequence."
                '("" "booktabs" nil))
 
   (load (concat doom-private-dir "extras/+ox-word.el"))
+  (load (concat doom-private-dir "extras/+ox-filters.el"))
   (add-to-list 'org-latex-listings-langs '(matlab "matlab"))
   (setq org-latex-listings 'minted)
   (setq org-latex-minted-options '(("frame" "lines") ("framesep" "3mm")
