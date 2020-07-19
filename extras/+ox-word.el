@@ -8,14 +8,14 @@
 ;; Version: 0.0.1
 ;; Keywords:
 ;; Package-Requires: ((emacs 28.0.50) (cl-lib "0.5") (org-ref) (pandoc "2.0")
-;; (pandoc-crossref) (svg2pdf))
+;; (pandoc-crossref) (svg2png))
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; Commentary:
 ;; Uses org-mode to LaTeX exporter followed by pandoc to convert LaTeX to docx.
 ;; Based off ideas from John Kitchin's ox-word.el. After exporting to LaTeX the
-;; resulting TeX file is processed, converting all tikz and svg figures to pdf
+;; resulting TeX file is processed, converting all tikz and svg figures to png
 ;; and numbers all figures, equations, and tables as pandoc doesn't do this.
 ;; Also adds a Reference section if citations used.
 ;;
@@ -49,7 +49,7 @@
          (buf (find-file-noselect tex-file)))
 
     (with-current-buffer buf
-      (ow--convert-file-figures-to-pdf)
+      (ow--convert-file-figures-to-png)
       (ow--fix-references)
       (if bib-file
           (ow--add-reference-header))
@@ -58,8 +58,8 @@
 
     (shell-command pandoc-command)))
 
-(defun ow--convert-file-figures-to-pdf ()
-  "Convert all tikz and svg figures in file to pdf."
+(defun ow--convert-file-figures-to-png ()
+  "Convert all tikz and svg figures in file to PNG."
 
   (let* ((tikz-regex "\\\\input{\\(.*?\\).tikz}")
          (svg-regex "\\\\includesvg\\[width=\\(.*?\\)\\]{\\(.*?\\)}")
@@ -68,8 +68,8 @@
                                "\\(" tikz-regex "\\)"
                                "\\|"
                                "\\(" svg-regex "\\)"))
-         (pdf-width "[width=%s]")
-         (pdf-command "\\\\includegraphics%s{%s.pdf}"))
+         (png-width "[width=%s]")
+         (png-command "\\\\includegraphics%s{%s.png}"))
 
     (goto-char (point-min))
     (while (re-search-forward figure-regex nil t)
@@ -84,28 +84,28 @@
                        ((match-string 6)
                         ".svg")))
             (size (cond ((match-string 1)
-                         (format pdf-width
+                         (format png-width
                                  (replace-regexp-in-string
                                   "\\\\" "\\\\\\\\" (match-string 2))))
                         ((match-string 6)
-                         (format pdf-width
+                         (format png-width
                                  (replace-regexp-in-string
                                   "\\\\" "\\\\\\\\" (match-string 7))))
                         (t ""))))
 
-        (replace-match (format pdf-command
+        (replace-match (format png-command
                                size
                                basename))
 
-        (if (or (not (file-exists-p (concat basename ".pdf")))
-                (< (ow--file-modification-time (concat basename ".pdf"))
+        (if (or (not (file-exists-p (concat basename ".png")))
+                (< (ow--file-modification-time (concat basename ".png"))
                    (ow--file-modification-time (concat basename ext))))
 
             (progn
               (if (string= ext ".tikz")
-                  (ow--tikz2pdf basename))
-              (ow--svg2pdf basename)
-              (message (concat basename ext " converted to pdf"))))))))
+                  (ow--tikz2png basename))
+              (ow--svg2png basename)
+              (message (concat basename ext " converted to png"))))))))
 
 (defun ow--file-modification-time (file)
   "Posix time of last modification."
@@ -113,27 +113,13 @@
                       (file-attribute-modification-time
                        (file-attributes file)))))
 
-(defun ow--tikz2pdf (basename)
-  "Convert tikz figure BASENAME to a PDF file."
-  (let ((textemplate (concat
-                      "\\documentclass[tikz,convert={outfile=%1$s.pdf}]{standalone}\n"
-                      "\\usepackage{graphicx}\n"
-                      "\\usepackage{pgfplots}\n"
-                      "\\pgfplotsset{compat=1.16}\n"
-                      "\\begin{document}\n"
-                      "\\input{%1$s.tikz}\n"
-                      "\\end{document}"))
-        (command "latex --shell-escape"))
-    (with-temp-buffer
-      (insert (format textemplate basename))
-      (write-file "temp.tex"))
-    (shell-command (concat command " temp.tex"))
-    (dolist (f (directory-files "." nil "temp\..*"))
-      (delete-file f))))
+(defun ow--tikz2png (basename)
+  "Convert tikz figure BASENAME to a PNG file."
+  (shell-command (concat "tikz2png " basename ".tikz")))
 
-(defun ow--svg2pdf (basename)
-  "convert SVG figure BASENAME to a PDF file."
-  (shell-command (concat "svg2pdf " basename ".svg " basename ".pdf")))
+(defun ow--svg2png (basename)
+  "convert SVG figure BASENAME to a PNG file."
+  (shell-command (concat "svg2png " basename ".svg " basename ".png")))
 
 (defun ow--fix-references ()
   (let ((counter-alist)
