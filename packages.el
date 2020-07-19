@@ -24,6 +24,7 @@
 (package! spacemacs-theme)
 (package! evil-smartparens)
 (package! nov)
+(package! evil-lisp-state)
 ;; (package! exwm)
 
 (package! org-ref-ox-hugo :recipe

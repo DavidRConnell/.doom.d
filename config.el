@@ -297,3 +297,8 @@ Only search the range between just after the point and BOUND."
   :mode ("\\DS\\'" . mu4e-compose-mode))
 
 (load-files-in (concat doom-private-dir "mode_keybindings"))
+
+(use-package! evil-lisp-state
+  :config
+  (evil-lisp-state-leader ", l")
+  (add-to-list 'evil-lisp-state-major-modes 'common-lisp-mode))
