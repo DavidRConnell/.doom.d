@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: framesubtitle
+# key: subtitle
+# condition: t
+# --
+#+BEAMER: \framesubtitle{$1}
+$0
