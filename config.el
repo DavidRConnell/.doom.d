@@ -150,13 +150,16 @@
         "K" #'evil-scroll-line-up
         :n "gr" #'magit-refresh))
 
+(after! ace-window
+  (setq aw-keys '(?u ?h ?e ?t ?o ?n ?a ?s)))
+
 (after! avy
   (setq avy-keys-alist
-        '((avy-goto-char . (?a ?o ?e ?u ?h ?t ?n ?s))))
-  (setq avy-keys '(?a ?o ?e ?u ?h ?t ?n ?s))
+        '((avy-goto-char . (?u ?h ?e ?t ?o ?n ?a ?s))))
+  (setq avy-keys '(?u ?h ?e ?t ?o ?n ?a ?s))
   (setq avy-enter-times-out t)
   (setq avy-timeout-seconds 0.75)
-  (setq aw-keys '(?a ?o ?e ?u ?h ?t ?n ?s))
+  (setq aw-keys '(?u ?h ?e ?t ?o ?n ?a ?s))
   (setq avy-flyspell-correct-function #'flyspell-correct-at-point)
   (defun dc-avy-action-kill-move (pt)
     "Kill sexp at PT and move there."
