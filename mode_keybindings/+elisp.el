@@ -3,6 +3,7 @@
         "f"     #'eval-defun
         "%"     #'eval-buffer
         "v"     #'eval-region
+        ","     #'ielm
         "r"     #'quickrun)
       (:prefix "C-c"
         "C-c" #'eval-defun

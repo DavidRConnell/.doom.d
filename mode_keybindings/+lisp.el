@@ -3,4 +3,9 @@
 (after! sly
   (map! :mode (lisp-mode sly-mode sly-editing-mode)
         (:prefix "C-c"
-         "C-e" #'eval-defun)))
+         "C-c" (dc-arg-cmd #'sly-eval-defun
+                           #'sly-compile-defun)
+         "C-e" #'sly-eval-last-expression)
+        (:localleader
+         "'" #'nil
+         "," #'sly)))
