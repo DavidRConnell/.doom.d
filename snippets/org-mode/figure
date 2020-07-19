@@ -4,6 +4,6 @@
 # condition: t
 # --
 
-#+CAPTION: $1
-#+NAME: fig:$2
+#+NAME: fig:$1
+#+CAPTION: $2
 [[./figures/$0]]
