@@ -68,7 +68,7 @@ If FILE is a directory search with `counsel-find-file'"
   (dc-goto-or-create-workspace name)
 
   (if (file-directory-p file)
-      (counsel-find-file file)
+      (projectile-find-file-in-directory file)
     (find-file file)))
 
 (defun dc-run-deft-in-workspace (name directory)
