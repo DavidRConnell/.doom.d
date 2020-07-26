@@ -301,6 +301,7 @@ Only search the range between just after the point and BOUND."
   :mode ("\\DS\\'" . mu4e-compose-mode))
 
 (load-files-in (concat doom-private-dir "mode_keybindings"))
+(put 'upcase-region 'disabled nil)
 
 (use-package! evil-lisp-state
   :config
