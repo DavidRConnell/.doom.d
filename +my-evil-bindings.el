@@ -177,7 +177,8 @@
  :nv  "C-u"     #'universal-argument
  :i   "C-u"     #'doom/backward-kill-to-bol-and-indent
  :nv  "U"       #'undo-tree-visualize
- :nvi "C-c C-r" #'ivy-resume
+ :nvi "C-c C-r" (cond ((featurep! :completion ivy) #'ivy-resume)
+                      ((featurep! :completion helm) #'helm-resume))
  :nvm "C-n"     #'evil-next-line
  :nvm "C-p"     #'evil-previous-line
 
@@ -302,7 +303,44 @@
         (:after swiper
           :map swiper-map
           [backtab] #'+ivy/wgrep-occur
-          [C-return] #'+ivy/git-grep-other-window-action)))
+          [C-return] #'+ivy/git-grep-other-window-action))
+
+	  (:when (featurep! :completion helm)
+			 (:after helm :map helm-map
+					 [remap next-line]     #'helm-next-line
+					 [remap previous-line] #'helm-previous-line
+					 [left]     #'left-char
+					 [right]    #'right-char
+					 "C-S-f"    #'helm-previous-page
+					 "C-S-n"    #'helm-next-source
+					 "C-S-p"    #'helm-previous-source
+					 (:when (featurep! :editor evil +everywhere)
+							"C-j"    #'helm-next-line
+							"C-k"    #'helm-previous-line
+							"C-S-j"  #'helm-next-source
+							"C-S-k"  #'helm-previous-source)
+					 "C-u"      #'helm-delete-minibuffer-contents
+					 "C-s"      #'helm-minibuffer-history
+					 ;; Swap TAB and C-z
+					 "TAB"      #'helm-execute-persistent-action
+					 [tab]      #'helm-execute-persistent-action
+					 "C-z"      #'helm-select-action)
+       (:after helm-ag :map helm-ag-map
+			   "C--"      #'+helm-do-ag-decrease-context
+        "C-="      #'+helm-do-ag-increase-context
+        [left]     nil
+        [right]    nil)
+       (:after helm-files :map (helm-find-files-map helm-read-file-map)
+        [C-return] #'helm-ff-run-switch-other-window
+        "C-w"      #'helm-find-files-up-one-level)
+       (:after helm-locate :map helm-generic-files-map
+        [C-return] #'helm-ff-run-switch-other-window)
+       (:after helm-buffers :map helm-buffer-map
+        [C-return] #'helm-buffer-switch-other-window)
+       (:after helm-occur :map helm-occur-map
+        [C-return] #'helm-occur-run-goto-line-ow)
+       (:after helm-grep :map helm-grep-map
+        [C-return] #'helm-grep-run-other-window-action)))
 
 (map! (:when (featurep! :editor fold)
         :nv "C-SPC" #'+fold/toggle)
@@ -428,7 +466,8 @@
         :desc "open emacs.d" "e" (cmd! (dc-open-in-workspace "Emacs" "~/.emacs.d"))
         :desc "open config" "c" (cmd! (dc-open-in-workspace "Config" "~/.config/"))
         "R" #'projectile-replace
-        "g" #'+ivy/project-search
+        "g" (cond ((featurep! :completion ivy) #'counsel-projectile-grep)
+                  ((featurep! :completion helm) #'+helm/project-search))
         "o" #'projectile-switch-project
         "f" #'projectile-find-file
         "r" #'counsel-buffer-or-recentf)
@@ -500,7 +539,9 @@
 
       (:prefix ("n" . "Reference Notes")
        :desc "Ebib"              "e" #'arg-ebib-open-bibtex-file
-       :desc "bibtex"            "b" #'ivy-bibtex
+       :desc "bibtex"            "b"
+       (cond ((featurep! :completion ivy) #'ivy-bibtex)
+             ((featurep! :completion helm) #'helm-bibtex))
        :desc "Master bib file"   "m" (cmd! (dc-open-in-workspace
                                          "References" refs-bib))
        :desc "Open Reference"    "r" (cmd! (dc-open-in-workspace
