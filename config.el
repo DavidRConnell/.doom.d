@@ -1,3 +1,5 @@
+(add-to-list 'load-path (concat doom-private-dir "extras"))
+
 (defvar notes-dir "~/notes/")
 (defvar zettle-dir (concat notes-dir "zettle/"))
 (defvar refs-notes (concat notes-dir  "refs/"))
@@ -211,7 +213,7 @@
   (add-hook 'text-mode-hook
             #'flycheck-mode))
 
-(load! (concat doom-private-dir "extras/+colors.el"))
+(require '+colors)
 (after! flyspell
   (doom-themes-set-faces nil
     '(flyspell-duplicate :slant 'italic :foreground yellow :underline nil)

@@ -263,8 +263,9 @@ right sequence."
   (add-to-list 'org-latex-packages-alist
                '("" "booktabs" nil))
 
-  (load (concat doom-private-dir "extras/+ox-word.el"))
-  (load (concat doom-private-dir "extras/+ox-filters.el"))
+  (require '+ox-word)
+  (require '+ox-filters)
+
   (add-to-list 'org-latex-listings-langs '(matlab "matlab"))
   (setq org-latex-listings 'minted)
   (setq org-latex-minted-options '(("frame" "lines") ("framesep" "3mm")
@@ -277,7 +278,7 @@ right sequence."
   (setq org-export-with-toc nil))
 
 (after! ob-octave
-  (load (concat doom-private-dir "extras/+ob-octave-fix.el")))
+  (require '+ob-octave-fix))
 
 (after! org-ref
   (org-ref-ivy-cite-completion)

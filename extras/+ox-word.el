@@ -188,6 +188,6 @@
   '(?w "Export to MS Word"
        ((?p "via Pandoc/LaTeX" org-word-export-to-docx))))
 
-(provide 'ox-word)
+(provide '+ox-word)
 
 ;;; ox-word.el ends here

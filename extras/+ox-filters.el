@@ -24,3 +24,5 @@
                        (file-attributes file)))))
 
 (add-hook 'org-export-before-processing-hook #'dc-org-export-convert-tikz-h)
+
+(provide '+ox-filters)

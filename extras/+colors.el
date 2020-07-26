@@ -5,3 +5,5 @@
 (defvar yellow "b1951d")
 (defvar green "#67b11d")
 (defvar blue "#3a81c3")
+
+(provide '+colors)
