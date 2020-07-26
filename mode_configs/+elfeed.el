@@ -51,4 +51,10 @@ See `elfeed-play-with-mpv'."
         "http://pragmaticemacs.com/feed/"))
 
 (map! :map elfeed-show-mode-map
-      :n "o" #'elfeed-visit-or-play-with-mpv)
+      :nm "o" #'elfeed-visit-or-play-with-mpv)
+
+(map! :map elfeed-search-mode-map
+      :nm "C-SPC" #'elfeed-search-browse-url)
+
+(add-hook 'elfeed-search-mode-hook #'elfeed-update)
+(add-hook 'eww-mode-hook #'delete-other-windows)

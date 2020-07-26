@@ -422,8 +422,7 @@
       "/"    #'evil-ex-nohighlight
       "\\"   #'toggle-truncate-lines
       "e"    (cmd! (dc-goto-or-create-workspace "elfeed")
-                (elfeed)
-                (elfeed-update))
+                (elfeed))
 
       :desc "Find file in project"  "SPC"  #'projectile-find-file
       :desc "Search for symbol in project" "*" #'+default/search-project-for-symbol-at-point
