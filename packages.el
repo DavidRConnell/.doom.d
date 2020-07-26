@@ -26,7 +26,6 @@
 (package! evil-smartparens)
 (package! nov)
 (package! evil-lisp-state)
-;; (package! exwm)
 (package! iedit)
 (package! evil-iedit-state)
 (package! org-roam-server)
