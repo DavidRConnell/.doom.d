@@ -1,4 +1,5 @@
 (map! :mode emacs-lisp-mode
+      :ni "C-]" #'lisp-state-toggle-lisp-state
       (:localleader
         "f"     #'eval-defun
         "%"     #'eval-buffer

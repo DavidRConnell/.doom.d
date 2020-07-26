@@ -3,6 +3,7 @@
 (map!
  :after evil-lisp-state
  :map evil-lisp-state-map
+ "C-[" #'evil-normal-state
  "%"   #'evil-lisp-state-evil-jump-item
  ":"   #'evil-lisp-state-evil-ex
  "("   #'evil-lisp-state-insert-sexp-before

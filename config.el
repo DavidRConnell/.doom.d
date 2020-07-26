@@ -305,5 +305,7 @@ Only search the range between just after the point and BOUND."
 
 (use-package! evil-lisp-state
   :config
-  (evil-lisp-state-leader ", l")
-  (add-to-list 'evil-lisp-state-major-modes 'common-lisp-mode))
+  (evil-lisp-state-leader "")
+  (add-to-list 'evil-lisp-state-major-modes 'common-lisp-mode)
+  (setq evil-lisp-state-cursor '(bar +evil-emacs-cursor-fn))
+  (add-to-list 'doom-evil-state-alist '(?l . lisp)))
