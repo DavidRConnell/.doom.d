@@ -315,3 +315,9 @@ Only search the range between just after the point and BOUND."
   (use-package! evil-iedit-state
     :config (add-hook 'iedit-mode-hook 'evil-iedit-state)))
 
+(use-package! eww
+  :config
+  (setq browse-url-browser-function 'eww-browse-url
+        url-cookie-trusted-urls '()
+        url-cookie-untrusted-urls '(".*")))
+
