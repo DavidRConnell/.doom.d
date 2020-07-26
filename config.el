@@ -321,3 +321,9 @@ Only search the range between just after the point and BOUND."
         url-cookie-trusted-urls '()
         url-cookie-untrusted-urls '(".*")))
 
+(use-package! org-roam-server
+  :after org-roam
+  :config
+  (setq org-roam-server-host "127.0.0.1"
+        org-roam-server-port 8078
+        org-roam-server-export-inline-images t))

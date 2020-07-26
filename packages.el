@@ -29,6 +29,7 @@
 ;; (package! exwm)
 (package! iedit)
 (package! evil-iedit-state)
+(package! org-roam-server)
 
 (package! org-ref-ox-hugo :recipe
   (:host github :repo "jethrokuan/org-ref-ox-hugo" :branch "custom/overrides"))
