@@ -101,7 +101,7 @@
        (mu4e +gmail)
 
        :app
-       rss
+       (rss +org)
 
        :config
        (default +smartparens))

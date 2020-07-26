@@ -31,25 +31,6 @@ See `elfeed-play-with-mpv'."
           (elfeed-search-browse-url)
         (shr-browse-url)))))
 
-(setq elfeed-feeds
-      '("http://kitchingroup.cheme.cmu.edu/blog/feed"
-        "http://www.aaronsw.com/2002/feeds/pgessays.rss"
-        "https://alistapart.com/main/feed/"
-        "https://www.colinmclear.net/posts/index.xml"
-        "https://andregarzia.com/feeds/all.rss.xml"
-        "https://nibblestew.blogspot.com/feeds/posts/default?alt=rss"
-        "http://fmnt.info/feed/atom.xml"
-        "https://irreal.org/blog/?feed=rss2"
-        "https://aliquote.org/index.xml"
-        "https://sachachua.com/blog/feed/rss/"
-        "https://cestlaz.github.io/rss.xml"
-        "https://oremacs.com/atom.xml"
-        "http://xenodium.com/rss.xml"
-        "http://feeds.feedburner.com/XahsEmacsBlog"
-        "https://rgoswami.me/posts/index.xml"
-        "https://menno.io/rss.xml"
-        "http://pragmaticemacs.com/feed/"))
-
 (map! :map elfeed-show-mode-map
       :nm "o" #'elfeed-visit-or-play-with-mpv)
 
