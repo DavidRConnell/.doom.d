@@ -235,7 +235,7 @@
    :nv "M-7"   (λ! (+workspace/switch-to 6))
    :nv "M-8"   (λ! (+workspace/switch-to 7))
    :nv "M-9"   (λ! (+workspace/switch-to 8))
-   :nv "M-0"   #'+workspace/switch-to-final))
+   :nv "M-0"   #'+workspace/switch-to-final)
 
  :n "C-w =" #'balance-windows-area)
 
