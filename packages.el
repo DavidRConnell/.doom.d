@@ -27,6 +27,8 @@
 (package! nov)
 (package! evil-lisp-state)
 ;; (package! exwm)
+(package! iedit)
+(package! evil-iedit-state)
 
 (package! org-ref-ox-hugo :recipe
   (:host github :repo "jethrokuan/org-ref-ox-hugo" :branch "custom/overrides"))
