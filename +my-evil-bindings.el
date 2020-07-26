@@ -358,7 +358,9 @@
       "o"    #'find-file
       "O"    #'counsel-locate
 
-      "b"    #'persp-switch-to-buffer
+      "b"    (dc-arg-cmd #'+ivy/switch-workspace-buffer
+                         #'dc-workspace/switch-to)
+
       "B"    #'switch-to-buffer
       "+"    #'evil-numbers/inc-at-pt
       "-"    #'evil-numbers/dec-at-pt

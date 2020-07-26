@@ -161,3 +161,34 @@ If there no FUNC3 is provided defaults to FUNC2."
               (other-window 1)
               (find-file file)))
           vterm-eval-cmds))
+
+(defun dc-workspace/switch-to (index)
+  "Switch to a workspace at a given INDEX. A negative number will start from the
+end of the workspace list. Edited from `+workspace/switch-to'"
+  (interactive
+   (list (if (featurep! :completion ivy)
+                 (ivy-read "Switch to workspace: "
+                           (+workspace-list-names)
+                           :caller #'+workspace/switch-to
+                           :preselect (+workspace-current-name))
+               (completing-read "Switch to workspace: " (+workspace-list-names)))))
+  (when (and (stringp index)
+             (string-match-p "^[0-9]+$" index))
+    (setq index (string-to-number index)))
+  (condition-case-unless-debug ex
+      (let ((names (+workspace-list-names))
+            (old-name (+workspace-current-name)))
+        (cond ((numberp index)
+               (let ((dest (nth index names)))
+                 (unless dest
+                   (error "No workspace at #%s" (1+ index)))
+                 (+workspace-switch dest)))
+              ((stringp index)
+               (+workspace-switch index t))
+              (t
+               (error "Not a valid index: %s" index)))
+        (unless (called-interactively-p 'interactive)
+          (if (equal (+workspace-current-name) old-name)
+              (+workspace-message (format "Already in %s" old-name) 'warn)
+            (+workspace/display))))
+    ('error (+workspace-error (cadr ex) t))))
