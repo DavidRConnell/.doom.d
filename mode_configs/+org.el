@@ -5,8 +5,8 @@
 (setq org-agenda-files (list "~/org/"))
 
 (after! org
-  ;; (require 'org-ref)
-  (require 'org-drill)
+  (use-package! org-ref)
+  (use-package! org-drill)
 
   (setq org-startup-folded t)
   (setq org-startup-truncated nil)
@@ -273,9 +273,8 @@ right sequence."
   (setq org-latex-to-mathml-convert-command
         "latexmlmath \"%i\" --presentationmathml=%o")
 
-  (require 'ox-extra)
-  (ox-extras-activate '(ignore-headlines))
-  (setq org-export-with-toc nil))
+  (use-package! ox-extra
+    :config (ox-extras-activate '(ignore-headlines)))
 
 (after! ob-octave
   (require '+ob-octave-fix))
