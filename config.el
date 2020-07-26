@@ -118,8 +118,9 @@
         :i "C-n" #'next-line
         :i "C-p" #'previous-line))
 
+
 (setq-hook! 'display-line-numbers-mode-hook
-  display-line-numbers 'relative)
+  display-line-numbers 'nil)
 
 (after! evil-matchit
   (global-evil-matchit-mode 1))
