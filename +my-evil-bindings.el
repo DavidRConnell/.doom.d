@@ -236,6 +236,8 @@
    :nv "M-9"   (λ! (+workspace/switch-to 8))
    :nv "M-0"   #'+workspace/switch-to-final))
 
+ :n "C-w =" #'balance-windows-area)
+
 (map! (:when (featurep! :completion company)
         :i "C-SPC"    #'+company/complete
         :i "C-n"      #'+company/dabbrev
