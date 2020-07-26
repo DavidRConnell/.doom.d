@@ -364,12 +364,9 @@
       "B"    #'switch-to-buffer
       "+"    #'evil-numbers/inc-at-pt
       "-"    #'evil-numbers/dec-at-pt
-      ","    (lambda (arg) (interactive "p")
-               (cond ((= arg 4)
-                      (call-interactively #'+vterm/toggle))
-                     ((= arg 16)
-                      (call-interactively #'+vterm/here))
-                     (t (vterm))))
+      ","    (dc-arg-cmd #'vterm
+                         #'+vterm/toggle
+                         #'+vterm/here)
       "<"    #'counsel-switch-to-shell-buffer
 
       :desc "journal" "j"    (cmd! (dc-run-deft-in-workspace
