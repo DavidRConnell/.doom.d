@@ -22,6 +22,7 @@
 (package! spell-fu)
 (package! pdfgrep)
 (package! spacemacs-theme)
+(package! modus-operandi-theme)
 (package! evil-smartparens)
 (package! nov)
 (package! evil-lisp-state)
