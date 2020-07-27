@@ -23,6 +23,7 @@
 (package! pdfgrep)
 (package! spacemacs-theme)
 (package! modus-operandi-theme)
+(package! modus-vivendi-theme)
 (package! evil-smartparens)
 (package! nov)
 (package! evil-lisp-state)
