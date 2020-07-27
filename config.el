@@ -52,6 +52,7 @@
               :lt-equal "≤"))
 
 (setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 16))
+(setq doom-variable-pitch-font (font-spec :family "ETBembo" :size 18))
 (setq doom-localleader-key ",")
 (setq doom-theme 'modus-operandi)
 (setq doom-scratch-buffer-major-mode 'emacs-lisp-mode)
