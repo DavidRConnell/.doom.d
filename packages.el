@@ -21,7 +21,6 @@
 (package! sed-mode)
 (package! spell-fu)
 (package! pdfgrep)
-(package! spacemacs-theme)
 (package! modus-operandi-theme)
 (package! modus-vivendi-theme)
 (package! evil-smartparens)
