@@ -10,6 +10,7 @@
    :nv "k" #'evil-previous-visual-line
    :nv "zn" #'org-toggle-narrow-to-subtree
    :nv "C-i" #'better-jumper-jump-forward
+   :n "C-;" #'iedit-mode
    ;; org-ref open cite bindings
    :nv "s-p" #'org-ref-open-pdf-at-point
    :nv "s-n" #'org-ref-open-notes-at-point
