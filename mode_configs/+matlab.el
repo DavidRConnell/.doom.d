@@ -1,6 +1,7 @@
 (defun insert-function-snippet ()
   "Add snippet for matlab function when opening a new .m file."
-  (if (equal 0 (buffer-size))
+  (if (and (equal 0 (buffer-size))
+           (not (string-match-p "^\s*\\*.*\\*\s*$" (buffer-name))))
       (insert (concat "function " (file-name-sans-extension (buffer-name)) "\nend"))))
 
 (defun fix-matlab-imenu-generic-expression ()
