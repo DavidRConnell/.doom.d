@@ -52,14 +52,6 @@
     "C-n" #'next-line-or-history-element
     "C-p" #'previous-line-or-history-element))
 
-(dc--select-function-with-universal-arg arg-swiper-isearch
-                                        #'swiper #'swiper-isearch)
-(dc--select-function-with-universal-arg arg-backward-swiper-isearch
-                                        #'swiper-backward #'swiper-isearch-backward)
-(dc--select-function-with-universal-arg arg-at-point-swiper-isearch
-                                        #'swiper-thing-at-point
-                                        #'swiper-isearch-thing-at-point)
-
 (dc--select-function-with-universal-arg
  arg-ebib-open-bibtex-file
  (cmd! (dc-goto-or-create-workspace "References")
@@ -169,9 +161,11 @@
  :nv  "C-m"     #'evil-goto-mark
  :nv  "M"       #'counsel-evil-marks
  :nv  "ZZ"      #'save-buffers-kill-terminal
- :nv  "/"       #'arg-swiper-isearch
- :nv  "?"       #'arg-backward-swiper-isearch
- :nv  "gn"      #'arg-at-point-swiper-isearch
+ :nv  "/"       (dc-arg-cmd #'swiper-isearch #'swiper)
+ :nv  "?"       (dc-arg-cmd #'swiper-isearch-backward
+                            #'swiper-backward)
+ :nv  "gn"      (dc-arg-cmd #'swiper-isearch-thing-at-point
+                            #'swiper-thing-at-point)
  :nvi "M-/"     (dc-arg-cmd #'link-hint-open-link
                             #'link-hint-copy-link)
  :nv  "C-u"     #'universal-argument
@@ -350,24 +344,6 @@
         :i  "C-a" #'aya-expand
         :nv "C-a" #'aya-create
         :i  "C-s" #'yas-expand))
-
-(dc--select-function-with-universal-arg arg-define-word
-                                        #'define-word-at-point
-                                        (lambda (word)
-                                          (interactive "MWord: ")
-                                          (define-word word 'wordnik)))
-
-(dc--select-function-with-universal-arg arg-thesaurus-word
-                                        (cmd! (synosaurus-lookup (word-at-point)))
-                                        #'synosaurus-lookup)
-
-(dc--select-function-with-universal-arg arg-wiki-word
-                                        (cmd! (wiki-summary (word-at-point)))
-                                        #'wiki-summary)
-
-(dc--select-function-with-universal-arg arg-wordnut-word
-                                        #'wordnut-lookup-current-word
-                                        #'wordnut-search)
 
 (after! vterm
   (add-hook! 'vterm-mode-hook
@@ -570,11 +546,15 @@
                                          (concat zettle-dir "index.org"))))
 
       (:prefix ("d" . "Define")
-        :desc "Define word"      "d" #'arg-define-word
-        :desc "MW Define word"   "D" #'mw-thesaurus-lookup-at-point
-        :desc "Thesaurus"        "t" #'arg-thesaurus-word
-        :desc "Wordnut"          "w" #'arg-wordnut-word
-        :desc "Wiki summary"     "k" #'arg-wiki-word
-        :desc "Biblio lookup"    "b" #'biblio-lookup
-        :desc "Add bib entry"    "c" #'doi-utils-add-entry-from-crossref-query
-        :desc "Search duck"      "s" #'counsel-search))
+       :desc "Define word"      "D" (dc-arg-cmd (cmd! (sdcv-search (word-at-point)))
+                                                #'sdcv-search)
+       :desc "MW Define word"   "d" #'mw-thesaurus-lookup-at-point
+       :desc "Thesaurus"        "t" (dc-arg-cmd (cmd! (synosaurus-lookup (word-at-point)))
+                                                #'synosaurus-lookup)
+       :desc "Wordnut"          "w" (dc-arg-cmd #'wordnut-lookup-current-word
+                                                #'wordnut-search)
+       :desc "Wiki summary"     "k" (dc-arg-cmd (cmd! (wiki-summary (word-at-point)))
+                                                #'wiki-summary)
+       :desc "Biblio lookup"    "b" #'biblio-lookup
+       :desc "Add bib entry"    "c" #'doi-utils-add-entry-from-crossref-query
+       :desc "Search duck"      "s" #'counsel-search))
