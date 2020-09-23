@@ -322,7 +322,7 @@ instead externally"
   (setq bibtex-completion-bibliography refs-bib)
   (setq bibtex-completion-additional-search-fields '(keywords))
   (setq bibtex-completion-library-path
-        (remove-if-not
+        (cl-remove-if-not
          (lambda (f) (find-lisp-file-predicate-is-directory f refs-pdfs))
          (directory-files-recursively refs-pdfs "." 'dirs)))
   (setq bibtex-completion-notes-path refs-notes)
