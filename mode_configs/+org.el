@@ -698,3 +698,26 @@ and rewrite link paths to make blogging more seamless."
             (if (string-prefix-p "{{< relref " path)
                 (format "[%s](%s)" path path)
               (format "<%s>" path))))))))))
+
+(after! org-yt
+  (defun org-yt-follow (video-id)
+    "Open youtube with VIDEO-ID."
+    (start-process "org-mpv" nil "mpv" (concat "https://youtu.be/" video-id))))
+
+(after! org-cliplink
+  (defvar dc-yt-regex
+    (rx "https://"
+        (? "www.")
+        (or "youtube.com/watch?v="
+            "youtu.be/")
+        (group (* anything))))
+
+  (defun org-cliplink-org-mode-link-transformer (url title)
+      (if (string-match dc-yt-regex url)
+          (setq url (concat "yt:" (match-string-no-properties 1 url))))
+      (if title
+          (format "[[%s][%s]]" url (org-cliplink-elide-string
+                                    (org-cliplink-escape-html4
+                                     (org-cliplink-title-for-url url title))
+                                    org-cliplink-max-length))
+        (format "[[%s]]" url))))
