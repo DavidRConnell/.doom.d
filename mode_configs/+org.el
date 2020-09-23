@@ -276,6 +276,10 @@ right sequence."
   (use-package! ox-extra
     :config (ox-extras-activate '(ignore-headlines)))
 
+  (setq org-export-with-toc nil)
+  (setq org-babel-default-header-args:R '((:session . "*R*"))
+        org-babel-default-header-args:matlab '((:session . "*MATLAB*"))))
+
 (after! ob-octave
   (require '+ob-octave-fix))
 
