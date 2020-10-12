@@ -192,3 +192,10 @@ end of the workspace list. Edited from `+workspace/switch-to'"
               (+workspace-message (format "Already in %s" old-name) 'warn)
             (+workspace/display))))
     ('error (+workspace-error (cadr ex) t))))
+
+(defun dc-org-roam-add-link ()
+  (interactive)
+  (insert "[[roam:]]")
+  (evil-backward-char 2)
+  (evil-insert-state)
+  (company-complete))
