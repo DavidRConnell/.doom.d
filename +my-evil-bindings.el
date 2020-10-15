@@ -175,6 +175,7 @@
                       ((featurep! :completion helm) #'helm-resume))
  :nvm "C-n"     #'evil-next-line
  :nvm "C-p"     #'evil-previous-line
+ :i   "C-e"     #'end-of-line
 
  ;; Use C-s (snipe) instead of C-t because C-t is my stumpwm key
  :nvm "C-s" (cmd! ; make exclusive (more like till than from)
