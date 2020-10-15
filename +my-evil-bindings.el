@@ -438,8 +438,8 @@
                            (concat "%s/\\<" (thing-at-point 'symbol) "\\>/"))))
 
       (:prefix ("p" . "Projects")
-        :desc "open emacs.d" "e" (cmd! (dc-open-in-workspace "Emacs" "~/.emacs.d"))
-        :desc "open config" "c" (cmd! (dc-open-in-workspace "Config" "~/.config/"))
+        :desc "open emacs.d" "e" (cmd! (dc-open-in-workspace "Emacs" doom-emacs-dir))
+        :desc "open config" "c" (cmd! (dc-open-in-workspace "Config" doom-private-dir))
         "R" #'projectile-replace
         "g" (cond ((featurep! :completion ivy) #'counsel-projectile-grep)
                   ((featurep! :completion helm) #'+helm/project-search))
