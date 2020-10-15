@@ -521,8 +521,7 @@
              ((featurep! :completion helm) #'helm-bibtex))
        :desc "Master bib file"   "m" (cmd! (dc-open-in-workspace
                                          "References" refs-bib))
-       :desc "Open Reference"    "r" (cmd! (dc-open-in-workspace
-                                         "References" refs-pdfs))
+       :desc "Open Reference"    "r" #'ivy-bibtex
        :desc "Go to notes"       "g" (cmd! (dc-open-org-file-in-workspace
                                          "References" refs-notes))
        :desc "Open reading list" "l" (cmd! (dc-open-in-workspace
