@@ -166,8 +166,8 @@
                             #'swiper-backward)
  :nv  "gn"      (dc-arg-cmd #'swiper-isearch-thing-at-point
                             #'swiper-thing-at-point)
- :nvi "M-/"     (dc-arg-cmd #'link-hint-open-link
-                            #'link-hint-copy-link)
+ :nvi "M-/"     #'link-hint-open-link
+ :nvi "M-?"     #'link-hint-copy-link
  :nv  "C-u"     #'universal-argument
  :i   "C-u"     #'doom/backward-kill-to-bol-and-indent
  :nv  "U"       #'undo-tree-visualize
