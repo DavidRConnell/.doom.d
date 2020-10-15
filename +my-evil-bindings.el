@@ -239,6 +239,7 @@
         :i "C-n"      #'+company/dabbrev
         :i "C-f"      #'company-files
         :i "C-k"      #'+company/dict-or-keywords
+        :i "C-\\"     #'company-math-symbols-unicode
         (:prefix "C-x"
           :i "C-l"    #'+company/whole-lines
           :i "C-k"    #'+company/dict-or-keywords
