@@ -61,7 +61,6 @@
     (:prefix "l"
      "h" #'counsel-org-link)
     (:prefix "m"
-     "l" #'dc-org-roam-add-link
      "x" #'org-roam-capture))))
 
  (:after org-agenda
